@@ -23,81 +23,49 @@
 
       <!-- Desktop/Tablet grid -->
       <div class="services-grid">
-        <div class="service-card card-delay-1">
-          <div class="card-image-wrapper">
-            <div class="card-overlay"></div>
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/fe5c2334f9f080ff8b5c212ba479fb0dc32bd14a?width=586"
-              alt="Helicopter Rental" />
-          </div>
-          <div class="card-content">
-            <div class="card-number">01.</div>
-            <h3 class="card-title">Helicopter Rental & Charter</h3>
-            <p class="card-description">Point-to-point charter flights for executives, VIP transfers and remote access.
-              Flexible departure times, comfortable cabins and experienced commercial pilots.</p>
-          </div>
-        </div>
+        <ServiceCard
+          class="card-delay-1"
+          number="01."
+          title="Helicopter Rental & Charter"
+          description="Point-to-point charter flights for executives, VIP transfers and remote access. Flexible departure times, comfortable cabins and experienced commercial pilots."
+          imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/fe5c2334f9f080ff8b5c212ba479fb0dc32bd14a?width=586"
+        />
 
-        <div class="service-card card-delay-2">
-          <div class="card-image-wrapper">
-            <div class="card-overlay"></div>
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/3d0450e5df59859f882b2e54090c5acda11b4678?width=586"
-              alt="Aerial Filming" />
-          </div>
-          <div class="card-content">
-            <div class="card-number">02.</div>
-            <h3 class="card-title">Aerial Filming & Video Production</h3>
-            <p class="card-description">Cinematic aerials for film, TV, advertising, real estate and events. Stabilized
-              gimbals, cinema-grade cameras and a crew that understands production workflows.</p>
-          </div>
-        </div>
+        <ServiceCard
+          class="card-delay-2"
+          number="02."
+          title="Aerial Filming & Video Production"
+          description="Cinematic aerials for film, TV, advertising, real estate and events. Stabilized gimbals, cinema-grade cameras and a crew that understands production workflows."
+          imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/3d0450e5df59859f882b2e54090c5acda11b4678?width=586"
+        />
 
-        <div class="service-card card-delay-3">
-          <div class="card-image-wrapper">
-            <div class="card-overlay"></div>
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/88acf5cc83779de54ba2028ec0f0f0a460e5bc1c?width=586"
-              alt="Surveying" />
-          </div>
-          <div class="card-content">
-            <div class="card-number">03.</div>
-            <h3 class="card-title">Surveying & Inspection Flights</h3>
-            <p class="card-description">High-accuracy aerial surveys for construction, infrastructure, utilities and
-              agriculture. Capture large areas quickly and minimize the need for ground crews.</p>
-          </div>
-        </div>
+        <ServiceCard
+          class="card-delay-3"
+          number="03."
+          title="Surveying & Inspection Flights"
+          description="High-accuracy aerial surveys for construction, infrastructure, utilities and agriculture. Capture large areas quickly and minimize the need for ground crews."
+          imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/88acf5cc83779de54ba2028ec0f0f0a460e5bc1c?width=586"
+        />
 
-        <div class="service-card card-delay-4">
-          <div class="card-image-wrapper">
-            <div class="card-overlay"></div>
-            <img
-              src="https://api.builder.io/api/v1/image/assets/TEMP/e460f8318b5e3e98bd2835a4001e29e28d19b1f5?width=586"
-              alt="3D Mapping" />
-          </div>
-          <div class="card-content">
-            <div class="card-number">04.</div>
-            <h3 class="card-title">3D Space Mapping & Modelling</h3>
-            <p class="card-description">LiDAR and photogrammetry solutions to generate detailed 3D models, point clouds
-              and orthomosaics for engineers, planners and asset managers.</p>
-          </div>
-        </div>
+        <ServiceCard
+          class="card-delay-4"
+          number="04."
+          title="3D Space Mapping & Modelling"
+          description="LiDAR and photogrammetry solutions to generate detailed 3D models, point clouds and orthomosaics for engineers, planners and asset managers."
+          imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/e460f8318b5e3e98bd2835a4001e29e28d19b1f5?width=586"
+        />
       </div>
 
       <!-- Mobile-only slider: one card visible with navigation -->
       <div class="services-slider" v-if="cards.length">
         <div class="slider-card">
-          <div class="service-card active">
-            <div class="card-image-wrapper">
-              <div class="card-overlay"></div>
-              <img :src="cards[currentIndex].img" :alt="cards[currentIndex].title" />
-            </div>
-            <div class="card-content">
-              <div class="card-number">{{ cards[currentIndex].number }}</div>
-              <h3 class="card-title">{{ cards[currentIndex].title }}</h3>
-              <p class="card-description">{{ cards[currentIndex].desc }}</p>
-            </div>
-          </div>
+          <ServiceCard
+            :number="cards[currentIndex].number"
+            :title="cards[currentIndex].title"
+            :description="cards[currentIndex].desc"
+            :imageUrl="cards[currentIndex].img"
+            :enableTilt="false"
+          />
         </div>
         <div class="slider-controls">
           <button class="slider-btn" @click="prevCard" aria-label="Previous">‹</button>
@@ -125,6 +93,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import SectionLabel from './SectionLabel.vue'
+import ServiceCard from './ServiceCard.vue'
 
 const servicesContainerRef = ref(null)
 const isServicesLoaded = ref(false)
@@ -380,226 +349,28 @@ onUnmounted(() => {
   background: #DCC62D;
 }
 
-.service-card {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  height: 427px;
-  background: #0D0D0D;
-  overflow: hidden;
-  animation: cardFloat 6s ease-in-out infinite;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+.card-delay-1 {
+  animation: cardLoadIn 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0s forwards, cardFloat 6s ease-in-out 1.8s infinite;
   opacity: 0;
   transform: scale(0.9);
 }
 
-.services-loaded .service-card {
-  animation: cardLoadIn 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, cardFloat 6s ease-in-out 1.8s infinite;
-}
-
-.services-loaded .card-delay-1 {
-  animation-delay: 0s, 1.8s;
-}
-
-.services-loaded .card-delay-2 {
-  animation-delay: 0.4s, 2.2s;
-}
-
-.services-loaded .card-delay-3 {
-  animation-delay: 0.8s, 2.6s;
-}
-
-.services-loaded .card-delay-4 {
-  animation-delay: 1.2s, 3s;
-}
-
-.card-delay-1 {
-  animation-delay: 0s;
-}
-
 .card-delay-2 {
-  animation-delay: 0.2s;
+  animation: cardLoadIn 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.4s forwards, cardFloat 6s ease-in-out 2.2s infinite;
+  opacity: 0;
+  transform: scale(0.9);
 }
 
 .card-delay-3 {
-  animation-delay: 0.4s;
+  animation: cardLoadIn 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.8s forwards, cardFloat 6s ease-in-out 2.6s infinite;
+  opacity: 0;
+  transform: scale(0.9);
 }
 
 .card-delay-4 {
-  animation-delay: 0.6s;
-}
-
-.service-card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 20px 40px rgba(220, 198, 45, 0.2);
-}
-
-.card-image-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-}
-
-.card-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: #0D0D0D;
-  opacity: 0.24;
-  mix-blend-mode: luminosity;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 0.4s ease;
-}
-
-.service-card:hover .card-overlay {
-  opacity: 0.35;
-}
-
-.card-overlay::before {
-  content: '';
-  position: absolute;
-  width: 80px;
-  height: 80px;
-  border: 2px solid #DCC62D;
-  border-radius: 50%;
-  box-shadow:
-    inset 0 0 0 1px #DCC62D,
-    0 0 20px rgba(220, 198, 45, 0.5);
+  animation: cardLoadIn 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) 1.2s forwards, cardFloat 6s ease-in-out 3s infinite;
   opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: 3;
-}
-
-.service-card:hover .card-overlay::before {
-  opacity: 1;
-  animation: target-pulse 2s ease-in-out infinite;
-}
-
-.card-overlay::after {
-  content: '';
-  position: absolute;
-  width: 100px;
-  height: 2px;
-  background: linear-gradient(90deg, transparent 0%, #DCC62D 20%, #DCC62D 80%, transparent 100%);
-  box-shadow:
-    0 -15px 0 0 currentColor,
-    0 15px 0 0 currentColor,
-    0 0 0 2px #DCC62D,
-    0 0 20px rgba(220, 198, 45, 0.4);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  color: #DCC62D;
-  z-index: 3;
-}
-
-.service-card:hover .card-overlay::after {
-  opacity: 1;
-  animation: crosshair-shimmer 2s ease-in-out infinite;
-}
-
-@keyframes target-pulse {
-
-  0%,
-  100% {
-    transform: scale(1);
-    box-shadow:
-      inset 0 0 0 1px #DCC62D,
-      0 0 20px rgba(220, 198, 45, 0.5);
-  }
-
-  50% {
-    transform: scale(1.15);
-    box-shadow:
-      inset 0 0 0 1px #DCC62D,
-      0 0 30px rgba(220, 198, 45, 0.8);
-  }
-}
-
-@keyframes crosshair-shimmer {
-
-  0%,
-  100% {
-    opacity: 0.8;
-    filter: brightness(1);
-  }
-
-  50% {
-    opacity: 1;
-    filter: brightness(1.3);
-  }
-}
-
-.card-image-wrapper img {
-  width: 100%;
-  height: 103%;
-  object-fit: cover;
-  object-position: center;
-  position: relative;
-  top: -6px;
-  z-index: 1;
-  filter: grayscale(100%);
-  transition: filter 0.4s ease;
-}
-
-.service-card:hover .card-image-wrapper img {
-  filter: grayscale(0%);
-}
-
-.card-content {
-  position: relative;
-  z-index: 3;
-  padding: 88px 20px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-  filter: grayscale(100%) brightness(0.8);
-  transition: filter 0.4s ease;
-}
-
-.service-card:hover .card-content {
-  filter: grayscale(0%) brightness(1);
-}
-
-.card-number {
-  color: #DCC62D;
-  font-family: 'Oswald', sans-serif;
-  font-size: 40px;
-  font-weight: 500;
-  line-height: 1.075;
-  text-transform: uppercase;
-  margin: 0;
-}
-
-.card-title {
-  color: #DCC62D;
-  font-family: 'Oswald', sans-serif;
-  font-size: 28px;
-  font-weight: 500;
-  line-height: 1.536;
-  text-transform: uppercase;
-  margin: 0;
-  min-height: 86px;
-}
-
-.card-description {
-  color: #FFF;
-  font-family: 'Manrope', sans-serif;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 1.4;
-  margin: 0.5rem 0 0;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  transform: scale(0.9);
 }
 
 
@@ -693,27 +464,6 @@ onUnmounted(() => {
     display: block;
   }
 
-  .service-card {
-    height: 380px;
-  }
-
-  .card-content {
-    padding: 60px 20px 0;
-  }
-
-  .card-number {
-    font-size: 36px;
-  }
-
-  .card-title {
-    font-size: 24px;
-    min-height: auto;
-  }
-
-  .card-description {
-    font-size: 15px;
-  }
-
   .section-title {
     font-size: 32px;
     line-height: 1.3;
@@ -749,28 +499,6 @@ onUnmounted(() => {
 
   .section-label {
     font-size: 16px;
-  }
-
-  .service-card {
-    height: 420px;
-  }
-
-  .card-content {
-    padding: 50px 16px 0;
-  }
-
-  .card-number {
-    font-size: 32px;
-  }
-
-  .card-title {
-    font-size: 22px;
-    line-height: 1.4;
-  }
-
-  .card-description {
-    font-size: 14px;
-    line-height: 1.5;
   }
 
   .footer-left,

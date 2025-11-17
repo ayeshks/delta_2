@@ -1,5 +1,6 @@
 <template>
   <section class="why-fly-section">
+    <FluidAnimation />
     <div class="decorative-bg-left"></div>
     <div class="decorative-bg-right"></div>
 
@@ -194,6 +195,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import FluidAnimation from './FluidAnimation.vue'
 
 const containerRef = ref(null)
 const isContainerLoaded = ref(false)

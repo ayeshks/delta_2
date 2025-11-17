@@ -1,16 +1,33 @@
 <template>
-  <div class="hero-wrapper">
+  <div class="hero-wrapper" ref="heroRef">
     <div class="hero-background">
+      <!-- SVG filter defs for interactive water-like wave -->
+      <svg class="visually-hidden" width="0" height="0" aria-hidden="true" focusable="false">
+        <filter id="waterWaveFilter">
+          <feTurbulence id="waveTurb" type="fractalNoise" baseFrequency="0.008 0.02" numOctaves="2" seed="7" />
+          <feDisplacementMap id="waveDisp" in="SourceGraphic" scale="18" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
       <div id="tsparticles" class="particles-container"></div>
-      <img class="bg-helicopter-overlay" src="https://cdn.builder.io/api/v1/image/assets%2F7d4dc6c18bb44bf38d1786568767e08e%2Fe23413db85484fe5a98c389f1f08ef97?format=webp&width=800" alt="Helicopter" />
-      <img class="bg-helicopter-overlay helicopter-landing" src="https://cdn.builder.io/api/v1/image/assets%2F7d4dc6c18bb44bf38d1786568767e08e%2F2958c5523a254e4e862130966c54ea62?format=webp&width=800" alt="Helicopter" />
-      <img class="bg-image-overlay-1" src="https://api.builder.io/api/v1/image/assets/TEMP/d924db34fa0bd87939ee320874555174aade0a21?width=648" alt="" />
-      <img class="bg-image-overlay-2" src="https://api.builder.io/api/v1/image/assets/TEMP/00da309db929fb12a1cff1a8644132770534426b?width=412" alt="" />
+      <img class="bg-helicopter-overlay water-wave"
+        src="https://cdn.builder.io/api/v1/image/assets%2F7d4dc6c18bb44bf38d1786568767e08e%2Fe23413db85484fe5a98c389f1f08ef97?format=webp&width=800"
+        alt="Helicopter" />
+      <img class="bg-helicopter-overlay helicopter-landing"
+        src="https://cdn.builder.io/api/v1/image/assets%2F7d4dc6c18bb44bf38d1786568767e08e%2F2958c5523a254e4e862130966c54ea62?format=webp&width=800"
+        alt="Helicopter" />
+      <img class="bg-image-overlay-1"
+        src="https://api.builder.io/api/v1/image/assets/TEMP/d924db34fa0bd87939ee320874555174aade0a21?width=648"
+        alt="" />
+      <img class="bg-image-overlay-2"
+        src="https://api.builder.io/api/v1/image/assets/TEMP/00da309db929fb12a1cff1a8644132770534426b?width=412"
+        alt="" />
     </div>
 
     <nav class="navbar">
-      <img class="navbar-logo" src="https://api.builder.io/api/v1/image/assets/TEMP/4a29e3443cdf0359763cb1de98787f1a6ad707a2?width=368" alt="Delta Helicopters" />
-      
+      <img class="navbar-logo"
+        src="https://api.builder.io/api/v1/image/assets/TEMP/4a29e3443cdf0359763cb1de98787f1a6ad707a2?width=368"
+        alt="Delta Helicopters" />
+
       <div class="nav-center">
         <a href="#home">Home</a>
         <a href="#fleet">Fleet</a>
@@ -20,14 +37,16 @@
         <a href="#contact">Contact Us</a>
       </div>
 
-      <img class="navbar-user-icon" src="https://api.builder.io/api/v1/image/assets/TEMP/355cb9a24372485e7e886319e8b89ccc41d77dea?width=58" alt="User Account" />
+      <img class="navbar-user-icon"
+        src="https://api.builder.io/api/v1/image/assets/TEMP/355cb9a24372485e7e886319e8b89ccc41d77dea?width=58"
+        alt="User Account" />
     </nav>
 
     <div class="hero-section">
       <div class="hero-left">
         <div class="title-box">
           <span class="bracket bracket-animate">[</span>
-          <h1 class="hero-title title-animate">PREMIUM<br/>AERIAL<br/>SERVICES</h1>
+          <h1 class="hero-title title-animate">PREMIUM<br />AERIAL<br />SERVICES</h1>
           <span class="bracket bracket-animate">]</span>
         </div>
 
@@ -36,9 +55,11 @@
         </h2>
 
         <p class="hero-description description-animate">
-          Delta helicopters provides professional helicopter and drone operations for production companies, engineers, surveyors and agencies. From cinematic aerial shots to precision 3D mapping, our licensed pilots deliver safe, reliable and efficient missions.
+          Delta helicopters provides professional helicopter and drone operations for production companies, engineers,
+          surveyors and agencies. From cinematic aerial shots to precision 3D mapping, our licensed pilots deliver safe,
+          reliable and efficient missions.
         </p>
-        
+
         <PrimaryButton>Book Now</PrimaryButton>
       </div>
 
@@ -47,8 +68,10 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import PrimaryButton from './buttons/PrimaryButton.vue'
+
+const heroRef = ref(null)
 
 onMounted(async () => {
   const { tsParticles } = await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')
@@ -115,6 +138,48 @@ onMounted(async () => {
       }
     }
   })
+})
+
+// Interactive water-wave filter animation and mouse response
+let rafId = 0
+const animateWaves = () => {
+  const turb = document.getElementById('waveTurb')
+  if (!turb) return
+  let t = 0
+  const loop = () => {
+    t += 0.006
+    const xFreq = 0.006 + 0.004 * Math.sin(t * 0.45)
+    const yFreq = 0.015 + 0.006 * Math.cos(t * 0.35)
+    turb.setAttribute('baseFrequency', `${xFreq.toFixed(4)} ${yFreq.toFixed(4)}`)
+    rafId = requestAnimationFrame(loop)
+  }
+  loop()
+}
+
+const onMouseMove = (e) => {
+  const disp = document.getElementById('waveDisp')
+  if (!disp || !heroRef.value) return
+  const rect = heroRef.value.getBoundingClientRect()
+  const relY = (e.clientY - rect.top) / rect.height
+  const relX = (e.clientX - rect.left) / rect.width
+  const scale = 5 + Math.min(1, Math.max(0, relY)) * 20
+  disp.setAttribute('scale', String(scale.toFixed(1)))
+  const turb = document.getElementById('waveTurb')
+  if (turb) {
+    const xFreq = 0.006 + 0.01 * (relX - 0.5)
+    const yFreq = 0.015 + 0.01 * (relY - 0.5)
+    turb.setAttribute('baseFrequency', `${xFreq.toFixed(4)} ${yFreq.toFixed(4)}`)
+  }
+}
+
+onMounted(() => {
+  animateWaves()
+  window.addEventListener('mousemove', onMouseMove)
+})
+
+onUnmounted(() => {
+  if (rafId) cancelAnimationFrame(rafId)
+  window.removeEventListener('mousemove', onMouseMove)
 })
 </script>
 
@@ -183,6 +248,18 @@ onMounted(async () => {
   pointer-events: none;
 }
 
+.water-wave {
+  filter: url(#waterWaveFilter);
+  left: 8px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
 .helicopter-landing {
   animation: helicopterLanding 2.5s ease-in-out forwards;
 }
@@ -192,12 +269,15 @@ onMounted(async () => {
     transform: translateY(-100px);
     opacity: 0;
   }
+
   20% {
     opacity: 1;
   }
+
   85% {
     transform: translateY(0px);
   }
+
   100% {
     transform: translateY(0px);
     opacity: 1;
@@ -226,10 +306,13 @@ onMounted(async () => {
 }
 
 @keyframes float {
-  0%, 100% {
+
+  0%,
+  100% {
     transform: translateY(0px);
     opacity: 0.6;
   }
+
   50% {
     transform: translateY(-30px);
     opacity: 0.8;
@@ -333,10 +416,12 @@ onMounted(async () => {
     opacity: 0;
     transform: scale(0.5);
   }
+
   60% {
     opacity: 1;
     transform: scale(1.1);
   }
+
   100% {
     opacity: 1;
     transform: scale(1);
@@ -366,17 +451,20 @@ onMounted(async () => {
     clip-path: inset(100% 0% 0% 0%);
     text-shadow: -3px 0 0 #DCC62D, 3px 0 0 rgba(220, 198, 45, 0.3);
   }
+
   30% {
     opacity: 0.7;
     clip-path: inset(50% 0% 0% 0%);
     text-shadow: -2px 0 0 #DCC62D, 2px 0 0 rgba(220, 198, 45, 0.4);
   }
+
   60% {
     opacity: 1;
     transform: translateY(0) scaleY(1.05) scaleX(1);
     clip-path: inset(0% 0% 0% 0%);
     text-shadow: -1px 0 0 #DCC62D, 1px 0 0 rgba(220, 198, 45, 0.2);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0) scaleY(1) scaleX(1);
@@ -405,6 +493,7 @@ onMounted(async () => {
     opacity: 0;
     transform: translateY(20px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -432,9 +521,11 @@ onMounted(async () => {
     transform: translateX(-10px);
     text-shadow: -2px 0 #DCC62D;
   }
+
   50% {
     text-shadow: 2px 0 #DCC62D, -2px 0 rgba(220, 198, 45, 0.5);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);

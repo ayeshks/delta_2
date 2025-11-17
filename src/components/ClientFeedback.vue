@@ -1,10 +1,12 @@
 <template>
   <section class="client-feedback">
     <div class="decorative-bg-right">
-      <img src="https://api.builder.io/api/v1/image/assets/TEMP/2cdedecc5316dc46d8a4ae6a8230de07e99248fb?width=921" alt="" />
+      <img src="https://api.builder.io/api/v1/image/assets/TEMP/2cdedecc5316dc46d8a4ae6a8230de07e99248fb?width=921"
+        alt="" />
     </div>
     <div class="decorative-bg-left">
-      <img src="https://api.builder.io/api/v1/image/assets/TEMP/bbf456b8ed839c877d92c66fb2cc520cc26c41be?width=2192" alt="" />
+      <img src="https://api.builder.io/api/v1/image/assets/TEMP/bbf456b8ed839c877d92c66fb2cc520cc26c41be?width=2192"
+        alt="" />
     </div>
 
     <div class="feedback-container" :class="{ 'feedback-loaded': isFeedbackLoaded }" ref="feedbackContainerRef">
@@ -19,11 +21,13 @@
           <button class="arrow-btn arrow-left" @click="previousTestimonial" aria-label="Previous testimonial">
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_58_188)">
-                <path d="M7.21749 15.9646L20.8539 29.6006C21.3863 30.1332 22.2498 30.1332 22.7823 29.6005C23.3148 29.068 23.3148 28.2046 22.7822 27.6721L10.1101 15.0002L22.7823 2.32779C23.3148 1.79524 23.3148 0.931878 22.7822 0.399333C22.516 0.13306 22.167 -3.1652e-05 21.818 -3.16825e-05C21.469 -3.1713e-05 21.12 0.13306 20.8538 0.399424L7.21749 14.0361C6.96167 14.2919 6.81804 14.6387 6.81804 15.0003C6.81804 15.362 6.96167 15.7089 7.21749 15.9646Z" fill="#DCC62D"/>
+                <path
+                  d="M7.21749 15.9646L20.8539 29.6006C21.3863 30.1332 22.2498 30.1332 22.7823 29.6005C23.3148 29.068 23.3148 28.2046 22.7822 27.6721L10.1101 15.0002L22.7823 2.32779C23.3148 1.79524 23.3148 0.931878 22.7822 0.399333C22.516 0.13306 22.167 -3.1652e-05 21.818 -3.16825e-05C21.469 -3.1713e-05 21.12 0.13306 20.8538 0.399424L7.21749 14.0361C6.96167 14.2919 6.81804 14.6387 6.81804 15.0003C6.81804 15.362 6.96167 15.7089 7.21749 15.9646Z"
+                  fill="#DCC62D" />
               </g>
               <defs>
                 <clipPath id="clip0_58_188">
-                  <rect width="30" height="30" fill="white" transform="translate(30 30) rotate(-180)"/>
+                  <rect width="30" height="30" fill="white" transform="translate(30 30) rotate(-180)" />
                 </clipPath>
               </defs>
             </svg>
@@ -31,11 +35,13 @@
           <button class="arrow-btn arrow-right" @click="nextTestimonial" aria-label="Next testimonial">
             <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
               <g clip-path="url(#clip0_58_186)">
-                <path d="M22.7825 14.0354L9.14614 0.399398C8.61369 -0.133148 7.75023 -0.133148 7.21769 0.399489C6.68523 0.932034 6.68523 1.7954 7.21778 2.32794L19.8899 14.9998L7.21769 27.6722C6.68523 28.2048 6.68523 29.0681 7.21778 29.6007C7.48396 29.8669 7.83296 30 8.18196 30C8.53096 30 8.87996 29.8669 9.14623 29.6006L22.7825 15.9639C23.0383 15.7081 23.182 15.3613 23.182 14.9997C23.182 14.638 23.0383 14.2911 22.7825 14.0354Z" fill="white"/>
+                <path
+                  d="M22.7825 14.0354L9.14614 0.399398C8.61369 -0.133148 7.75023 -0.133148 7.21769 0.399489C6.68523 0.932034 6.68523 1.7954 7.21778 2.32794L19.8899 14.9998L7.21769 27.6722C6.68523 28.2048 6.68523 29.0681 7.21778 29.6007C7.48396 29.8669 7.83296 30 8.18196 30C8.53096 30 8.87996 29.8669 9.14623 29.6006L22.7825 15.9639C23.0383 15.7081 23.182 15.3613 23.182 14.9997C23.182 14.638 23.0383 14.2911 22.7825 14.0354Z"
+                  fill="white" />
               </g>
               <defs>
                 <clipPath id="clip0_58_186">
-                  <rect width="30" height="30" fill="white"/>
+                  <rect width="30" height="30" fill="white" />
                 </clipPath>
               </defs>
             </svg>
@@ -44,48 +50,32 @@
       </div>
 
       <div class="testimonials-grid">
-        <div class="testimonial-card">
-          <p class="testimonial-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue metus quis accumsan euismod. Maecenas sed est mollis, convallis nisi convallis, imperdiet massa.
-          </p>
+        <div class="testimonial-card" v-for="(t,) in displayedTestimonials" :key="t.id">
+          <p class="testimonial-text">{{ t.text }}</p>
           <div class="client-info">
             <div class="client-avatar">
-              <img src="https://api.builder.io/api/v1/image/assets/TEMP/848263f85f5375bf7055de6bd05cc5a37ade935e?width=120" alt="Miss Sammy Feeney" />
+              <img :src="t.img" :alt="t.alt || t.name" />
             </div>
             <div class="client-details">
-              <h3 class="client-name">Miss Sammy Feeney</h3>
-              <p class="client-title">Investor Metrics Executive</p>
+              <h3 class="client-name">{{ t.name }}</h3>
+              <p class="client-title">{{ t.title }}</p>
               <div class="star-rating">
                 <svg width="112" height="16" viewBox="0 0 112 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z" fill="#DCC62D"/>
-                  <path d="M32 0L33.7961 5.52786H39.6085L34.9062 8.94427L36.7023 14.4721L32 11.0557L27.2977 14.4721L29.0938 8.94427L24.3915 5.52786H30.2039L32 0Z" fill="#DCC62D"/>
-                  <path d="M56 0L57.7961 5.52786H63.6085L58.9062 8.94427L60.7023 14.4721L56 11.0557L51.2977 14.4721L53.0938 8.94427L48.3915 5.52786H54.2039L56 0Z" fill="#DCC62D"/>
-                  <path d="M80 0L81.7961 5.52786H87.6085L82.9062 8.94427L84.7023 14.4721L80 11.0557L75.2977 14.4721L77.0938 8.94427L72.3915 5.52786H78.2039L80 0Z" fill="#DCC62D"/>
-                  <path d="M104 0L105.796 5.52786H111.608L106.906 8.94427L108.702 14.4721L104 11.0557L99.2977 14.4721L101.094 8.94427L96.3915 5.52786H102.204L104 0Z" fill="#DCC62D"/>
-                </svg>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="testimonial-card">
-          <p class="testimonial-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue metus quis accumsan euismod. Maecenas sed est mollis, convallis nisi convallis, imperdiet massa.
-          </p>
-          <div class="client-info">
-            <div class="client-avatar">
-              <img src="https://api.builder.io/api/v1/image/assets/TEMP/3b2da61a2e3ad317410b97864cc39cd9227c8ea5?width=120" alt="Rosemary Mante" />
-            </div>
-            <div class="client-details">
-              <h3 class="client-name">Rosemary Mante</h3>
-              <p class="client-title">Human Integration Agent</p>
-              <div class="star-rating">
-                <svg width="112" height="16" viewBox="0 0 112 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z" fill="#DCC62D"/>
-                  <path d="M32 0L33.7961 5.52786H39.6085L34.9062 8.94427L36.7023 14.4721L32 11.0557L27.2977 14.4721L29.0938 8.94427L24.3915 5.52786H30.2039L32 0Z" fill="#DCC62D"/>
-                  <path d="M56 0L57.7961 5.52786H63.6085L58.9062 8.94427L60.7023 14.4721L56 11.0557L51.2977 14.4721L53.0938 8.94427L48.3915 5.52786H54.2039L56 0Z" fill="#DCC62D"/>
-                  <path d="M80 0L81.7961 5.52786H87.6085L82.9062 8.94427L84.7023 14.4721L80 11.0557L75.2977 14.4721L77.0938 8.94427L72.3915 5.52786H78.2039L80 0Z" fill="#DCC62D"/>
-                  <path d="M104 0L105.796 5.52786H111.608L106.906 8.94427L108.702 14.4721L104 11.0557L99.2977 14.4721L101.094 8.94427L96.3915 5.52786H102.204L104 0Z" fill="#DCC62D"/>
+                  <path
+                    d="M8 0L9.79611 5.52786H15.6085L10.9062 8.94427L12.7023 14.4721L8 11.0557L3.29772 14.4721L5.09383 8.94427L0.391548 5.52786H6.20389L8 0Z"
+                    fill="#DCC62D" />
+                  <path
+                    d="M32 0L33.7961 5.52786H39.6085L34.9062 8.94427L36.7023 14.4721L32 11.0557L27.2977 14.4721L29.0938 8.94427L24.3915 5.52786H30.2039L32 0Z"
+                    fill="#DCC62D" />
+                  <path
+                    d="M56 0L57.7961 5.52786H63.6085L58.9062 8.94427L60.7023 14.4721L56 11.0557L51.2977 14.4721L53.0938 8.94427L48.3915 5.52786H54.2039L56 0Z"
+                    fill="#DCC62D" />
+                  <path
+                    d="M80 0L81.7961 5.52786H87.6085L82.9062 8.94427L84.7023 14.4721L80 11.0557L75.2977 14.4721L77.0938 8.94427L72.3915 5.52786H78.2039L80 0Z"
+                    fill="#DCC62D" />
+                  <path
+                    d="M104 0L105.796 5.52786H111.608L106.906 8.94427L108.702 14.4721L104 11.0557L99.2977 14.4721L101.094 8.94427L96.3915 5.52786H102.204L104 0Z"
+                    fill="#DCC62D" />
                 </svg>
               </div>
             </div>
@@ -97,7 +87,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import SectionLabel from './SectionLabel.vue'
 
 const feedbackContainerRef = ref(null)
@@ -128,17 +118,68 @@ onMounted(() => {
 
 onUnmounted(() => {
   if (feedbackContainerRef.value) {
-    const observer = new IntersectionObserver(() => {})
+    const observer = new IntersectionObserver(() => { })
     observer.disconnect()
   }
 })
 
+const testimonials = ref([
+  {
+    id: 1,
+    text:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue metus quis accumsan euismod. Maecenas sed est mollis, convallis nisi convallis, imperdiet massa.',
+    img:
+      'https://api.builder.io/api/v1/image/assets/TEMP/848263f85f5375bf7055de6bd05cc5a37ade935e?width=120',
+    alt: 'Miss Sammy Feeney',
+    name: 'Miss Sammy Feeney',
+    title: 'Investor Metrics Executive',
+  },
+  {
+    id: 2,
+    text:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue metus quis accumsan euismod. Maecenas sed est mollis, convallis nisi convallis, imperdiet massa.',
+    img:
+      'https://api.builder.io/api/v1/image/assets/TEMP/3b2da61a2e3ad317410b97864cc39cd9227c8ea5?width=120',
+    alt: 'Rosemary Mante',
+    name: 'Rosemary Mante',
+    title: 'Human Integration Agent',
+  },
+  // New two testimonial cards (distinct clients)
+  {
+    id: 3,
+    text:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue metus quis accumsan euismod. Maecenas sed est mollis, convallis nisi convallis, imperdiet massa.',
+    img:
+      'https://api.builder.io/api/v1/image/assets/TEMP/848263f85f5375bf7055de6bd05cc5a37ade935e?width=120',
+    alt: 'Avery Stone',
+    name: 'Avery Stone',
+    title: 'Operations Lead',
+  },
+  {
+    id: 4,
+    text:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue metus quis accumsan euismod. Maecenas sed est mollis, convallis nisi convallis, imperdiet massa.',
+    img:
+      'https://api.builder.io/api/v1/image/assets/TEMP/3b2da61a2e3ad317410b97864cc39cd9227c8ea5?width=120',
+    alt: 'Jordan Brooks',
+    name: 'Jordan Brooks',
+    title: 'Project Coordinator',
+  },
+])
+
+const pageSize = 2
+const currentPage = ref(0)
+const totalPages = computed(() => Math.ceil(testimonials.value.length / pageSize))
+const displayedTestimonials = computed(() =>
+  testimonials.value.slice(currentPage.value * pageSize, currentPage.value * pageSize + pageSize)
+)
+
 const nextTestimonial = () => {
-  console.log('Next testimonial')
+  currentPage.value = (currentPage.value + 1) % totalPages.value
 }
 
 const previousTestimonial = () => {
-  console.log('Previous testimonial')
+  currentPage.value = (currentPage.value - 1 + totalPages.value) % totalPages.value
 }
 </script>
 
@@ -294,6 +335,7 @@ const previousTestimonial = () => {
     opacity: 0;
     transform: translateY(30px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);

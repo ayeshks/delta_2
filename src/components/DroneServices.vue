@@ -1,20 +1,28 @@
 <template>
-  <div class="drone-services">
+  <div class="drone-services" ref="sectionRef">
     <div class="parallelogram-background"></div>
 
     <div class="background-images">
-      <img
-        class="bg-landscape"
+      <!-- SVG defs for water-like wave effect (unique IDs for this section) -->
+      <svg class="visually-hidden" width="0" height="0" aria-hidden="true" focusable="false">
+        <filter id="waterWaveFilter_ds">
+          <feTurbulence id="waveTurb_ds" type="fractalNoise" baseFrequency="0.006 0.015" numOctaves="2" seed="11" />
+          <feDisplacementMap id="waveDisp_ds" in="SourceGraphic" scale="14" xChannelSelector="R" yChannelSelector="G" />
+        </filter>
+      </svg>
+      <img class="bg-landscape"
         src="https://api.builder.io/api/v1/image/assets/TEMP/823fc9d7831a3985286fe9c81e14cc807581a771?width=8204"
-        alt=""
-      />
+        alt="" />
     </div>
 
     <div class="drone-image drone-scroll-reveal" ref="droneImageRef">
-      <img
-        src="https://api.builder.io/api/v1/image/assets/TEMP/40c773e6e28bf9e9bf9623721b2eac177f01383d?width=1190"
-        alt="Professional Drone"
-      />
+      <img src="https://api.builder.io/api/v1/image/assets/TEMP/40c773e6e28bf9e9bf9623721b2eac177f01383d?width=1190"
+        alt="Professional Drone" />
+    </div>
+
+    <!-- Mobile-only decorative drone image  -->
+    <div class="mobile-drone" aria-hidden="true">
+      <img src="@/assets/mobile-view/drone.png" alt="" />
     </div>
 
     <div class="content-container" ref="contentRef">
@@ -22,16 +30,22 @@
         <SectionLabel>DRONE OPERATIONS</SectionLabel>
 
         <h2 class="section-title">
-          <span class="title-bold">Precision Drone Services</span><br/>
+          <span class="title-bold">Precision Drone Services</span><br />
           for <span class="title-light">Every Project</span>
         </h2>
 
         <p class="section-description">
-          Our UAV fleet is equipped with high-resolution cameras, LiDAR and thermal sensors to capture the data and visuals you need. Whether you are producing a TV commercial, inspecting assets or mapping complex terrain, we plan, fly and deliver end-to-end.
+          Our UAV fleet is equipped with high-resolution cameras, LiDAR and thermal sensors to capture the data and
+          visuals you need. Whether you are producing a TV commercial, inspecting assets or mapping complex terrain, we
+          plan, fly and deliver end-to-end.
         </p>
 
-        <div class="button-group">
+        <div class="button-group desktop-buttons">
           <PrimaryButton>Explore Drone Packages</PrimaryButton>
+          <SecondaryButton>I'm Interested</SecondaryButton>
+        </div>
+        <div class="button-group mobile-buttons">
+          <PrimaryButton>BOOK NOW</PrimaryButton>
           <SecondaryButton>I'm Interested</SecondaryButton>
         </div>
       </div>
@@ -48,6 +62,7 @@ import SectionLabel from './SectionLabel.vue'
 const droneImageRef = ref(null)
 const contentRef = ref(null)
 const isContentLoaded = ref(false)
+const sectionRef = ref(null)
 
 const handleScroll = () => {
   if (!droneImageRef.value) return
@@ -95,11 +110,42 @@ onMounted(() => {
   window.addEventListener('scroll', handleScroll)
   observeDroneImage()
   observeContent()
+  // start wave animation
+  startWaveAnimation()
+  window.addEventListener('mousemove', onMouseMove)
 })
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll)
+  if (rafId) cancelAnimationFrame(rafId)
+  window.removeEventListener('mousemove', onMouseMove)
 })
+
+// Wave effect animation & interaction (slow, subtle)
+let rafId = 0
+const startWaveAnimation = () => {
+  const turb = document.getElementById('waveTurb_ds')
+  if (!turb) return
+  let t = 0
+  const loop = () => {
+    t += 0.006
+    const xFreq = 0.005 + 0.0035 * Math.sin(t * 0.35)
+    const yFreq = 0.012 + 0.0045 * Math.cos(t * 0.28)
+    turb.setAttribute('baseFrequency', `${xFreq.toFixed(4)} ${yFreq.toFixed(4)}`)
+    rafId = requestAnimationFrame(loop)
+  }
+  loop()
+}
+
+const onMouseMove = (e) => {
+  const disp = document.getElementById('waveDisp_ds')
+  if (!disp || !sectionRef.value) return
+  const rect = sectionRef.value.getBoundingClientRect()
+  if (e.clientX < rect.left || e.clientX > rect.right || e.clientY < rect.top || e.clientY > rect.bottom) return
+  const relY = (e.clientY - rect.top) / rect.height
+  const scale = 6 + Math.min(1, Math.max(0, relY)) * 16
+  disp.setAttribute('scale', String(scale.toFixed(1)))
+}
 </script>
 
 <style scoped>
@@ -135,6 +181,14 @@ onUnmounted(() => {
   width: 130%;
   height: auto;
   opacity: 0.4;
+  filter: url(#waterWaveFilter_ds);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
 }
 
 .drone-image {
@@ -146,6 +200,22 @@ onUnmounted(() => {
   z-index: 6;
   pointer-events: none;
   will-change: transform;
+}
+
+.mobile-drone {
+  display: none;
+  position: absolute;
+  right: 1%;
+  /* left: 55%; */
+  top: -24%;
+  z-index: 5;
+}
+
+.mobile-drone img {
+  width: 70vw;
+  max-width: 260px;
+  height: auto;
+  opacity: 0.9;
 }
 
 .drone-scroll-reveal {
@@ -162,9 +232,11 @@ onUnmounted(() => {
     opacity: 0;
     transform: translateY(calc(-50% + 100px));
   }
+
   50% {
     opacity: 0.7;
   }
+
   100% {
     opacity: 1;
     transform: translateY(-50%);
@@ -176,6 +248,7 @@ onUnmounted(() => {
     opacity: 0;
     transform: translateX(60px);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -253,6 +326,14 @@ onUnmounted(() => {
   margin-top: 1.5rem;
 }
 
+.desktop-buttons {
+  display: flex;
+}
+
+.mobile-buttons {
+  display: none;
+}
+
 @media (max-width: 1200px) {
   .drone-services {
     padding: 6rem 5% 5rem;
@@ -289,6 +370,7 @@ onUnmounted(() => {
 
   .content-container {
     justify-content: center;
+    top: 40px;
   }
 
   .content {
@@ -305,6 +387,25 @@ onUnmounted(() => {
     padding: 4rem 4% 3rem;
   }
 
+  /* Hide desktop drone, show mobile corner image */
+  .drone-image {
+    display: none;
+  }
+
+  .mobile-drone {
+    display: block;
+  }
+
+  /* Left-align content and buttons on mobile */
+  .content-container {
+    justify-content: flex-start;
+  }
+
+  .content {
+    align-items: flex-start;
+    text-align: left;
+  }
+
   .section-title {
     font-size: 32px;
     line-height: 1.3;
@@ -317,6 +418,24 @@ onUnmounted(() => {
   .button-group {
     flex-direction: column;
     gap: 1rem;
+  }
+
+  .desktop-buttons {
+    display: none;
+  }
+
+  .mobile-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  /* Narrow fixed widths for mobile CTAs, aligned to left edge */
+  .mobile-buttons .btn-primary,
+  .mobile-buttons .btn-secondary {
+    width: 200px;
+    max-width: none;
   }
 
   .btn-primary,
@@ -332,6 +451,11 @@ onUnmounted(() => {
 }
 
 @media (max-width: 480px) {
+  .content-container {
+    justify-content: flex-start;
+    padding: 20px;
+  }
+
   .drone-services {
     padding: 3rem 3% 2.5rem;
   }
@@ -353,6 +477,15 @@ onUnmounted(() => {
 
   .drone-image {
     max-width: 300px;
+  }
+
+  .bg-landscape {
+    bottom: -8%;
+    left: -15%;
+    width: 150%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center bottom;
   }
 }
 </style>

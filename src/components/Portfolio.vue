@@ -299,7 +299,8 @@ const previousImage = () => {
 
 @media (max-width: 480px) {
   .portfolio-section {
-    padding: 60px 3% 80px;
+    /* padding: 60px 3% 80px; */
+    padding: 3rem 8% 2.5rem;
   }
 
   .section-label {

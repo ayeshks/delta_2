@@ -1,5 +1,24 @@
+<script setup>
+import { ref, onMounted, onUnmounted } from 'vue'
+
+const navRef = ref(null)
+const isScrolled = ref(false)
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 50
+}
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+})
+</script>
+
 <template>
-  <nav class="navbar">
+  <nav ref="navRef" :class="['navbar', { 'navbar-scrolled': isScrolled }]">
     <img
       class="navbar-logo"
       src="https://api.builder.io/api/v1/image/assets/TEMP/4a29e3443cdf0359763cb1de98787f1a6ad707a2?width=368"
@@ -32,6 +51,13 @@
     width: 100%;
     padding: 2rem 6%;
     gap: 2rem;
+    background-color: transparent;
+    transition: background-color 0.3s ease;
+  }
+
+  .navbar.navbar-scrolled {
+    background-color: #1a1a1a;
+    padding: 0.7rem 6%;
   }
 
   .navbar-logo {
@@ -97,38 +123,6 @@
       width: 28px;
       height: 28px;
     }
-
-    .hero-section {
-      padding: 0 4%;
-    }
-
-    .title-box {
-      margin-bottom: 0.5rem;
-    }
-
-    .hero-title {
-      font-size: 32px;
-      letter-spacing: 1px;
-    }
-
-    .bracket {
-      font-size: 50px;
-    }
-
-    .hero-subtitle {
-      font-size: 18px;
-    }
-
-    .hero-description {
-      font-size: 14px;
-    }
-
-    .btn-book-now {
-      width: 100%;
-      max-width: 280px;
-      height: 50px;
-      font-size: 16px;
-    }
   }
 
   @media (max-width: 480px) {
@@ -148,32 +142,9 @@
       font-size: 12px;
     }
 
-    .hero-section {
-      padding: 0 3%;
-    }
-
-    .hero-title {
-      font-size: 26px;
-      line-height: 1.2;
-    }
-
-    .bracket {
-      font-size: 40px;
-    }
-
-    .hero-subtitle {
-      font-size: 16px;
-    }
-
-    .hero-description {
-      font-size: 13px;
-      line-height: 1.5;
-    }
-
-    .btn-book-now {
-      width: 100%;
-      height: 48px;
-      font-size: 15px;
+    .navbar-user-icon {
+      width: 28px;
+      height: 28px;
     }
   }
 </style>

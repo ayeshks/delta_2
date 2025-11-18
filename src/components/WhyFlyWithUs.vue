@@ -1,5 +1,6 @@
 <template>
   <section class="why-fly-section">
+    <FluidAnimation />
     <div class="decorative-bg-left"></div>
     <div class="decorative-bg-right"></div>
 
@@ -194,6 +195,7 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
+import FluidAnimation from './FluidAnimation.vue'
 
 const containerRef = ref(null)
 const isContainerLoaded = ref(false)
@@ -523,7 +525,22 @@ onUnmounted(() => {
 
 @media (max-width: 480px) {
   .why-fly-section {
-    padding: 50px 3% 60px;
+    /* padding: 50px 3% 60px; */
+    padding: 3rem 8% 2.5rem;
+  }
+
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 12px;
+    opacity: 0;
+    transform: translateY(30px);
+    position: relative;
+    padding: 5px 5px;
+    border: 2px solid transparent;
+    transition: transform 0.3s ease, border-color 0.3s ease;
   }
 
   .section-header {

@@ -59,42 +59,18 @@ onUnmounted(() => {
 
 .label-text.animate-typing {
   animation: typing 6s steps(50) forwards;
-  border-right: 3px solid #DCC62D;
 }
 
-.label-text.animate-typing::after {
-  content: '';
-  position: absolute;
-  right: 0;
-  top: 0;
-  width: 3px;
-  height: 1.2em;
-  background: #DCC62D;
-  animation: showCursorAfter 6s steps(50) forwards;
-}
 
 @keyframes typing {
   0% {
     width: 0;
-    border-right: 3px solid #DCC62D;
   }
   100% {
     width: 100%;
-    border-right: none;
   }
 }
 
-@keyframes showCursorAfter {
-  0% {
-    opacity: 0;
-  }
-  99% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-}
 
 
 @media (max-width: 768px) {

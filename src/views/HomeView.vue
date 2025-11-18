@@ -15,12 +15,23 @@ import Footer from "@/components/Footer.vue";
 const isMobile = ref(false);
 let mql;
 let scrollTriggers = [];
+const isLoading = ref(true);
+let onWindowLoad;
 
 const updateIsMobile = () => {
   isMobile.value = window.matchMedia("(max-width: 768px)").matches;
 };
 
 onMounted(() => {
+  // Preloader: hide when window has fully loaded or after a short fallback
+  onWindowLoad = () => {
+    isLoading.value = false;
+    window.removeEventListener("load", onWindowLoad);
+  };
+  window.addEventListener("load", onWindowLoad);
+  // Fallback in case the load event was already fired or doesn't fire
+  setTimeout(() => (isLoading.value = false), 2000);
+
   mql = window.matchMedia("(max-width: 768px)");
   updateIsMobile();
   mql.addEventListener?.("change", updateIsMobile);
@@ -70,11 +81,17 @@ onUnmounted(() => {
   // cleanup ScrollTriggers if any
   scrollTriggers.forEach((st) => st && st.kill && st.kill());
   scrollTriggers = [];
+  if (onWindowLoad) {
+    window.removeEventListener("load", onWindowLoad);
+  }
 });
 </script>
 
 <template>
   <div class="home-view">
+    <div v-if="isLoading" class="preloader" aria-live="polite" aria-busy="true">
+      <div class="spinner"></div>
+    </div>
     <Nav v-if="!isMobile" />
     <component :is="isMobile ? Mobilehero : Hero" />
     <section class="parallax-section" data-speed="0.18"><DroneServices /></section>
@@ -102,5 +119,28 @@ onUnmounted(() => {
 .parallax-section {
   will-change: transform;
   transform: translateZ(0);
+}
+
+.preloader {
+  position: fixed;
+  inset: 0;
+  background: #0b0b0f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  border: 8px solid rgb(24, 24, 24);
+  border-top-color: #dbe72bff;
+  border-radius: 50%;
+  animation: spin 0.9s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 </style>

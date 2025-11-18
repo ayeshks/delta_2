@@ -221,7 +221,7 @@
 
 .right-bottom {
   right: -50px;
-  bottom: 40px;
+  bottom: -40px;
   width: 300px;
   animation: floatUpDown 4s ease-in-out infinite 1s;
 }

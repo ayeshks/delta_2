@@ -51,7 +51,6 @@
                         <li><a href="#testimonials" @click="isMenuOpen = false">Testimonials</a></li>
                         <li><a href="#contact" @click="isMenuOpen = false">Contact Us</a></li>
                     </ul>
-                    <button class="drawer-cta" @click="isMenuOpen = false">BOOK NOW</button>
                 </div>
             </div>
         </nav>
@@ -836,7 +835,7 @@ onUnmounted(() => {
     .hero-wrapper {
         position: relative;
         width: 100%;
-        height: 90vh;
+        height: 100%;
         overflow: hidden;
         background: #181818;
         z-index: 1;

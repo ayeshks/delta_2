@@ -23,49 +23,28 @@
 
       <!-- Desktop/Tablet grid -->
       <div class="services-grid">
-        <ServiceCard
-          class="card-delay-1"
-          number="01."
-          title="Helicopter Rental & Charter"
+        <ServiceCard class="card-delay-1" number="01." title="Helicopter Rental & Charter"
           description="Point-to-point charter flights for executives, VIP transfers and remote access. Flexible departure times, comfortable cabins and experienced commercial pilots."
-          imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/fe5c2334f9f080ff8b5c212ba479fb0dc32bd14a?width=586"
-        />
+          imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/fe5c2334f9f080ff8b5c212ba479fb0dc32bd14a?width=586" />
 
-        <ServiceCard
-          class="card-delay-2"
-          number="02."
-          title="Aerial Filming & Video Production"
+        <ServiceCard class="card-delay-2" number="02." title="Aerial Filming & Video Production"
           description="Cinematic aerials for film, TV, advertising, real estate and events. Stabilized gimbals, cinema-grade cameras and a crew that understands production workflows."
-          imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/3d0450e5df59859f882b2e54090c5acda11b4678?width=586"
-        />
+          imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/3d0450e5df59859f882b2e54090c5acda11b4678?width=586" />
 
-        <ServiceCard
-          class="card-delay-3"
-          number="03."
-          title="Surveying & Inspection Flights"
+        <ServiceCard class="card-delay-3" number="03." title="Surveying & Inspection Flights"
           description="High-accuracy aerial surveys for construction, infrastructure, utilities and agriculture. Capture large areas quickly and minimize the need for ground crews."
-          imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/88acf5cc83779de54ba2028ec0f0f0a460e5bc1c?width=586"
-        />
+          imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/88acf5cc83779de54ba2028ec0f0f0a460e5bc1c?width=586" />
 
-        <ServiceCard
-          class="card-delay-4"
-          number="04."
-          title="3D Space Mapping & Modelling"
+        <ServiceCard class="card-delay-4" number="04." title="3D Space Mapping & Modelling"
           description="LiDAR and photogrammetry solutions to generate detailed 3D models, point clouds and orthomosaics for engineers, planners and asset managers."
-          imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/e460f8318b5e3e98bd2835a4001e29e28d19b1f5?width=586"
-        />
+          imageUrl="https://api.builder.io/api/v1/image/assets/TEMP/e460f8318b5e3e98bd2835a4001e29e28d19b1f5?width=586" />
       </div>
 
       <!-- Mobile-only slider: one card visible with navigation -->
       <div class="services-slider" v-if="cards.length">
         <div class="slider-card">
-          <ServiceCard
-            :number="cards[currentIndex].number"
-            :title="cards[currentIndex].title"
-            :description="cards[currentIndex].desc"
-            :imageUrl="cards[currentIndex].img"
-            :enableTilt="false"
-          />
+          <ServiceCard :number="cards[currentIndex].number" :title="cards[currentIndex].title"
+            :description="cards[currentIndex].desc" :imageUrl="cards[currentIndex].img" :enableTilt="false" />
         </div>
         <div class="slider-controls">
           <button class="slider-btn" @click="prevCard" aria-label="Previous">‹</button>
@@ -486,7 +465,7 @@ onUnmounted(() => {
 
 @media (max-width: 480px) {
   .aerial-services {
-    padding: 3rem 3% 2.5rem;
+    padding: 3rem 8% 2.5rem;
   }
 
   .services-header {

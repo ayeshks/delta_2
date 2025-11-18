@@ -286,7 +286,7 @@
 @media (max-width: 480px) {
   .footer-inner {
     top: -150px;
-    padding: 70px 28px 32px;
+    padding: 3rem 8% 2.5rem;
     min-height: auto;
     margin-top: 120px;
   }
@@ -345,7 +345,7 @@
     text-align: center;
   }
 
-  /* Center columns on small mobile */
+  /* Keep columns centered headings, but left-align lists for readability */
   .links,
   .services,
   .contact {
@@ -363,12 +363,22 @@
 
   .list,
   .contact-list {
-    justify-items: center;
+    justify-items: start;
   }
 
   .list li,
   .contact-list li {
-    text-align: center;
+    text-align: left;
+    display: grid;
+    grid-template-columns: 16px 1fr;
+    align-items: center;
+    /* vertically center icon and text */
+    gap: 10px;
+  }
+
+  .list li img,
+  .contact-list li img {
+    align-self: center;
   }
 
   .left-top {

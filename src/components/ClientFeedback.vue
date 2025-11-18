@@ -479,6 +479,10 @@ const previousTestimonial = () => {
 }
 
 @media (max-width: 480px) {
+  .client-feedback {
+    padding: 3rem 8% 2.5rem;
+  }
+
   .feedback-container {
     padding: 0 20px;
   }

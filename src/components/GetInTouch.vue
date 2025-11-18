@@ -15,16 +15,20 @@
         </div>
 
         <div class="contact-wrap">
-            <div class="intro-frame">
-                <div class="intro-inner">
-                    <p class="kicker">BOOK A FLIGHT OR REQUEST A QUOTE</p>
-                    <h2 class="intro-title">GET IN TOUCH</h2>
-                    <p class="intro-copy">
-                        Tell us about your project and our operations team will respond with availability, a suggested
-                        platform and a tailored quote
-                    </p>
+            <ElectricBorder :color="'#d9b200'" :speed="1" :chaos="1" :thickness="4" :className="'intro-border'"
+                :style="{ borderRadius: '12px' }">
+                <div class="intro-frame">
+                    <div class="intro-inner">
+                        <p class="kicker">BOOK A FLIGHT OR REQUEST A QUOTE</p>
+                        <h2 class="intro-title">GET IN TOUCH</h2>
+                        <p class="intro-copy">
+                            Tell us about your project and our operations team will respond with availability, a
+                            suggested
+                            platform and a tailored quote
+                        </p>
+                    </div>
                 </div>
-            </div>
+            </ElectricBorder>
 
             <div class="form-card">
                 <form @submit.prevent="submitForm" class="form-grid">
@@ -78,6 +82,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 import SectionLabel from './SectionLabel.vue'
+import ElectricBorder from '@/components/UI/ElectricBorder.vue'
 
 const showreelElement = ref(null)
 const isDroneVisible = ref(false)
@@ -98,7 +103,6 @@ const form = ref({
 const submitForm = () => {
     console.log('Form submitted', form.value)
 }
-
 const handleScroll = () => {
     const currentScrollY = window.scrollY
     const scrollDelta = Math.abs(currentScrollY - lastScrollY)
@@ -156,13 +160,27 @@ onUnmounted(() => {
 
 /* Floating animations for geometric shapes */
 @keyframes floatUpDownGeo {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 @keyframes floatUpDownGeoRotated {
-    0%, 100% { transform: translateY(0) rotate(-8deg); }
-    50% { transform: translateY(-10px) rotate(-8deg); }
+
+    0%,
+    100% {
+        transform: translateY(0) rotate(-8deg);
+    }
+
+    50% {
+        transform: translateY(-10px) rotate(-8deg);
+    }
 }
 
 .geo-shape img {
@@ -197,6 +215,16 @@ onUnmounted(() => {
     left: 60px;
 }
 
+.intro-border {
+    width: 350px;
+}
+
+@media (min-width: 768px) {
+    .intro-border {
+        width: 425px;
+    }
+}
+
 @media (max-width: 640px) {
     .contact-wrap {
         left: 0;
@@ -226,11 +254,11 @@ onUnmounted(() => {
 
 .intro-frame {
     position: relative;
-    width: 420px;
+    width: 100%;
     height: 650px;
-    border: 4px solid #d9b200;
+    border: none;
     padding: 36px 32px 120px;
-    bottom: -20px;
+    bottom: -10px;
     background: rgba(0, 0, 0, 0.15);
 }
 
@@ -560,7 +588,7 @@ onUnmounted(() => {
     }
 
     .intro-frame {
-        width: 520px;
+        width: 100%;
     }
 
     .form-card {
@@ -636,8 +664,15 @@ onUnmounted(() => {
 }
 
 @media (max-width: 480px) {
+    .showreel {
+        position: relative;
+        width: 100vw;
+        height: 100vh;
+    }
+
     .contact-wrap {
         padding: 56px 16px;
+        bottom: -140px;
     }
 
     .intro-title {
@@ -704,9 +739,9 @@ onUnmounted(() => {
 
     .intro-frame {
         position: relative;
-        border: 4px solid #d9b200;
+        border: none;
         padding: 36px 32px 120px;
-        bottom: -40px;
+        bottom: -10px;
         background: rgba(0, 0, 0, 0.15);
     }
 }

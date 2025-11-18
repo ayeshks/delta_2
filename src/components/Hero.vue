@@ -314,6 +314,7 @@ onUnmounted(() => {
   max-width: 100%;
   margin: 0;
   padding: 0 6%;
+  top: 90px;
 }
 
 .hero-left {

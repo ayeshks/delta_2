@@ -485,6 +485,7 @@ const previousTestimonial = () => {
 
   .feedback-container {
     padding: 0 20px;
+    top: -50px;
   }
 
   .section-label {

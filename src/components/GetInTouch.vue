@@ -217,6 +217,7 @@ onUnmounted(() => {
 
 .intro-border {
     width: 350px;
+    bottom: -80px;
 }
 
 @media (min-width: 768px) {
@@ -680,7 +681,7 @@ onUnmounted(() => {
     }
 
     .form-card {
-        top: -370px;
+        top: -340px;
         height: 500px;
         width: 90%;
         margin: 0 auto;

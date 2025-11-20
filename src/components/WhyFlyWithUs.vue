@@ -5,6 +5,10 @@
     <div class="decorative-bg-right"></div>
     <div class="bottom-right-triangle"></div>
 
+    <div class="bottom-right-geo">
+      <img src="@/assets/client-feedback/bg-decorative-rightconner.png" alt="" />
+    </div>
+
     <div class="container" :class="{ 'container-loaded': isContainerLoaded }" ref="containerRef">
       <div class="section-header">
         <p class="section-label">WHY FLY WITH US?</p>
@@ -277,10 +281,27 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 400px;
-  background: rgb(24, 24, 24);
+  background: rgb(31, 31, 31);
   z-index: 2;
   pointer-events: none;
-  clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 180px));
+  clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 200px));
+}
+
+.bottom-right-geo {
+  position: absolute;
+  bottom: -85px;
+  right: -58px;
+  width: 340px;
+  height: 340px;
+  z-index: 3;
+  pointer-events: none;
+  transform: rotate(81deg) scaleX(-1);
+}
+
+.bottom-right-geo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .container {
@@ -445,6 +466,12 @@ onUnmounted(() => {
     clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 350px));
   }
 
+  .bottom-right-geo {
+    width: 180px;
+    right: 250px;
+    bottom: 70px;
+  }
+
   .features-grid {
     gap: 60px 40px;
   }
@@ -458,6 +485,12 @@ onUnmounted(() => {
   .bottom-right-triangle {
     height: 300px;
     clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 300px));
+  }
+
+  .bottom-right-geo {
+    width: 160px;
+    right: 200px;
+    bottom: 60px;
   }
 
   .section-header {
@@ -494,6 +527,12 @@ onUnmounted(() => {
   .bottom-right-triangle {
     height: 250px;
     clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 250px));
+  }
+
+  .bottom-right-geo {
+    width: 140px;
+    right: 150px;
+    bottom: 50px;
   }
 
   .section-header {
@@ -560,6 +599,12 @@ onUnmounted(() => {
   .bottom-right-triangle {
     height: 200px;
     clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 200px));
+  }
+
+  .bottom-right-geo {
+    width: 120px;
+    right: 100px;
+    bottom: 40px;
   }
 
   .feature-card {

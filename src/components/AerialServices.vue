@@ -11,6 +11,7 @@
     <img class="drone-image"
       src="https://api.builder.io/api/v1/image/assets/TEMP/d795a707aa2baa4cc9d514650cff6aef8ba125bd?width=2540"
       alt="" />
+    <div class="top-left-triangle"></div>
 
     <div class="services-container" :class="{ 'services-loaded': isServicesLoaded }" ref="servicesContainerRef">
       <div class="services-header">
@@ -218,6 +219,18 @@ onUnmounted(() => {
   }
 }
 
+.top-left-triangle {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background: rgb(31, 31, 31);
+  z-index: 2;
+  pointer-events: none;
+  clip-path: polygon(0 0, 100% 0, 0 200px);
+}
+
 @keyframes cardFloat {
 
   0%,
@@ -394,6 +407,11 @@ onUnmounted(() => {
     padding: 6rem 5% 5rem;
   }
 
+  .top-left-triangle {
+    height: 350px;
+    clip-path: polygon(0 0, 100% 0, 0 350px);
+  }
+
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
@@ -414,6 +432,11 @@ onUnmounted(() => {
     padding: 5rem 4%;
   }
 
+  .top-left-triangle {
+    height: 300px;
+    clip-path: polygon(0 0, 100% 0, 0 300px);
+  }
+
   .section-title {
     font-size: 38px;
   }
@@ -432,6 +455,11 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .aerial-services {
     padding: 4rem 4% 3rem;
+  }
+
+  .top-left-triangle {
+    height: 250px;
+    clip-path: polygon(0 0, 100% 0, 0 250px);
   }
 
   /* Hide desktop grid, show slider */
@@ -466,6 +494,11 @@ onUnmounted(() => {
 @media (max-width: 480px) {
   .aerial-services {
     padding: 3rem 8% 2.5rem;
+  }
+
+  .top-left-triangle {
+    height: 200px;
+    clip-path: polygon(0 0, 100% 0, 0 200px);
   }
 
   .services-header {

@@ -3,9 +3,9 @@
     <div class="bg-shape left-center">
       <img src="@/assets/footer/bg-geometric-1.png" alt="" />
     </div>
-    <div class="bg-shape left-top">
+    <!-- <div class="bg-shape left-top">
       <img src="@/assets/footer/bg-geometric-3.png" alt="" />
-    </div>
+    </div> -->
     <div class="bg-shape right-bottom">
       <img src="@/assets/footer/bg-geometric-2.png" alt="" />
     </div>
@@ -74,6 +74,7 @@
   position: relative;
   background: #0f0f0f;
   overflow: hidden;
+  min-height: 80vh;
 }
 
 .footer-inner {
@@ -81,9 +82,9 @@
   max-width: 1320px;
   margin: 0 auto;
   padding: 120px 60px 60px;
-  min-height: 580px;
+  margin-top: 30px;
+  min-height: 500px;
   z-index: 2;
-  margin-top: 200px;
 }
 
 .footer-panel {
@@ -162,7 +163,7 @@
 .panel-divider {
   height: 3px;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 60px;
 
   /* Yellow center with faded sides */
   background: linear-gradient(to right,
@@ -214,15 +215,15 @@
 
 .left-center {
   left: 1px;
-  top: 10%;
-  width: 280px;
+  top: -3%;
+  width: 200px;
   animation: floatUpDown 4s ease-in-out infinite;
 }
 
 .right-bottom {
-  right: -50px;
-  bottom: -40px;
-  width: 300px;
+  right: -5px;
+  bottom: 4px;
+  width: 250px;
   animation: floatUpDown 4s ease-in-out infinite 1s;
 }
 

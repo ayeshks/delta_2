@@ -3,6 +3,7 @@
     <FluidAnimation />
     <div class="decorative-bg-left"></div>
     <div class="decorative-bg-right"></div>
+    <div class="bottom-right-triangle"></div>
 
     <div class="container" :class="{ 'container-loaded': isContainerLoaded }" ref="containerRef">
       <div class="section-header">
@@ -270,6 +271,18 @@ onUnmounted(() => {
   z-index: 0;
 }
 
+.bottom-right-triangle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background: rgb(24, 24, 24);
+  z-index: 2;
+  pointer-events: none;
+  clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 180px));
+}
+
 .container {
   position: relative;
   max-width: 1440px;
@@ -427,6 +440,11 @@ onUnmounted(() => {
     padding: 100px 5% 120px;
   }
 
+  .bottom-right-triangle {
+    height: 350px;
+    clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 350px));
+  }
+
   .features-grid {
     gap: 60px 40px;
   }
@@ -435,6 +453,11 @@ onUnmounted(() => {
 @media (max-width: 1024px) {
   .why-fly-section {
     padding: 80px 4% 100px;
+  }
+
+  .bottom-right-triangle {
+    height: 300px;
+    clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 300px));
   }
 
   .section-header {
@@ -466,6 +489,11 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .why-fly-section {
     padding: 60px 4% 80px;
+  }
+
+  .bottom-right-triangle {
+    height: 250px;
+    clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 250px));
   }
 
   .section-header {
@@ -527,6 +555,11 @@ onUnmounted(() => {
   .why-fly-section {
     /* padding: 50px 3% 60px; */
     padding: 3rem 8% 2.5rem;
+  }
+
+  .bottom-right-triangle {
+    height: 200px;
+    clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 200px));
   }
 
   .feature-card {

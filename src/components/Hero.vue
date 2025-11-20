@@ -21,6 +21,7 @@
       <img class="bg-image-overlay-2"
         src="https://api.builder.io/api/v1/image/assets/TEMP/00da309db929fb12a1cff1a8644132770534426b?width=412"
         alt="" />
+      <div class="bottom-right-triangle"></div>
     </div>
 
     <div class="hero-section">
@@ -303,6 +304,20 @@ onUnmounted(() => {
   }
 }
 
+.bottom-right-triangle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  background: rgb(31,
+      31,
+      31);
+  z-index: 4;
+  pointer-events: none;
+  clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 100%);
+}
+
 .hero-section {
   position: relative;
   z-index: 10;
@@ -495,6 +510,10 @@ onUnmounted(() => {
     font-size: 70px;
   }
 
+  .bottom-right-triangle {
+    height: 350px;
+  }
+
 }
 
 @media (max-width: 1024px) {
@@ -512,6 +531,10 @@ onUnmounted(() => {
 
   .bracket {
     font-size: 60px;
+  }
+
+  .bottom-right-triangle {
+    height: 300px;
   }
 }
 
@@ -575,6 +598,10 @@ onUnmounted(() => {
     font-size: 16px;
   }
 
+  .bottom-right-triangle {
+    height: 250px;
+  }
+
 }
 
 @media (max-width: 480px) {
@@ -620,6 +647,10 @@ onUnmounted(() => {
     width: 100%;
     height: 48px;
     font-size: 15px;
+  }
+
+  .bottom-right-triangle {
+    height: 200px;
   }
 
 }

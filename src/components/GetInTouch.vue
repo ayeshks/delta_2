@@ -7,6 +7,14 @@
         </div>
         <div class="bg-overlay"></div>
 
+        <div class="top-left-triangle"></div>
+
+        <div class="bottom-left-triangle"></div>
+
+        <div class="geo-shape bottom-left-geo">
+            <img src="@/assets/footer/bg-geometric-3.png" alt="" />
+        </div>
+
         <div class="geo-shape left-top-geo">
             <img src="@/assets/getintouch/bg-geometric-1.png" alt="" />
         </div>
@@ -138,7 +146,7 @@ onUnmounted(() => {
 .showreel {
     position: relative;
     width: 100vw;
-    min-height: 120vh;
+    min-height: 150vh;
     background: #181818;
     overflow: hidden;
     padding: 0;
@@ -191,8 +199,8 @@ onUnmounted(() => {
 }
 
 .left-top-geo {
-    left: -140px;
-    top: -100px;
+    left: -150px;
+    top: -80px;
     width: 420px;
     animation: floatUpDownGeo 3s ease-in-out infinite;
 }
@@ -205,6 +213,15 @@ onUnmounted(() => {
     animation: floatUpDownGeoRotated 3s ease-in-out infinite 0.75s;
 }
 
+.bottom-left-geo {
+    left: 290px;
+    bottom: -400px;
+    width: 180px;
+    transform: rotate(-82deg) scaleY(-1);
+    z-index: 4;
+    margin-bottom: 10px;
+}
+
 .contact-wrap {
     position: relative;
     z-index: 3;
@@ -213,6 +230,7 @@ onUnmounted(() => {
     margin: 0 auto;
     padding: 20px 5%;
     left: 60px;
+    top: -80px;
 }
 
 .intro-border {
@@ -230,6 +248,12 @@ onUnmounted(() => {
     .contact-wrap {
         left: 0;
         padding: 40px 16px;
+    }
+
+    .bottom-left-geo {
+        width: 180px;
+        left: 150px;
+        bottom: 60px;
     }
 
     .intro-frame {
@@ -295,7 +319,7 @@ onUnmounted(() => {
 .form-card {
     position: absolute;
     left: 110px;
-    bottom: 40px;
+    bottom: -40px;
     width: min(840px, 60%);
     height: 380px;
     background: #0f0f0f;
@@ -432,6 +456,32 @@ onUnmounted(() => {
     z-index: 2;
 }
 
+.top-left-triangle {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    background: rgb(24, 24, 24);
+    z-index: 2;
+    pointer-events: none;
+    clip-path: polygon(0 0, 100% 0, 100% 200px, 0 0);
+}
+
+.bottom-left-triangle {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    background: rgb(15,
+            15,
+            15);
+    z-index: 3;
+    pointer-events: none;
+    clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 205px));
+}
+
 .showreel-container {
     position: relative;
     z-index: 3;
@@ -558,6 +608,17 @@ onUnmounted(() => {
     .form-card {
         left: 260px;
         width: min(720px, 74%);
+        bottom: 40px;
+    }
+
+    .top-left-triangle {
+        height: 350px;
+        clip-path: polygon(0 0, 100% 0, 100% 350px, 0 0);
+    }
+
+    .bottom-left-triangle {
+        height: 350px;
+        clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 350px));
     }
 
     .drone-image {
@@ -586,6 +647,16 @@ onUnmounted(() => {
     .contact-wrap {
         padding: 70px 5%;
         left: 0;
+    }
+
+    .top-left-triangle {
+        height: 300px;
+        clip-path: polygon(0 0, 100% 0, 100% 300px, 0 0);
+    }
+
+    .bottom-left-triangle {
+        height: 300px;
+        clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 300px));
     }
 
     .intro-frame {
@@ -617,6 +688,16 @@ onUnmounted(() => {
     .intro-frame {
         width: 100%;
         padding: 28px 24px 100px;
+    }
+
+    .top-left-triangle {
+        height: 250px;
+        clip-path: polygon(0 0, 100% 0, 100% 250px, 0 0);
+    }
+
+    .bottom-left-triangle {
+        height: 250px;
+        clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 250px));
     }
 
     .form-card {
@@ -669,6 +750,22 @@ onUnmounted(() => {
         position: relative;
         width: 100vw;
         height: 100vh;
+    }
+
+    .bottom-left-geo {
+        width: 140px;
+        left: 100px;
+        bottom: 40px;
+    }
+
+    .top-left-triangle {
+        height: 200px;
+        clip-path: polygon(0 0, 100% 0, 100% 200px, 0 0);
+    }
+
+    .bottom-left-triangle {
+        height: 200px;
+        clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 100px));
     }
 
     .contact-wrap {

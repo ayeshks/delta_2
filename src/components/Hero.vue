@@ -10,11 +10,12 @@
       </svg>
       <div id="tsparticles" class="particles-container"></div>
       <img class="bg-helicopter-overlay water-wave"
-        src="https://cdn.builder.io/api/v1/image/assets%2F7d4dc6c18bb44bf38d1786568767e08e%2Fe23413db85484fe5a98c389f1f08ef97?format=webp&width=800"
+        src="https://cdn.builder.io/api/v1/image/assets%2Ff290de50bb23438081b567faae887dbc%2F729cf7c6f1134dd6bbed2a98a7ab5f73?format=webp&width=800"
         alt="Helicopter" />
       <img class="bg-helicopter-overlay helicopter-landing"
         src="https://cdn.builder.io/api/v1/image/assets%2F7d4dc6c18bb44bf38d1786568767e08e%2F2958c5523a254e4e862130966c54ea62?format=webp&width=800"
         alt="Helicopter" />
+      <div class="blur-background-overlay"></div>
       <img class="bg-image-overlay-1"
         src="https://api.builder.io/api/v1/image/assets/TEMP/d924db34fa0bd87939ee320874555174aade0a21?width=648"
         alt="" />
@@ -66,7 +67,7 @@ onMounted(async () => {
     options: {
       particles: {
         number: {
-          value: 80
+          value: 200
         },
         color: {
           value: '#FFFFFF'
@@ -188,6 +189,17 @@ onUnmounted(() => {
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+}
+
+.blur-background-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  z-index: 1;
+  pointer-events: none;
 }
 
 .particles-container {

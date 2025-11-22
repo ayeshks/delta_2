@@ -3,15 +3,20 @@
     <img class="bg-helicopter-outline"
       src="https://api.builder.io/api/v1/image/assets/TEMP/e00c04be55eae7f3875875404c0599feb6505e25?width=2552"
       alt="" />
-    <img class="bg-geometric-1"
+    <!-- <img class="bg-geometric-1"
       src="https://api.builder.io/api/v1/image/assets/TEMP/f9a98a4ddbc26168cbe2c70d23b013cb859d0d36?width=2192"
-      alt="" />
-    <img class="bg-geometric-2"
-      src="https://api.builder.io/api/v1/image/assets/TEMP/5fadb1237fd28b1fec19da02ff507748eae7bdc7?width=556" alt="" />
+      alt="" /> -->
+    <!-- <img class="bg-geometric-2"
+      src="https://api.builder.io/api/v1/image/assets/TEMP/5fadb1237fd28b1fec19da02ff507748eae7bdc7?width=556" alt="" /> -->
+    
     <img class="drone-image"
       src="https://api.builder.io/api/v1/image/assets/TEMP/d795a707aa2baa4cc9d514650cff6aef8ba125bd?width=2540"
       alt="" />
     <div class="top-left-triangle"></div>
+
+    <div class="left-top-geo">
+      <img src="@/assets/aerial-services/bg-geometric-3.png" alt="" />
+    </div>
 
     <div class="services-container" :class="{ 'services-loaded': isServicesLoaded }" ref="servicesContainerRef">
       <div class="services-header">
@@ -105,6 +110,7 @@ const cards = ref([
     img: 'https://api.builder.io/api/v1/image/assets/TEMP/e460f8318b5e3e98bd2835a4001e29e28d19b1f5?width=586',
     desc: 'LiDAR and photogrammetry solutions to generate detailed 3D models, point clouds and orthomosaics for engineers, planners and asset managers.'
   }
+
 ])
 
 const prevCard = () => { currentIndex.value = (currentIndex.value + cards.value.length - 1) % cards.value.length }
@@ -143,13 +149,31 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+
+
+.left-top-geo {
+  position: absolute;
+  top: 160px;
+  left: -110px;
+  width: 450px;
+  height: 450px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.left-top-geo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .aerial-services {
   position: relative;
   width: 100%;
   min-height: 100vh;
   background: #181818;
   overflow: hidden;
-  padding: 8rem 6% 6rem;
+  padding: 15rem 10% 6rem;
   z-index: 10;
 }
 
@@ -180,11 +204,11 @@ onUnmounted(() => {
 
 .bg-geometric-2 {
   position: absolute;
-  top: 8%;
-  left: -15%;
+  top: 50%;
+  left: -10%;
   width: 19%;
   height: auto;
-  transform: rotate(43.076deg);
+  transform: rotate(-50.076deg);
   opacity: 0.6;
   pointer-events: none;
   z-index: 1;
@@ -407,6 +431,12 @@ onUnmounted(() => {
     padding: 6rem 5% 5rem;
   }
 
+  .left-top-geo {
+    width: 260px;
+    left: -50px;
+    top: -30px;
+  }
+
   .top-left-triangle {
     height: 350px;
     clip-path: polygon(0 0, 100% 0, 0 350px);
@@ -432,6 +462,12 @@ onUnmounted(() => {
     padding: 5rem 4%;
   }
 
+  .left-top-geo {
+    width: 220px;
+    left: -40px;
+    top: -20px;
+  }
+
   .top-left-triangle {
     height: 300px;
     clip-path: polygon(0 0, 100% 0, 0 300px);
@@ -455,6 +491,12 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .aerial-services {
     padding: 4rem 4% 3rem;
+  }
+
+  .left-top-geo {
+    width: 180px;
+    left: -30px;
+    top: -15px;
   }
 
   .top-left-triangle {
@@ -494,6 +536,12 @@ onUnmounted(() => {
 @media (max-width: 480px) {
   .aerial-services {
     padding: 3rem 8% 2.5rem;
+  }
+
+  .left-top-geo {
+    width: 150px;
+    left: -25px;
+    top: -10px;
   }
 
   .top-left-triangle {

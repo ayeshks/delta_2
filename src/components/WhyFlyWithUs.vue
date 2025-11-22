@@ -9,6 +9,10 @@
       <img src="@/assets/client-feedback/bg-decorative-rightconner.png" alt="" />
     </div>
 
+    <div class="left-bottom-geo">
+      <img src="@/assets/getintouch/bg-geometric-2.png" alt="" />
+    </div>
+
     <div class="container" :class="{ 'container-loaded': isContainerLoaded }" ref="containerRef">
       <div class="section-header">
         <p class="section-label">WHY FLY WITH US?</p>
@@ -241,21 +245,20 @@ onUnmounted(() => {
   position: relative;
   width: 100%;
   background: #181818;
-  padding: 120px 6% 140px;
+  padding: 120px 10% 140px;
   overflow: hidden;
   z-index: 1;
 }
 
 .decorative-bg-left {
   position: absolute;
-  top: -50px;
-  left: -200px;
+  top: -70px;
+  left: -180px;
   width: 460px;
   height: 493px;
   background: url('https://api.builder.io/api/v1/image/assets/TEMP/1caec34eca43baf95948561a702746271c1a79e2?width=921') no-repeat center;
   background-size: contain;
-  transform: rotate(21.41deg);
-  opacity: 0.6;
+  transform: rotate(30deg);
   pointer-events: none;
   z-index: 0;
 }
@@ -299,6 +302,23 @@ onUnmounted(() => {
 }
 
 .bottom-right-geo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.left-bottom-geo {
+  position: absolute;
+  bottom: -10px;
+  left: -55px;
+  width: 300px;
+  height: 300px;
+  z-index: 1;
+  pointer-events: none;
+  transform: rotate(75deg);
+}
+
+.left-bottom-geo img {
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -472,6 +492,12 @@ onUnmounted(() => {
     bottom: 70px;
   }
 
+  .left-bottom-geo {
+    width: 160px;
+    left: -40px;
+    bottom: 70px;
+  }
+
   .features-grid {
     gap: 60px 40px;
   }
@@ -490,6 +516,12 @@ onUnmounted(() => {
   .bottom-right-geo {
     width: 160px;
     right: 200px;
+    bottom: 60px;
+  }
+
+  .left-bottom-geo {
+    width: 150px;
+    left: -35px;
     bottom: 60px;
   }
 
@@ -532,6 +564,12 @@ onUnmounted(() => {
   .bottom-right-geo {
     width: 140px;
     right: 150px;
+    bottom: 50px;
+  }
+
+  .left-bottom-geo {
+    width: 130px;
+    left: -30px;
     bottom: 50px;
   }
 
@@ -604,6 +642,12 @@ onUnmounted(() => {
   .bottom-right-geo {
     width: 120px;
     right: 100px;
+    bottom: 40px;
+  }
+
+  .left-bottom-geo {
+    width: 110px;
+    left: -20px;
     bottom: 40px;
   }
 

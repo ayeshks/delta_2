@@ -19,25 +19,7 @@ const images = ref([
 <template>
   <section class="portfolio-section">
     <div class="decorative-graphic-right">
-      <svg class="geometric-pattern" viewBox="0 0 450 575" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <g opacity="0.3">
-          <path d="M225 50 L400 150 L400 350 L225 450 L50 350 L50 150 Z" stroke="#DCC62D" stroke-width="1"
-            fill="none" />
-          <path d="M225 100 L350 175 L350 325 L225 400 L100 325 L100 175 Z" stroke="#DCC62D" stroke-width="1"
-            fill="none" />
-          <path d="M225 150 L300 200 L300 300 L225 350 L150 300 L150 200 Z" stroke="#DCC62D" stroke-width="1"
-            fill="none" />
-          <line x1="225" y1="50" x2="225" y2="450" stroke="#DCC62D" stroke-width="1" />
-          <line x1="50" y1="150" x2="400" y2="350" stroke="#DCC62D" stroke-width="1" />
-          <line x1="400" y1="150" x2="50" y2="350" stroke="#DCC62D" stroke-width="1" />
-          <circle cx="225" cy="50" r="4" fill="#DCC62D" />
-          <circle cx="400" cy="150" r="4" fill="#DCC62D" />
-          <circle cx="400" cy="350" r="4" fill="#DCC62D" />
-          <circle cx="225" cy="450" r="4" fill="#DCC62D" />
-          <circle cx="50" cy="350" r="4" fill="#DCC62D" />
-          <circle cx="50" cy="150" r="4" fill="#DCC62D" />
-        </g>
-      </svg>
+      <img src="@/assets/portfolio/portfolio-11.png" alt="Portfolio decorative" />
     </div>
 
     <div class="decorative-graphic-left">
@@ -53,9 +35,9 @@ const images = ref([
       </svg>
     </div>
 
-    <div class="geo-shape right-bottom-geo">
+    <!-- <div class="geo-shape right-bottom-geo">
       <img src="/src/assets/getintouch/bg-geometric-2.png" alt="" />
-    </div>
+    </div> -->
 
     <div class="portfolio-container">
       <SectionLabel>PORTFOLIO</SectionLabel>
@@ -93,18 +75,19 @@ const images = ref([
 
 .decorative-graphic-right {
   position: absolute;
-  top: 80px;
-  right: -100px;
-  width: 450px;
-  height: 575px;
+  top: 20%;
+  right: 0;
+  width: 300px;
+  height: auto;
   pointer-events: none;
   z-index: 1;
-  transform: rotate(-136deg);
+  transform: translateY(-50%);
 }
 
-.geometric-pattern {
+.decorative-graphic-right img {
   width: 100%;
-  height: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
 .decorative-graphic-left {
@@ -186,8 +169,8 @@ const images = ref([
 
   .decorative-graphic-right {
     width: 380px;
-    height: 485px;
-    right: -80px;
+    height: auto;
+    right: 0;
   }
 
   .gallery-wrapper {
@@ -203,8 +186,8 @@ const images = ref([
 
   .decorative-graphic-right {
     width: 320px;
-    height: 410px;
-    right: -60px;
+    height: auto;
+    right: 0;
   }
 
   .decorative-graphic-left {
@@ -234,9 +217,10 @@ const images = ref([
 
   .decorative-graphic-right {
     width: 250px;
-    height: 320px;
-    right: -50px;
-    top: 60px;
+    height: auto;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
   }
 
   .decorative-graphic-left {
@@ -268,8 +252,10 @@ const images = ref([
 
   .decorative-graphic-right {
     width: 180px;
-    height: 230px;
-    right: -40px;
+    height: auto;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
     opacity: 0.5;
   }
 

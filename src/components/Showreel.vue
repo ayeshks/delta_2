@@ -14,6 +14,10 @@
 
     <div class="top-right-triangle"></div>
 
+    <!-- <div class="top-right-geo">
+      <img src="@/assets/showreel/bg-geometric-4.png.png" alt="" />
+    </div> -->
+
     <div class="bottom-left-triangle"></div>
 
     <img class="geometric-pattern"
@@ -148,14 +152,31 @@ onUnmounted(() => {
 
 .geometric-pattern {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 400px;
+  bottom: -180px;
+  left: -130px;
+  width: 500px;
   height: auto;
   object-fit: contain;
   z-index: 2;
   opacity: 0.8;
   pointer-events: none;
+  /* transform: rotate(-10deg); */
+}
+
+.top-right-geo {
+  position: absolute;
+  top: -120px;
+  right: -30px;
+  width: 990px;
+  height: 990px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.top-right-geo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .bg-aerial-image {
@@ -351,6 +372,13 @@ onUnmounted(() => {
     clip-path: polygon(0 0, 100% 0, 100% 350px, 0 0);
   }
 
+  .top-right-geo {
+    width: 320px;
+    height: 320px;
+    right: -40px;
+    top: -30px;
+  }
+
   .bottom-left-triangle {
     height: 350px;
     clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 350px));
@@ -378,6 +406,13 @@ onUnmounted(() => {
   .top-right-triangle {
     height: 300px;
     clip-path: polygon(0 0, 100% 0, 100% 300px, 0 0);
+  }
+
+  .top-right-geo {
+    width: 280px;
+    height: 280px;
+    right: -30px;
+    top: -20px;
   }
 
   .bottom-left-triangle {
@@ -416,6 +451,13 @@ onUnmounted(() => {
   .top-right-triangle {
     height: 250px;
     clip-path: polygon(0 0, 100% 0, 100% 250px, 0 0);
+  }
+
+  .top-right-geo {
+    width: 220px;
+    height: 220px;
+    right: -20px;
+    top: -15px;
   }
 
   .bottom-left-triangle {
@@ -464,6 +506,13 @@ onUnmounted(() => {
   .top-right-triangle {
     height: 200px;
     clip-path: polygon(0 0, 100% 0, 100% 200px, 0 0);
+  }
+
+  .top-right-geo {
+    width: 180px;
+    height: 180px;
+    right: -15px;
+    top: -10px;
   }
 
   .bottom-left-triangle {

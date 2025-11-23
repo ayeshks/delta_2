@@ -12,8 +12,9 @@
       <img class="bg-helicopter-overlay water-wave"
         src="https://cdn.builder.io/api/v1/image/assets%2Ff290de50bb23438081b567faae887dbc%2F729cf7c6f1134dd6bbed2a98a7ab5f73?format=webp&width=800"
         alt="Helicopter" />
-      <img class="bg-helicopter-overlay helicopter-landing"
-        src="https://cdn.builder.io/api/v1/image/assets%2F7d4dc6c18bb44bf38d1786568767e08e%2F2958c5523a254e4e862130966c54ea62?format=webp&width=800"
+
+      <img class="bg-helicopter helicopter-landing"
+        src="@/assets/hero/helicopter.png"
         alt="Helicopter" />
       <div class="blur-background-overlay"></div>
       <img class="bg-image-overlay-1"
@@ -29,7 +30,7 @@
       <div class="hero-left">
         <div class="title-box">
           <span class="bracket bracket-animate">[</span>
-          <h1 class="hero-title title-animate">PREMIUM<br />AERIAL<br />SERVICES</h1>
+          <h1 class="hero-title title-animate">PREMIUM AERIAL<br />SERVICES</h1>
           <span class="bracket bracket-animate">]</span>
         </div>
 
@@ -197,7 +198,7 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(3px);
   z-index: 1;
   pointer-events: none;
 }
@@ -236,12 +237,24 @@ onUnmounted(() => {
 
 .bg-helicopter-overlay {
   position: absolute;
-  top: 0;
+  top: 7px;
   left: 0;
   width: 100%;
   height: 100%;
+  /* object-fit: cover; */
+  z-index: 2;
+  pointer-events: none;
+}
+
+.bg-helicopter {
+  position: absolute;
+  top: 90px;
+  left: 490px;
+  width: 68%;
+  height: 80%;
   object-fit: cover;
   z-index: 2;
+  filter: grayscale(100%);
   pointer-events: none;
 }
 
@@ -340,7 +353,8 @@ onUnmounted(() => {
   height: calc(100vh - 120px);
   max-width: 100%;
   margin: 0;
-  padding: 0 6%;
+  /* padding: 0 8%; */
+  padding: 120px 8% 80px;
   top: 90px;
 }
 
@@ -358,16 +372,17 @@ onUnmounted(() => {
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1rem;
+  margin-top: 2rem;
 }
 
 .bracket {
   color: #DCC62D;
   font-family: 'Manrope', sans-serif;
-  font-size: 80px;
+  font-size: 84px;
   font-weight: 800;
   line-height: 1;
   flex-shrink: 0;
-  margin-top: 0.2em;
+  margin-top: 0.1em;
 }
 
 .bracket-animate {
@@ -395,11 +410,11 @@ onUnmounted(() => {
 .hero-title {
   color: #DCC62D;
   font-family: 'Manrope', sans-serif;
-  font-size: 56px;
+  font-size: 50px;
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: 1.8px;
-  margin: 0;
+  margin-top: 0;
   -webkit-text-stroke: 1px rgba(0, 0, 0, 0.93);
 }
 

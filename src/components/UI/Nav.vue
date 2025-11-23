@@ -44,7 +44,7 @@ onUnmounted(() => {
 <style scoped>
   .navbar {
     position: fixed;
-    z-index: 20;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: space-between;

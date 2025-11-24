@@ -748,28 +748,40 @@ onUnmounted(() => {
 @media (max-width: 480px) {
     .showreel {
         position: relative;
-        width: 100vw;
-        height: 100vh;
+       min-height: 60vh;
+        padding: 10rem 1% 2.5rem;
     }
 
     .bottom-left-geo {
-        width: 140px;
-        left: 100px;
-        bottom: 40px;
+        width: 70px;
+        left: 63px;
+        bottom: -150px;
+        transform: rotate(-75deg);
     }
+
+    .right-bottom-geo {
+    right: -15px;
+    bottom: -75px;
+    width: 300px;
+    /* transform: rotate(8deg); */
+    animation: floatUpDownGeoRotated 3s ease-in-out infinite 0.75s;
+}
 
     .top-left-triangle {
         height: 200px;
-        clip-path: polygon(0 0, 100% 0, 100% 200px, 0 0);
+        clip-path: polygon(0 0, 100% 0, 100% 60px, 0 0);
+         background: rgb(24, 24, 24);
+         z-index: 2;
     }
 
     .bottom-left-triangle {
         height: 200px;
+        bottom: -3px;
         clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 100px));
     }
 
     .contact-wrap {
-        padding: 56px 16px;
+        padding: 5px 16px;
         bottom: -140px;
     }
 
@@ -778,7 +790,7 @@ onUnmounted(() => {
     }
 
     .form-card {
-        top: -340px;
+        top: -90px;
         height: 500px;
         width: 90%;
         margin: 0 auto;
@@ -838,9 +850,10 @@ onUnmounted(() => {
     .intro-frame {
         position: relative;
         border: none;
-        padding: 36px 32px 120px;
+        padding: 30px 32px 120px;
         bottom: -10px;
         background: rgba(0, 0, 0, 0.15);
+        height: 400px;
     }
 }
 </style>

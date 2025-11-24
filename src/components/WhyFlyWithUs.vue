@@ -636,19 +636,20 @@ onUnmounted(() => {
 
   .bottom-right-triangle {
     height: 200px;
-    clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 200px));
+    clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 100px));
   }
 
   .bottom-right-geo {
-    width: 120px;
-    right: 100px;
-    bottom: 40px;
+    width: 90px;
+    right: -10px;
+    bottom: -135px;
+    transform: rotate(4deg);
   }
 
   .left-bottom-geo {
     width: 110px;
     left: -20px;
-    bottom: 40px;
+    bottom: -100px;
   }
 
   .feature-card {

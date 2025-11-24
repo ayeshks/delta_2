@@ -207,7 +207,7 @@ const onMouseMove = (e) => {
   position: absolute;
   right: 1%;
   /* left: 55%; */
-  top: -24%;
+  top: -20%;
   z-index: 5;
 }
 
@@ -453,11 +453,13 @@ const onMouseMove = (e) => {
 @media (max-width: 480px) {
   .content-container {
     justify-content: flex-start;
-    padding: 20px;
+    padding: 30px;
+    margin-top: 30px;
   }
 
   .drone-services {
     padding: 3rem 3% 2.5rem;
+    min-height: 75vh;
   }
 
   .section-title {

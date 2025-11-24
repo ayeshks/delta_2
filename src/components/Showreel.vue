@@ -498,14 +498,24 @@ onUnmounted(() => {
 }
 
 @media (max-width: 480px) {
+
+  .showreel {
+  min-height: 90vh;
+}
+
+  .showreel-container {
+    top : 70px;
+    min-height: 70vh;
+  }
+
   .drone-image {
     height: 150px;
-    top: 2%;
+    top: 5%;
   }
 
   .top-right-triangle {
     height: 200px;
-    clip-path: polygon(0 0, 100% 0, 100% 200px, 0 0);
+    clip-path: polygon(0 0, 100% 0, 100% 60px, 0 0);
   }
 
   .top-right-geo {
@@ -517,11 +527,13 @@ onUnmounted(() => {
 
   .bottom-left-triangle {
     height: 200px;
-    clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 200px));
+    bottom: -2px;
+    clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 70px));
   }
 
   .geometric-pattern {
-    width: 220px;
+    width: 240px;
+    bottom: -100px;
   }
 
   .showreel-container {

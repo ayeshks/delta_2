@@ -290,6 +290,7 @@
     padding: 3rem 8% 2.5rem;
     min-height: auto;
     margin-top: 120px;
+    margin-bottom: 80px;
   }
 
   .footer-grid {

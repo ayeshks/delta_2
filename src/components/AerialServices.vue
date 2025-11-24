@@ -535,8 +535,12 @@ onUnmounted(() => {
 
 @media (max-width: 480px) {
   .aerial-services {
-    padding: 3rem 8% 2.5rem;
+    padding: 5rem 8% 1rem;
   }
+
+  .drone-image {
+  top: 3%;
+}
 
   .left-top-geo {
     width: 150px;
@@ -546,7 +550,7 @@ onUnmounted(() => {
 
   .top-left-triangle {
     height: 200px;
-    clip-path: polygon(0 0, 100% 0, 0 200px);
+    clip-path: polygon(0 0, 100% 0, 0 80px);
   }
 
   .services-header {

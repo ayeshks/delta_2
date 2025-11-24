@@ -526,14 +526,21 @@ const previousTestimonial = () => {
 }
 
 @media (max-width: 480px) {
+  .bottom-right-triangle {
+  position: absolute;
+  clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 100px));
+}
+
   .client-feedback {
     padding: 3rem 8% 2.5rem;
   }
 
   .bottom-right-geo {
     width: 120px;
-    right: 100px;
-    bottom: 40px;
+    right: -80px;
+    bottom: -305px;
+    z-index: 2;
+    transform: rotate(-106deg);
   }
 
   .feedback-container {

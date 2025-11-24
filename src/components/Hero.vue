@@ -10,10 +10,9 @@
       </svg>
       <div id="tsparticles" class="particles-container"></div>
       <img class="bg-helicopter-overlay water-wave"
-        src="https://cdn.builder.io/api/v1/image/assets%2Ff290de50bb23438081b567faae887dbc%2F729cf7c6f1134dd6bbed2a98a7ab5f73?format=webp&width=800"
+        src="@/assets/hero/hero-wave.png"
         alt="Helicopter" />
-
-      <img class="bg-helicopter helicopter-landing"
+       <img class="bg-helicopter helicopter-landing"
         src="@/assets/hero/helicopter.png"
         alt="Helicopter" />
       <div class="blur-background-overlay"></div>
@@ -68,7 +67,7 @@ onMounted(async () => {
     options: {
       particles: {
         number: {
-          value: 200
+          value: 80
         },
         color: {
           value: '#FFFFFF'
@@ -172,13 +171,10 @@ onUnmounted(() => {
   position: relative;
   width: 100%;
   height: 100vh;
-  min-height: 100vh;
-  max-height: 100vh;
   overflow: hidden;
   background: #181818;
-  z-index: auto;
+  z-index: 1;
   isolation: isolate;
-  contain: layout;
 }
 
 .hero-background {
@@ -198,7 +194,7 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  backdrop-filter: blur(3px);
+  backdrop-filter: blur(2px);
   z-index: 1;
   pointer-events: none;
 }
@@ -237,18 +233,18 @@ onUnmounted(() => {
 
 .bg-helicopter-overlay {
   position: absolute;
-  top: 7px;
-  left: 0;
+  top: -30px;
+  left: 10px;
   width: 100%;
   height: 100%;
-  /* object-fit: cover; */
+  object-fit: cover;
   z-index: 2;
   pointer-events: none;
 }
 
 .bg-helicopter {
   position: absolute;
-  top: 90px;
+  top: 100px;
   left: 490px;
   width: 68%;
   height: 80%;
@@ -331,7 +327,7 @@ onUnmounted(() => {
 
 .bottom-right-triangle {
   position: absolute;
-  bottom: 0;
+  bottom: -10px;
   left: 0;
   width: 100%;
   height: 130px;
@@ -340,7 +336,7 @@ onUnmounted(() => {
       31);
   z-index: 4;
   pointer-events: none;
-  clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 100%);
+  clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 110%);
 }
 
 .hero-section {
@@ -353,9 +349,9 @@ onUnmounted(() => {
   height: calc(100vh - 120px);
   max-width: 100%;
   margin: 0;
-  /* padding: 0 8%; */
   padding: 120px 8% 80px;
   top: 90px;
+  margin-top: 2rem;
 }
 
 .hero-left {
@@ -372,7 +368,6 @@ onUnmounted(() => {
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1rem;
-  margin-top: 2rem;
 }
 
 .bracket {
@@ -414,7 +409,7 @@ onUnmounted(() => {
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: 1.8px;
-  margin-top: 0;
+  margin: 0;
   -webkit-text-stroke: 1px rgba(0, 0, 0, 0.93);
 }
 
@@ -537,10 +532,6 @@ onUnmounted(() => {
     font-size: 70px;
   }
 
-  .bottom-right-triangle {
-    height: 350px;
-  }
-
 }
 
 @media (max-width: 1024px) {
@@ -558,10 +549,6 @@ onUnmounted(() => {
 
   .bracket {
     font-size: 60px;
-  }
-
-  .bottom-right-triangle {
-    height: 300px;
   }
 }
 
@@ -624,7 +611,6 @@ onUnmounted(() => {
     height: 50px;
     font-size: 16px;
   }
-
   .bottom-right-triangle {
     height: 250px;
   }
@@ -679,6 +665,5 @@ onUnmounted(() => {
   .bottom-right-triangle {
     height: 200px;
   }
-
 }
 </style>

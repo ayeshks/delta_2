@@ -10,12 +10,16 @@
       src="https://api.builder.io/api/v1/image/assets/TEMP/5fadb1237fd28b1fec19da02ff507748eae7bdc7?width=556" alt="" /> -->
     
     <img class="drone-image"
-      src="https://api.builder.io/api/v1/image/assets/TEMP/d795a707aa2baa4cc9d514650cff6aef8ba125bd?width=2540"
+      src="@/assets/aerial-services/drone.png"
       alt="" />
     <div class="top-left-triangle"></div>
 
     <div class="left-top-geo">
       <img src="@/assets/aerial-services/bg-geometric-3.png" alt="" />
+    </div>
+
+    <div class="bg-aerial-solutions">
+      <img src="@/assets/aerial-services/bg-aerial-solutions.png" alt="" />
     </div>
 
     <div class="services-container" :class="{ 'services-loaded': isServicesLoaded }" ref="servicesContainerRef">
@@ -150,6 +154,23 @@ onUnmounted(() => {
 
 <style scoped>
 
+.bg-aerial-solutions {
+  position: absolute;
+  top: 430px;
+  /* left: -110px; */
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bg-aerial-solutions img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
 .left-top-geo {
   position: absolute;
@@ -216,9 +237,9 @@ onUnmounted(() => {
 
 .drone-image {
   position: absolute;
-  top: -3%;
-  right: -8%;
-  width: 65%;
+  top: 4%;
+  right: -2%;
+  width: 50%;
   height: auto;
   mix-blend-mode: luminosity;
   opacity: 0.8;
@@ -571,3 +592,4 @@ onUnmounted(() => {
   }
 }
 </style>
+

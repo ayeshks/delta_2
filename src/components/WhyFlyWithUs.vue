@@ -265,15 +265,15 @@ onUnmounted(() => {
 
 .decorative-bg-right {
   position: absolute;
-  bottom: -200px;
-  right: -300px;
-  width: 1079px;
+  bottom: 90px;
+  right: -100px;
+  width: 1400px;
   height: 1154px;
   background: url('https://api.builder.io/api/v1/image/assets/TEMP/c0c5ad2bd94089aa977ba6999be092aa2057dabe?width=2158') no-repeat center;
   background-size: contain;
-  transform: rotate(21.41deg);
-  filter: blur(9.75px);
-  opacity: 0.4;
+  transform: rotate(-10.41deg);
+  filter: blur(1.75px);
+  opacity: 0.6;
   pointer-events: none;
   z-index: 0;
 }

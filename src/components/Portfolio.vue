@@ -22,7 +22,7 @@ const images = ref([
       <img src="@/assets/portfolio/portfolio-11.png" alt="Portfolio decorative" />
     </div>
 
-    <div class="decorative-graphic-left">
+    <!-- <div class="decorative-graphic-left">
       <svg class="dot-pattern" viewBox="0 0 300 350" fill="none" xmlns="http://www.w3.org/2000/svg">
         <g opacity="0.2">
           <circle cx="150" cy="175" r="120" stroke="#DCC62D" stroke-width="0.5" fill="none" />
@@ -33,7 +33,7 @@ const images = ref([
           <circle cx="150" cy="175" r="20" stroke="#DCC62D" stroke-width="0.5" fill="none" />
         </g>
       </svg>
-    </div>
+    </div> -->
 
     <!-- <div class="geo-shape right-bottom-geo">
       <img src="/src/assets/getintouch/bg-geometric-2.png" alt="" />
@@ -68,7 +68,7 @@ const images = ref([
 .portfolio-section {
   position: relative;
   width: 100%;
-  padding: 120px 6% 140px;
+  padding: 120px 6% 50px;
   background: #181818;
   overflow: hidden;
 }

@@ -176,11 +176,11 @@ const onMouseMove = (e) => {
 
 .bg-landscape {
   position: absolute;
-  bottom: -30%;
+  bottom: -40%;
   left: -30%;
   width: 130%;
   height: auto;
-  opacity: 0.4;
+  /* opacity: 0.4; */
   filter: url(#waterWaveFilter_ds);
 }
 

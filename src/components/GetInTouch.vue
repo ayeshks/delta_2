@@ -215,8 +215,8 @@ onUnmounted(() => {
 
 .bottom-left-geo {
     left: 290px;
-    bottom: -400px;
-    width: 180px;
+    bottom: -430px;
+    width: 190px;
     transform: rotate(-82deg) scaleY(-1);
     z-index: 4;
     margin-bottom: 10px;

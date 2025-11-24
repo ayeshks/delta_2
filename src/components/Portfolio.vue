@@ -68,7 +68,7 @@ const images = ref([
 .portfolio-section {
   position: relative;
   width: 100%;
-  padding: 120px 6% 140px;
+  padding: 120px 6% 120px;
   background: #181818;
   overflow: hidden;
 }

@@ -10,7 +10,7 @@
       </svg>
       <div id="tsparticles" class="particles-container"></div>
       <img class="bg-helicopter-overlay water-wave"
-        src="https://cdn.builder.io/api/v1/image/assets%2Ff290de50bb23438081b567faae887dbc%2F729cf7c6f1134dd6bbed2a98a7ab5f73?format=webp&width=800"
+        src="@/assets/hero/undehc.png"
         alt="Helicopter" />
 
       <img class="bg-helicopter helicopter-landing"
@@ -249,7 +249,7 @@ onUnmounted(() => {
 .bg-helicopter {
   position: absolute;
   top: 90px;
-  left: 490px;
+  right: 0;
   width: 68%;
   height: 80%;
   object-fit: cover;
@@ -335,9 +335,7 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 130px;
-  background: rgb(31,
-      31,
-      31);
+  background: #181818;
   z-index: 4;
   pointer-events: none;
   clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 100%);

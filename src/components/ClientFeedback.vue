@@ -195,7 +195,7 @@ const previousTestimonial = () => {
   left: 0;
   width: 100%;
   height: 400px;
-  background: rgb(24, 24, 24);
+  background: #181818;
   z-index: 2;
   pointer-events: none;
   clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 200px));
@@ -220,7 +220,7 @@ const previousTestimonial = () => {
 
 .client-feedback {
   position: relative;
-  background: rgb(31, 31, 31);
+  background: #181818;
   padding: 120px 0;
   overflow: hidden;
   min-height: 100vh;

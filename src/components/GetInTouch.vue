@@ -462,7 +462,7 @@ onUnmounted(() => {
     left: 0;
     width: 100%;
     height: 400px;
-    background: rgb(24, 24, 24);
+    background: #181818;
     z-index: 2;
     pointer-events: none;
     clip-path: polygon(0 0, 100% 0, 100% 200px, 0 0);
@@ -474,9 +474,7 @@ onUnmounted(() => {
     left: 0;
     width: 100%;
     height: 400px;
-    background: rgb(15,
-            15,
-            15);
+    background: #181818;
     z-index: 3;
     pointer-events: none;
     clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 205px));

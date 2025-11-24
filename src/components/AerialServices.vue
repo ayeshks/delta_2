@@ -173,7 +173,7 @@ onUnmounted(() => {
   min-height: 100vh;
   background: #181818;
   overflow: hidden;
-  padding: 15rem 10% 6rem;
+  padding: 120px 10% 120px;
   z-index: 10;
 }
 
@@ -249,7 +249,7 @@ onUnmounted(() => {
   left: 0;
   width: 100%;
   height: 400px;
-  background: rgb(31, 31, 31);
+  background: #181818;
   z-index: 2;
   pointer-events: none;
   clip-path: polygon(0 0, 100% 0, 0 200px);

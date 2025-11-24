@@ -11,7 +11,7 @@
         </filter>
       </svg>
       <img class="bg-landscape"
-        src="https://api.builder.io/api/v1/image/assets/TEMP/823fc9d7831a3985286fe9c81e14cc807581a771?width=8204"
+        src="@/assets/drone-services/Mask group.png"
         alt="" />
     </div>
 
@@ -155,7 +155,7 @@ const onMouseMove = (e) => {
   min-height: 100vh;
   background: #1F1F1F;
   overflow: hidden;
-  padding: 8rem 6% 6rem;
+  padding: 120px 6% 120px;
   z-index: 10;
 }
 

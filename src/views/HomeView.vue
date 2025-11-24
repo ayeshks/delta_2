@@ -14,7 +14,6 @@ import Footer from "@/components/Footer.vue";
 
 const isMobile = ref(false);
 let mql;
-let scrollTriggers = [];
 const isLoading = ref(true);
 let onWindowLoad;
 
@@ -41,46 +40,11 @@ onMounted(() => {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
 
-  const initGsap = async () => {
-    try {
-      const gsapMod = await import('https://cdn.skypack.dev/gsap@3.12.2');
-      const stMod = await import('https://cdn.skypack.dev/gsap@3.12.2/ScrollTrigger');
-      const gsap = gsapMod.default || gsapMod;
-      const ScrollTrigger = stMod.default || stMod;
-      gsap.registerPlugin(ScrollTrigger);
-
-      const sections = Array.from(document.querySelectorAll('.parallax-section'));
-      sections.forEach((el) => {
-        const speedAttr = el.getAttribute('data-speed');
-        const speed = speedAttr ? parseFloat(speedAttr) : 0.15;
-        const yPercent = -100 * speed; // translate range across viewport
-
-        const tween = gsap.to(el, {
-          yPercent,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        });
-        // keep references to cleanup
-        scrollTriggers.push(tween.scrollTrigger);
-      });
-    } catch (e) {
-      console.warn('GSAP ScrollTrigger failed to load', e);
-    }
-  };
-  initGsap();
 });
 
 onUnmounted(() => {
   mql?.removeEventListener?.("change", updateIsMobile);
   mql?.removeListener?.(updateIsMobile);
-  // cleanup ScrollTriggers if any
-  scrollTriggers.forEach((st) => st && st.kill && st.kill());
-  scrollTriggers = [];
   if (onWindowLoad) {
     window.removeEventListener("load", onWindowLoad);
   }

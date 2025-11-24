@@ -245,7 +245,7 @@ onUnmounted(() => {
 .bg-helicopter {
   position: absolute;
   top: 100px;
-  left: 490px;
+  right: 0;
   width: 68%;
   height: 80%;
   object-fit: cover;

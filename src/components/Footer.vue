@@ -66,7 +66,7 @@
             <ul class="contact-list">
               <li>
                 <img src="@/assets/footer/mail-icon.png" alt="" />
-                <span><p><a href="mailto:hello@website.com">Send email</a></p></span>
+                <span><p><a href="mailto:hello@website.com">hello@website.com</a></p></span>
               </li>
               <li><img src="@/assets/footer/location-icon.png" alt="" /><span>838 Cantt Sialkot, ENG</span></li>
               <li>

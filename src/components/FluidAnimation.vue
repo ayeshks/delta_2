@@ -1193,16 +1193,18 @@ onMounted(() => {
   /* ---------- input events ---------- */
   window.addEventListener('mousedown', e => {
     const pointer = pointers[0];
-    const posX = scaleByPixelRatio(e.clientX);
-    const posY = scaleByPixelRatio(e.clientY);
+    const rect = canvas!.getBoundingClientRect();
+    const posX = scaleByPixelRatio(e.clientX - rect.left);
+    const posY = scaleByPixelRatio(e.clientY - rect.top);
     updatePointerDownData(pointer, -1, posX, posY);
     clickSplat(pointer);
   });
 
   function handleFirstMouseMove(e: MouseEvent) {
     const pointer = pointers[0];
-    const posX = scaleByPixelRatio(e.clientX);
-    const posY = scaleByPixelRatio(e.clientY);
+    const rect = canvas!.getBoundingClientRect();
+    const posX = scaleByPixelRatio(e.clientX - rect.left);
+    const posY = scaleByPixelRatio(e.clientY - rect.top);
     const color = generateColor();
     updateFrame();
     updatePointerMoveData(pointer, posX, posY, color);
@@ -1212,8 +1214,9 @@ onMounted(() => {
 
   window.addEventListener('mousemove', e => {
     const pointer = pointers[0];
-    const posX = scaleByPixelRatio(e.clientX);
-    const posY = scaleByPixelRatio(e.clientY);
+    const rect = canvas!.getBoundingClientRect();
+    const posX = scaleByPixelRatio(e.clientX - rect.left);
+    const posY = scaleByPixelRatio(e.clientY - rect.top);
     const color = pointer.color;
     updatePointerMoveData(pointer, posX, posY, color);
   });
@@ -1222,8 +1225,9 @@ onMounted(() => {
     const touches = e.targetTouches;
     const pointer = pointers[0];
     for (let i = 0; i < touches.length; i++) {
-      const posX = scaleByPixelRatio(touches[i].clientX);
-      const posY = scaleByPixelRatio(touches[i].clientY);
+      const rect = canvas!.getBoundingClientRect();
+      const posX = scaleByPixelRatio(touches[i].clientX - rect.left);
+      const posY = scaleByPixelRatio(touches[i].clientY - rect.top);
       updateFrame();
       updatePointerDownData(pointer, touches[i].identifier, posX, posY);
     }
@@ -1237,8 +1241,9 @@ onMounted(() => {
       const touches = e.targetTouches;
       const pointer = pointers[0];
       for (let i = 0; i < touches.length; i++) {
-        const posX = scaleByPixelRatio(touches[i].clientX);
-        const posY = scaleByPixelRatio(touches[i].clientY);
+        const rect = canvas!.getBoundingClientRect();
+        const posX = scaleByPixelRatio(touches[i].clientX - rect.left);
+        const posY = scaleByPixelRatio(touches[i].clientY - rect.top);
         updatePointerDownData(pointer, touches[i].identifier, posX, posY);
       }
     },
@@ -1251,8 +1256,9 @@ onMounted(() => {
       const touches = e.targetTouches;
       const pointer = pointers[0];
       for (let i = 0; i < touches.length; i++) {
-        const posX = scaleByPixelRatio(touches[i].clientX);
-        const posY = scaleByPixelRatio(touches[i].clientY);
+        const rect = canvas!.getBoundingClientRect();
+        const posX = scaleByPixelRatio(touches[i].clientX - rect.left);
+        const posY = scaleByPixelRatio(touches[i].clientY - rect.top);
         updatePointerMoveData(pointer, posX, posY, pointer.color);
       }
     },
@@ -1273,11 +1279,11 @@ onMounted(() => {
 .fluid-animation-wrapper {
   position: absolute;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 .fluid-canvas {

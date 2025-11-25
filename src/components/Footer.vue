@@ -26,11 +26,26 @@
             <h4 class="col-title">Quick Links</h4>
             <span class="col-underline"></span>
             <ul class="list">
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>About</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>Fleet</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>Portfolio</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>FAQs</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>Contact</span></li>
+              <li>
+                <img src="@/assets/footer/arrow-icon.png" alt="" />
+                <a href="#about">About</a>
+              </li>
+              <li>
+                <img src="@/assets/footer/arrow-icon.png" alt="" />
+                <a href="#services">Fleet</a>
+              </li>
+              <li>
+                <img src="@/assets/footer/arrow-icon.png" alt="" />
+                <a href="#portfolio">Portfolio</a>
+              </li>
+              <li>
+                <img src="@/assets/footer/arrow-icon.png" alt="" />
+                <a href="#faqs">FAQs</a>
+              </li>
+              <li>
+                <img src="@/assets/footer/arrow-icon.png" alt="" />
+                <a href="#contact">Contact</a>
+              </li>
             </ul>
           </div>
 
@@ -49,9 +64,15 @@
             <h4 class="col-title">Contact Us</h4>
             <span class="col-underline"></span>
             <ul class="contact-list">
-              <li><img src="@/assets/footer/mail-icon.png" alt="" /><span>hello@website.com</span></li>
+              <li>
+                <img src="@/assets/footer/mail-icon.png" alt="" />
+                <span><p><a href="mailto:hello@website.com">Send email</a></p></span>
+              </li>
               <li><img src="@/assets/footer/location-icon.png" alt="" /><span>838 Cantt Sialkot, ENG</span></li>
-              <li><img src="@/assets/footer/phone-icon.png" alt="" /><span>+02 5421234560</span></li>
+              <li>
+                <img src="@/assets/footer/phone-icon.png" alt="" />
+                <span><a href="tel:+025421234560">+02 5421234560</a></span>
+              </li>
             </ul>
           </div>
         </div>
@@ -160,6 +181,23 @@
   height: 14px;
 }
 
+.links a,
+.services a,
+.contact-list a {
+  color: #eaeaea;
+  text-decoration: none;
+}
+
+.links a:hover,
+.services a:hover,
+.contact-list a:hover,
+.links a:visited,
+.services a:visited,
+.contact-list a:visited {
+  color: #eaeaea;
+  text-decoration: none;
+}
+
 .panel-divider {
   height: 3px;
   width: 100%;
@@ -221,9 +259,10 @@
 }
 
 .right-bottom {
-  right: -5px;
-  bottom: 4px;
-  width: 250px;
+  right: -110px;
+  bottom: -70px;
+  width: 450px;
+  transform: rotate(-15deg);
   animation: floatUpDown 4s ease-in-out infinite 1s;
 }
 

@@ -285,7 +285,7 @@ onUnmounted(() => {
   width: 100%;
   height: 400px;
   background: rgb(31, 31, 31);
-  z-index: 2;
+  z-index: 1;
   pointer-events: none;
   clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 200px));
 }

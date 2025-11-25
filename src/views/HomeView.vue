@@ -37,9 +37,6 @@ onMounted(() => {
   // Safari fallback
   mql.addListener?.(updateIsMobile);
 
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
-
 });
 
 onUnmounted(() => {
@@ -57,19 +54,28 @@ onUnmounted(() => {
       <div class="spinner"></div>
     </div>
     <Nav v-if="!isMobile" />
-    <component :is="isMobile ? Mobilehero : Hero" />
-    <section class="parallax-section" data-speed="0.18"><DroneServices /></section>
-    <section class="parallax-section" data-speed="0.14"><AerialServices /></section>
+    <section id="home"><component :is="isMobile ? Mobilehero : Hero" /></section>
+    <section id="fleet" class="parallax-section" data-speed="0.18"><DroneServices /></section>
+    <section id="services" class="parallax-section" data-speed="0.14"><AerialServices /></section>
     <section class="parallax-section" data-speed="0.22"><Showreel /></section>
-    <section class="parallax-section" data-speed="0.16"><WhyFlyWithUs /></section>
-    <section class="parallax-section" data-speed="0.12"><ClientFeedback /></section>
-    <section class="parallax-section" data-speed="0.1"><Portfolio /></section>
+    <section id="about" class="parallax-section" data-speed="0.16"><WhyFlyWithUs /></section>
+    <div id="faqs"></div>
+    <section id="testimonials" class="parallax-section" data-speed="0.12"><ClientFeedback /></section>
+    <section id="portfolio" class="parallax-section" data-speed="0.1"><Portfolio /></section>
     <section class="parallax-section" data-speed="0.12"><GetInTouch /></section>
-    <section class="parallax-section" data-speed="0.05"><Footer /></section>
+    <section id="contact" class="parallax-section" data-speed="0.05"><Footer /></section>
   </div>
 </template>
 
 <style>
+html {
+  scroll-behavior: smooth;
+}
+
+.home-view [id] {
+  scroll-margin-top: 70px;
+}
+
 .home-view {
   width: 100%;
   position: relative;

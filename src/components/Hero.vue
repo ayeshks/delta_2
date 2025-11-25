@@ -267,7 +267,7 @@ onUnmounted(() => {
 }
 
 .helicopter-landing {
-  animation: helicopterLanding 2.5s ease-in-out forwards;
+  animation: helicopterLanding 4.5s ease-in-out forwards;
 }
 
 @keyframes helicopterLanding {

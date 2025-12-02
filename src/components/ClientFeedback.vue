@@ -97,6 +97,7 @@ import SectionLabel from './SectionLabel.vue'
 
 const feedbackContainerRef = ref(null)
 const isFeedbackLoaded = ref(false)
+let autoSlideInterval = null
 
 const observeFeedback = () => {
   if (!feedbackContainerRef.value) return
@@ -117,11 +118,32 @@ const observeFeedback = () => {
   observer.observe(feedbackContainerRef.value)
 }
 
+const startAutoSlide = () => {
+  // Auto-slide every 5 seconds
+  autoSlideInterval = setInterval(() => {
+    nextTestimonial()
+  }, 5000)
+}
+
+const stopAutoSlide = () => {
+  if (autoSlideInterval) {
+    clearInterval(autoSlideInterval)
+    autoSlideInterval = null
+  }
+}
+
+const resetAutoSlide = () => {
+  stopAutoSlide()
+  startAutoSlide()
+}
+
 onMounted(() => {
   observeFeedback()
+  startAutoSlide()
 })
 
 onUnmounted(() => {
+  stopAutoSlide()
   if (feedbackContainerRef.value) {
     const observer = new IntersectionObserver(() => { })
     observer.disconnect()
@@ -181,10 +203,12 @@ const displayedTestimonials = computed(() =>
 
 const nextTestimonial = () => {
   currentPage.value = (currentPage.value + 1) % totalPages.value
+  resetAutoSlide()
 }
 
 const previousTestimonial = () => {
   currentPage.value = (currentPage.value - 1 + totalPages.value) % totalPages.value
+  resetAutoSlide()
 }
 </script>
 

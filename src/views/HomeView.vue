@@ -62,7 +62,7 @@ onUnmounted(() => {
     <div id="faqs"></div>
     <section id="testimonials" class="parallax-section" data-speed="0.12"><ClientFeedback /></section>
     <section id="portfolio" class="parallax-section" data-speed="0.1"><Portfolio /></section>
-    <section class="parallax-section" data-speed="0.12"><GetInTouch /></section>
+    <section id="getintouch" class="parallax-section" data-speed="0.12"><GetInTouch /></section>
     <section id="contact" class="parallax-section" data-speed="0.05"><Footer /></section>
   </div>
 </template>

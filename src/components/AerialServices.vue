@@ -117,9 +117,39 @@ const cards = ref([
 
 ])
 
-const prevCard = () => { currentIndex.value = (currentIndex.value + cards.value.length - 1) % cards.value.length }
-const nextCard = () => { currentIndex.value = (currentIndex.value + 1) % cards.value.length }
-const goTo = (i) => { currentIndex.value = i }
+const prevCard = () => {
+  currentIndex.value = (currentIndex.value + cards.value.length - 1) % cards.value.length
+  resetAuto()
+}
+const nextCard = () => {
+  currentIndex.value = (currentIndex.value + 1) % cards.value.length
+  resetAuto()
+}
+const goTo = (i) => {
+  currentIndex.value = i
+  resetAuto()
+}
+
+const AUTO_INTERVAL_MS = 5000
+let autoTimer = null
+
+const stopAuto = () => {
+  if (autoTimer) {
+    clearInterval(autoTimer)
+    autoTimer = null
+  }
+}
+
+const startAuto = () => {
+  stopAuto()
+  autoTimer = setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % cards.value.length
+  }, AUTO_INTERVAL_MS)
+}
+
+const resetAuto = () => {
+  startAuto()
+}
 
 const observeServices = () => {
   if (!servicesContainerRef.value) return
@@ -142,6 +172,8 @@ const observeServices = () => {
 
 onMounted(() => {
   observeServices()
+  startAuto()
+  document.addEventListener('visibilitychange', handleVisibility)
 })
 
 onUnmounted(() => {
@@ -149,7 +181,17 @@ onUnmounted(() => {
     const observer = new IntersectionObserver(() => { })
     observer.disconnect()
   }
+  stopAuto()
+  document.removeEventListener('visibilitychange', handleVisibility)
 })
+
+const handleVisibility = () => {
+  if (document.hidden) {
+    stopAuto()
+  } else {
+    startAuto()
+  }
+}
 </script>
 
 <style scoped>

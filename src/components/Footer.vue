@@ -44,7 +44,7 @@
               </li>
               <li>
                 <img src="@/assets/footer/arrow-icon.png" alt="" />
-                <a href="#contact">Contact</a>
+                <a href="#getintouch">Contact</a>
               </li>
             </ul>
           </div>
@@ -53,10 +53,10 @@
             <h4 class="col-title">Services</h4>
             <span class="col-underline"></span>
             <ul class="list">
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>Helicopter Rental & Charter</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>Aerial Filming & Photography</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>Surveying & Inspection</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>3D Mapping & Modelling</span></li>
+              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">Helicopter Rental & Charter</a></li>
+              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">Aerial Filming & Photography</a></li>
+              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">Surveying & Inspection</a></li>
+              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">3D Mapping & Modelling</a></li>
             </ul>
           </div>
 

@@ -327,10 +327,10 @@ onUnmounted(() => {
     position: absolute;
     top: 70%;
     left: -2%;
-    width: 18%;
+    width: 24%;
     height: auto;
     animation: float 6s ease-in-out infinite;
-    z-index: 4;
+    z-index: 1;
 }
 
 @keyframes float {
@@ -398,13 +398,13 @@ onUnmounted(() => {
     right: 0;
     top: 0;
     height: 100%;
-    width: 78%;
-    max-width: 360px;
+    width: 100%;
+    /* max-width: 360px; */
     background: #101010;
     border-left: 2px solid #DCC62D;
     transform: translateX(100%);
     transition: transform .3s ease;
-    padding: 18px 18px 24px;
+    padding: 28px 35px 24px;
     display: flex;
     flex-direction: column;
     gap: 14px;
@@ -509,7 +509,7 @@ onUnmounted(() => {
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    height: calc(100vh - 120px);
+    height: calc(85vh - 120px);
     max-width: 100%;
     margin: 0;
 }
@@ -771,11 +771,11 @@ onUnmounted(() => {
 
 @media (max-width: 480px) {
     .navbar {
-        padding: 0.8rem 3%;
+        padding: 2rem 6%;
     }
 
     .navbar-logo {
-        width: 90px;
+        width: 100px;
     }
 
     .nav-center {

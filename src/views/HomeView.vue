@@ -73,12 +73,13 @@ html {
 }
 
 .home-view [id] {
-  scroll-margin-top: 70px;
+  scroll-margin-top: 50px;
 }
 
 .home-view {
   width: 100%;
   position: relative;
+  overflow-x: hidden;
 }
 
 .home-view>* {

@@ -40,7 +40,7 @@
               </li>
               <li>
                 <img src="@/assets/footer/arrow-icon.png" alt="" />
-                <a href="#faqs">FAQs</a>
+                <a href="#">FAQs</a>
               </li>
               <li>
                 <img src="@/assets/footer/arrow-icon.png" alt="" />

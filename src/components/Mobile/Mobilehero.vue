@@ -50,7 +50,7 @@
                         <li><a href="#services" @click="isMenuOpen = false">Services</a></li>
                         <li><a href="#portfolio" @click="isMenuOpen = false">Portfolio</a></li>
                         <li><a href="#testimonials" @click="isMenuOpen = false">Testimonials</a></li>
-                        <li><a href="#contact" @click="isMenuOpen = false">Contact Us</a></li>
+                        <li><a href="#getintouch" @click="isMenuOpen = false">Contact Us</a></li>
                     </ul>
                 </div>
             </div>

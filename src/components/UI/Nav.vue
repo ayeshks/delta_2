@@ -31,7 +31,7 @@ onUnmounted(() => {
       <a href="#services">Services</a>
       <a href="#portfolio">Portfolio</a>
       <a href="#testimonials">Testimonials</a>
-      <a href="#contact">Contact Us</a>
+      <a href="#getintouch">Contact Us</a>
     </div>
 
     <img

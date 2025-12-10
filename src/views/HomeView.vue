@@ -14,7 +14,6 @@ import Footer from "@/components/Footer.vue";
 
 const isMobile = ref(false);
 let mql;
-let scrollTriggers = [];
 const isLoading = ref(true);
 let onWindowLoad;
 
@@ -38,49 +37,11 @@ onMounted(() => {
   // Safari fallback
   mql.addListener?.(updateIsMobile);
 
-  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
-
-  const initGsap = async () => {
-    try {
-      const gsapMod = await import('https://cdn.skypack.dev/gsap@3.12.2');
-      const stMod = await import('https://cdn.skypack.dev/gsap@3.12.2/ScrollTrigger');
-      const gsap = gsapMod.default || gsapMod;
-      const ScrollTrigger = stMod.default || stMod;
-      gsap.registerPlugin(ScrollTrigger);
-
-      const sections = Array.from(document.querySelectorAll('.parallax-section'));
-      sections.forEach((el) => {
-        const speedAttr = el.getAttribute('data-speed');
-        const speed = speedAttr ? parseFloat(speedAttr) : 0.15;
-        const yPercent = -100 * speed; // translate range across viewport
-
-        const tween = gsap.to(el, {
-          yPercent,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: el,
-            start: 'top bottom',
-            end: 'bottom top',
-            scrub: true,
-          },
-        });
-        // keep references to cleanup
-        scrollTriggers.push(tween.scrollTrigger);
-      });
-    } catch (e) {
-      console.warn('GSAP ScrollTrigger failed to load', e);
-    }
-  };
-  initGsap();
 });
 
 onUnmounted(() => {
   mql?.removeEventListener?.("change", updateIsMobile);
   mql?.removeListener?.(updateIsMobile);
-  // cleanup ScrollTriggers if any
-  scrollTriggers.forEach((st) => st && st.kill && st.kill());
-  scrollTriggers = [];
   if (onWindowLoad) {
     window.removeEventListener("load", onWindowLoad);
   }
@@ -93,22 +54,32 @@ onUnmounted(() => {
       <div class="spinner"></div>
     </div>
     <Nav v-if="!isMobile" />
-    <component :is="isMobile ? Mobilehero : Hero" />
-    <section class="parallax-section" data-speed="0.18"><DroneServices /></section>
-    <section class="parallax-section" data-speed="0.14"><AerialServices /></section>
+    <section id="home"><component :is="isMobile ? Mobilehero : Hero" /></section>
+    <section id="fleet" class="parallax-section" data-speed="0.18"><DroneServices /></section>
+    <section id="services" class="parallax-section" data-speed="0.14"><AerialServices /></section>
     <section class="parallax-section" data-speed="0.22"><Showreel /></section>
-    <section class="parallax-section" data-speed="0.16"><WhyFlyWithUs /></section>
-    <section class="parallax-section" data-speed="0.12"><ClientFeedback /></section>
-    <section class="parallax-section" data-speed="0.1"><Portfolio /></section>
-    <section class="parallax-section" data-speed="0.12"><GetInTouch /></section>
-    <section class="parallax-section" data-speed="0.05"><Footer /></section>
+    <section id="about" class="parallax-section" data-speed="0.16"><WhyFlyWithUs /></section>
+    <div id="faqs"></div>
+    <section id="testimonials" class="parallax-section" data-speed="0.12"><ClientFeedback /></section>
+    <section id="portfolio" class="parallax-section" data-speed="0.1"><Portfolio /></section>
+    <section id="getintouch" class="parallax-section" data-speed="0.12"><GetInTouch /></section>
+    <section id="contact" class="parallax-section" data-speed="0.05"><Footer /></section>
   </div>
 </template>
 
 <style>
+html {
+  scroll-behavior: smooth;
+}
+
+.home-view [id] {
+  scroll-margin-top: 50px;
+}
+
 .home-view {
   width: 100%;
   position: relative;
+  overflow-x: hidden;
 }
 
 .home-view>* {

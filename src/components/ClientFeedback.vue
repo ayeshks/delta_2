@@ -1,12 +1,17 @@
 <template>
   <section class="client-feedback">
-    <div class="decorative-bg-right">
+    <!-- <div class="decorative-bg-right">
       <img src="https://api.builder.io/api/v1/image/assets/TEMP/2cdedecc5316dc46d8a4ae6a8230de07e99248fb?width=921"
         alt="" />
-    </div>
-    <div class="decorative-bg-left">
+    </div> -->
+    <!-- <div class="decorative-bg-left">
       <img src="https://api.builder.io/api/v1/image/assets/TEMP/bbf456b8ed839c877d92c66fb2cc520cc26c41be?width=2192"
         alt="" />
+    </div> -->
+    <div class="bottom-right-triangle"></div>
+
+    <div class="bottom-right-geo">
+      <img src="@/assets/portfolio/portfolio-10.png" alt="" />
     </div>
 
     <div class="feedback-container" :class="{ 'feedback-loaded': isFeedbackLoaded }" ref="feedbackContainerRef">
@@ -92,6 +97,7 @@ import SectionLabel from './SectionLabel.vue'
 
 const feedbackContainerRef = ref(null)
 const isFeedbackLoaded = ref(false)
+let autoSlideInterval = null
 
 const observeFeedback = () => {
   if (!feedbackContainerRef.value) return
@@ -112,11 +118,32 @@ const observeFeedback = () => {
   observer.observe(feedbackContainerRef.value)
 }
 
+const startAutoSlide = () => {
+  // Auto-slide every 5 seconds
+  autoSlideInterval = setInterval(() => {
+    nextTestimonial()
+  }, 5000)
+}
+
+const stopAutoSlide = () => {
+  if (autoSlideInterval) {
+    clearInterval(autoSlideInterval)
+    autoSlideInterval = null
+  }
+}
+
+const resetAutoSlide = () => {
+  stopAutoSlide()
+  startAutoSlide()
+}
+
 onMounted(() => {
   observeFeedback()
+  startAutoSlide()
 })
 
 onUnmounted(() => {
+  stopAutoSlide()
   if (feedbackContainerRef.value) {
     const observer = new IntersectionObserver(() => { })
     observer.disconnect()
@@ -176,17 +203,48 @@ const displayedTestimonials = computed(() =>
 
 const nextTestimonial = () => {
   currentPage.value = (currentPage.value + 1) % totalPages.value
+  resetAutoSlide()
 }
 
 const previousTestimonial = () => {
   currentPage.value = (currentPage.value - 1 + totalPages.value) % totalPages.value
+  resetAutoSlide()
 }
 </script>
 
 <style scoped>
+.bottom-right-triangle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background: rgb(24, 24, 24);
+  z-index: 2;
+  pointer-events: none;
+  clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 200px));
+}
+
+.bottom-right-geo {
+  position: absolute;
+  bottom: -210px;
+  right: -420px;
+  width: 700px;
+  height: 700px;
+  z-index: 3;
+  pointer-events: none;
+  transform: rotate(82deg) scaleX(-1);
+}
+
+.bottom-right-geo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .client-feedback {
   position: relative;
-  background: #181818;
+  background: rgb(31, 31, 31);
   padding: 120px 0;
   overflow: hidden;
   min-height: 100vh;
@@ -239,6 +297,7 @@ const previousTestimonial = () => {
   width: 100%;
   margin: 0 auto;
   padding: 0 145px;
+  top: -80px;
 }
 
 .feedback-header {
@@ -414,6 +473,12 @@ const previousTestimonial = () => {
     padding: 0 80px;
   }
 
+  .bottom-right-geo {
+    width: 180px;
+    right: 250px;
+    bottom: 70px;
+  }
+
   .section-title {
     font-size: 42px;
     line-height: 60px;
@@ -444,6 +509,12 @@ const previousTestimonial = () => {
 @media (max-width: 768px) {
   .client-feedback {
     padding: 80px 0;
+  }
+
+  .bottom-right-geo {
+    width: 150px;
+    right: 150px;
+    bottom: 60px;
   }
 
   .feedback-container {
@@ -479,8 +550,21 @@ const previousTestimonial = () => {
 }
 
 @media (max-width: 480px) {
+  .bottom-right-triangle {
+  position: absolute;
+  clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 100px));
+}
+
   .client-feedback {
     padding: 3rem 8% 2.5rem;
+  }
+
+  .bottom-right-geo {
+    width: 120px;
+    right: -80px;
+    bottom: -305px;
+    z-index: 2;
+    transform: rotate(-106deg);
   }
 
   .feedback-container {

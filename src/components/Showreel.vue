@@ -1,31 +1,53 @@
 <template>
   <div class="showreel" ref="showreelElement">
-    <img class="drone-image" :class="{ 'drone-visible': isDroneVisible }" src="https://cdn.builder.io/api/v1/image/assets%2F76536513f46d49f58638b73b18830729%2Fac31c357624f485586f2ff4fa5f487b1?format=webp&width=800" alt="Drone" />
+    <img class="drone-image" :class="{ 'drone-visible': isDroneVisible }"
+      src="https://cdn.builder.io/api/v1/image/assets%2F76536513f46d49f58638b73b18830729%2Fac31c357624f485586f2ff4fa5f487b1?format=webp&width=800"
+      alt="Drone" />
 
     <div class="bg-aerial-image">
-      <img class="bg-aerial-img" :class="{ 'cinematic-loaded': isDroneVisible }" src="https://api.builder.io/api/v1/image/assets/TEMP/3c12ed418dea13ea3e7db4992dc1d1f372d72eed?width=4236" alt="" />
+      <img class="bg-aerial-img" :class="{ 'cinematic-loaded': isDroneVisible }"
+        src="https://api.builder.io/api/v1/image/assets/TEMP/3c12ed418dea13ea3e7db4992dc1d1f372d72eed?width=4236"
+        alt="" />
     </div>
 
     <div class="bg-overlay"></div>
 
-    <img class="geometric-pattern" src="https://cdn.builder.io/api/v1/image/assets%2F76536513f46d49f58638b73b18830729%2F43d249f813bc411690f1ff7183b193a0?format=webp&width=800" alt="" />
+    <div class="top-right-triangle"></div>
+
+    <!-- <div class="top-right-geo">
+      <img src="@/assets/showreel/bg-geometric-4.png.png" alt="" />
+    </div> -->
+
+    <div class="bottom-left-triangle"></div>
+
+    <img class="geometric-pattern"
+      src="https://cdn.builder.io/api/v1/image/assets%2F76536513f46d49f58638b73b18830729%2F43d249f813bc411690f1ff7183b193a0?format=webp&width=800"
+      alt="" />
 
     <div class="showreel-container">
       <div class="video-section">
         <div class="video-thumbnail-stack">
           <div class="thumbnail-layer thumbnail-back">
             <div class="thumbnail-overlay"></div>
-            <img :src="thumbnailSwapped ? 'https://api.builder.io/api/v1/image/assets/TEMP/c13888be4d1072e4ff2d29aa9dd6ed918ca2f586?width=1032' : 'https://api.builder.io/api/v1/image/assets/TEMP/7830954cf744e460cce8631c9f3e7b6bab9ae04c?width=1056'" :alt="thumbnailSwapped ? 'Helicopter and drone operations' : 'Aerial footage'" />
+            <img
+              :src="thumbnailSwapped ? 'https://api.builder.io/api/v1/image/assets/TEMP/c13888be4d1072e4ff2d29aa9dd6ed918ca2f586?width=1032' : 'https://api.builder.io/api/v1/image/assets/TEMP/7830954cf744e460cce8631c9f3e7b6bab9ae04c?width=1056'"
+              :alt="thumbnailSwapped ? 'Helicopter and drone operations' : 'Aerial footage'" />
           </div>
 
           <div class="thumbnail-layer thumbnail-front">
             <div class="thumbnail-overlay"></div>
-            <img :src="thumbnailSwapped ? 'https://api.builder.io/api/v1/image/assets/TEMP/7830954cf744e460cce8631c9f3e7b6bab9ae04c?width=1056' : 'https://api.builder.io/api/v1/image/assets/TEMP/c13888be4d1072e4ff2d29aa9dd6ed918ca2f586?width=1032'" :alt="thumbnailSwapped ? 'Aerial footage' : 'Helicopter and drone operations'" />
+            <img
+              :src="thumbnailSwapped ? 'https://api.builder.io/api/v1/image/assets/TEMP/7830954cf744e460cce8631c9f3e7b6bab9ae04c?width=1056' : 'https://api.builder.io/api/v1/image/assets/TEMP/c13888be4d1072e4ff2d29aa9dd6ed918ca2f586?width=1032'"
+              :alt="thumbnailSwapped ? 'Aerial footage' : 'Helicopter and drone operations'" />
 
             <div class="play-button">
               <svg viewBox="0 0 124 124" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M62.2423 110.438C35.6138 110.438 13.938 88.7739 13.938 62.1454C13.938 35.5169 35.6017 13.8411 62.2423 13.8411C88.8708 13.8411 110.534 35.5047 110.534 62.1454C110.534 88.7739 88.8708 110.438 62.2423 110.438ZM62.2423 25.4903C42.0317 25.4903 25.5872 41.9348 25.5872 62.1454C25.5872 82.3559 42.0317 98.8004 62.2423 98.8004C82.4528 98.8004 98.8974 82.3559 98.8974 62.1454C98.8974 41.9348 82.4528 25.4903 62.2423 25.4903Z" fill="#DCC62D"/>
-                <path d="M52.9301 41.8862L83.1915 59.3601C85.3348 60.5952 85.3348 63.6831 83.1915 64.9182L52.9301 82.4042C50.7868 83.6393 48.1106 82.0893 48.1106 79.619V44.6714C48.1106 42.2011 50.7868 40.6511 52.9301 41.8862Z" fill="black"/>
+                <path
+                  d="M62.2423 110.438C35.6138 110.438 13.938 88.7739 13.938 62.1454C13.938 35.5169 35.6017 13.8411 62.2423 13.8411C88.8708 13.8411 110.534 35.5047 110.534 62.1454C110.534 88.7739 88.8708 110.438 62.2423 110.438ZM62.2423 25.4903C42.0317 25.4903 25.5872 41.9348 25.5872 62.1454C25.5872 82.3559 42.0317 98.8004 62.2423 98.8004C82.4528 98.8004 98.8974 82.3559 98.8974 62.1454C98.8974 41.9348 82.4528 25.4903 62.2423 25.4903Z"
+                  fill="#DCC62D" />
+                <path
+                  d="M52.9301 41.8862L83.1915 59.3601C85.3348 60.5952 85.3348 63.6831 83.1915 64.9182L52.9301 82.4042C50.7868 83.6393 48.1106 82.0893 48.1106 79.619V44.6714C48.1106 42.2011 50.7868 40.6511 52.9301 41.8862Z"
+                  fill="black" />
               </svg>
             </div>
           </div>
@@ -34,13 +56,14 @@
 
       <div class="content-section">
         <SectionLabel>SHOWREEL</SectionLabel>
-        
+
         <h2 class="section-title">
           <span class="title-bold">See Our Aircraft and </span><span class="title-light">Crews in Action</span>
         </h2>
-        
+
         <p class="section-description">
-          Watch a short reel featuring helicopter and drone projects across film, infrastructure, real estate and environmental work. Every clip was planned, flown and delivered by our in-house team.
+          Watch a short reel featuring helicopter and drone projects across film, infrastructure, real estate and
+          environmental work. Every clip was planned, flown and delivered by our in-house team.
         </p>
       </div>
     </div>
@@ -129,14 +152,31 @@ onUnmounted(() => {
 
 .geometric-pattern {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 400px;
+  bottom: -180px;
+  left: -130px;
+  width: 580px;
   height: auto;
   object-fit: contain;
   z-index: 2;
   opacity: 0.8;
   pointer-events: none;
+  /* transform: rotate(-10deg); */
+}
+
+.top-right-geo {
+  position: absolute;
+  top: -120px;
+  right: -30px;
+  width: 990px;
+  height: 990px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.top-right-geo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .bg-aerial-image {
@@ -174,6 +214,30 @@ onUnmounted(() => {
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
   z-index: 2;
+}
+
+.top-right-triangle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background: rgb(24, 24, 24);
+  z-index: 2;
+  pointer-events: none;
+  clip-path: polygon(0 0, 100% 0, 100% 180px, 0 0);
+}
+
+.bottom-left-triangle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background: rgb(24, 24, 24);
+  z-index: 2;
+  pointer-events: none;
+  clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 100px));
 }
 
 .showreel-container {
@@ -303,6 +367,23 @@ onUnmounted(() => {
     height: 250px;
   }
 
+  .top-right-triangle {
+    height: 350px;
+    clip-path: polygon(0 0, 100% 0, 100% 350px, 0 0);
+  }
+
+  .top-right-geo {
+    width: 320px;
+    height: 320px;
+    right: -40px;
+    top: -30px;
+  }
+
+  .bottom-left-triangle {
+    height: 350px;
+    clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 350px));
+  }
+
   .geometric-pattern {
     width: 350px;
   }
@@ -322,6 +403,23 @@ onUnmounted(() => {
 }
 
 @media (max-width: 1024px) {
+  .top-right-triangle {
+    height: 300px;
+    clip-path: polygon(0 0, 100% 0, 100% 300px, 0 0);
+  }
+
+  .top-right-geo {
+    width: 280px;
+    height: 280px;
+    right: -30px;
+    top: -20px;
+  }
+
+  .bottom-left-triangle {
+    height: 300px;
+    clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 300px));
+  }
+
   .showreel-container {
     padding: 5rem 4%;
     flex-direction: column;
@@ -348,6 +446,23 @@ onUnmounted(() => {
   .drone-image {
     height: 200px;
     top: 3%;
+  }
+
+  .top-right-triangle {
+    height: 250px;
+    clip-path: polygon(0 0, 100% 0, 100% 250px, 0 0);
+  }
+
+  .top-right-geo {
+    width: 220px;
+    height: 220px;
+    right: -20px;
+    top: -15px;
+  }
+
+  .bottom-left-triangle {
+    height: 250px;
+    clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 250px));
   }
 
   .geometric-pattern {
@@ -383,13 +498,42 @@ onUnmounted(() => {
 }
 
 @media (max-width: 480px) {
+
+  .showreel {
+  min-height: 90vh;
+}
+
+  .showreel-container {
+    top : 70px;
+    min-height: 70vh;
+  }
+
   .drone-image {
     height: 150px;
-    top: 2%;
+    top: 5%;
+  }
+
+  .top-right-triangle {
+    height: 200px;
+    clip-path: polygon(0 0, 100% 0, 100% 60px, 0 0);
+  }
+
+  .top-right-geo {
+    width: 180px;
+    height: 180px;
+    right: -15px;
+    top: -10px;
+  }
+
+  .bottom-left-triangle {
+    height: 200px;
+    bottom: -2px;
+    clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 70px));
   }
 
   .geometric-pattern {
-    width: 220px;
+    width: 240px;
+    bottom: -100px;
   }
 
   .showreel-container {

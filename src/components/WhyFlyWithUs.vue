@@ -3,6 +3,15 @@
     <FluidAnimation />
     <div class="decorative-bg-left"></div>
     <div class="decorative-bg-right"></div>
+    <div class="bottom-right-triangle"></div>
+
+    <div class="bottom-right-geo">
+      <img src="@/assets/client-feedback/bg-decorative-rightconner.png" alt="" />
+    </div>
+
+    <div class="left-bottom-geo">
+      <img src="@/assets/getintouch/bg-geometric-2.png" alt="" />
+    </div>
 
     <div class="container" :class="{ 'container-loaded': isContainerLoaded }" ref="containerRef">
       <div class="section-header">
@@ -236,38 +245,83 @@ onUnmounted(() => {
   position: relative;
   width: 100%;
   background: #181818;
-  padding: 120px 6% 140px;
+  padding: 120px 10% 140px;
   overflow: hidden;
   z-index: 1;
 }
 
 .decorative-bg-left {
   position: absolute;
-  top: -50px;
-  left: -200px;
+  top: -70px;
+  left: -180px;
   width: 460px;
   height: 493px;
   background: url('https://api.builder.io/api/v1/image/assets/TEMP/1caec34eca43baf95948561a702746271c1a79e2?width=921') no-repeat center;
   background-size: contain;
-  transform: rotate(21.41deg);
-  opacity: 0.6;
+  transform: rotate(30deg);
   pointer-events: none;
   z-index: 0;
 }
 
 .decorative-bg-right {
   position: absolute;
-  bottom: -200px;
-  right: -300px;
-  width: 1079px;
+  bottom: 90px;
+  right: -100px;
+  width: 1400px;
   height: 1154px;
   background: url('https://api.builder.io/api/v1/image/assets/TEMP/c0c5ad2bd94089aa977ba6999be092aa2057dabe?width=2158') no-repeat center;
   background-size: contain;
-  transform: rotate(21.41deg);
-  filter: blur(9.75px);
-  opacity: 0.4;
+  transform: rotate(-10.41deg);
+  filter: blur(1.75px);
+  opacity: 0.6;
   pointer-events: none;
   z-index: 0;
+}
+
+.bottom-right-triangle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background: rgb(31, 31, 31);
+  z-index: 1;
+  pointer-events: none;
+  clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 200px));
+}
+
+.bottom-right-geo {
+  position: absolute;
+  bottom: -85px;
+  right: -58px;
+  width: 340px;
+  height: 340px;
+  z-index: 3;
+  pointer-events: none;
+  transform: rotate(81deg) scaleX(-1);
+}
+
+.bottom-right-geo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.left-bottom-geo {
+  position: absolute;
+  bottom: -10px;
+  left: -55px;
+  width: 300px;
+  height: 300px;
+  z-index: 1;
+  pointer-events: none;
+  transform: rotate(75deg);
+}
+
+.left-bottom-geo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .container {
@@ -427,6 +481,23 @@ onUnmounted(() => {
     padding: 100px 5% 120px;
   }
 
+  .bottom-right-triangle {
+    height: 350px;
+    clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 350px));
+  }
+
+  .bottom-right-geo {
+    width: 180px;
+    right: 250px;
+    bottom: 70px;
+  }
+
+  .left-bottom-geo {
+    width: 160px;
+    left: -40px;
+    bottom: 70px;
+  }
+
   .features-grid {
     gap: 60px 40px;
   }
@@ -435,6 +506,23 @@ onUnmounted(() => {
 @media (max-width: 1024px) {
   .why-fly-section {
     padding: 80px 4% 100px;
+  }
+
+  .bottom-right-triangle {
+    height: 300px;
+    clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 300px));
+  }
+
+  .bottom-right-geo {
+    width: 160px;
+    right: 200px;
+    bottom: 60px;
+  }
+
+  .left-bottom-geo {
+    width: 150px;
+    left: -35px;
+    bottom: 60px;
   }
 
   .section-header {
@@ -466,6 +554,23 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .why-fly-section {
     padding: 60px 4% 80px;
+  }
+
+  .bottom-right-triangle {
+    height: 250px;
+    clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 250px));
+  }
+
+  .bottom-right-geo {
+    width: 140px;
+    right: 150px;
+    bottom: 50px;
+  }
+
+  .left-bottom-geo {
+    width: 130px;
+    left: -30px;
+    bottom: 50px;
   }
 
   .section-header {
@@ -527,6 +632,24 @@ onUnmounted(() => {
   .why-fly-section {
     /* padding: 50px 3% 60px; */
     padding: 3rem 8% 2.5rem;
+  }
+
+  .bottom-right-triangle {
+    height: 200px;
+    clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 100px));
+  }
+
+  .bottom-right-geo {
+    width: 90px;
+    right: -10px;
+    bottom: -135px;
+    transform: rotate(4deg);
+  }
+
+  .left-bottom-geo {
+    width: 110px;
+    left: -20px;
+    bottom: -100px;
   }
 
   .feature-card {

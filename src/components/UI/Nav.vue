@@ -21,7 +21,7 @@ onUnmounted(() => {
   <nav ref="navRef" :class="['navbar', { 'navbar-scrolled': isScrolled }]">
     <img
       class="navbar-logo"
-      src="https://api.builder.io/api/v1/image/assets/TEMP/4a29e3443cdf0359763cb1de98787f1a6ad707a2?width=368"
+      src="@/assets/hero/Nav_logo.png"
       alt="Delta Helicopters"
     />
 
@@ -31,7 +31,7 @@ onUnmounted(() => {
       <a href="#services">Services</a>
       <a href="#portfolio">Portfolio</a>
       <a href="#testimonials">Testimonials</a>
-      <a href="#contact">Contact Us</a>
+      <a href="#getintouch">Contact Us</a>
     </div>
 
     <img
@@ -44,7 +44,7 @@ onUnmounted(() => {
 <style scoped>
   .navbar {
     position: fixed;
-    z-index: 20;
+    z-index: 10;
     display: flex;
     align-items: center;
     justify-content: space-between;

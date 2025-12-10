@@ -10,24 +10,26 @@
       </svg>
       <div id="tsparticles" class="particles-container"></div>
       <img class="bg-helicopter-overlay water-wave"
-        src="https://cdn.builder.io/api/v1/image/assets%2F7d4dc6c18bb44bf38d1786568767e08e%2Fe23413db85484fe5a98c389f1f08ef97?format=webp&width=800"
+        src="@/assets/hero/hero-wave.png"
         alt="Helicopter" />
-      <img class="bg-helicopter-overlay helicopter-landing"
-        src="https://cdn.builder.io/api/v1/image/assets%2F7d4dc6c18bb44bf38d1786568767e08e%2F2958c5523a254e4e862130966c54ea62?format=webp&width=800"
+       <img class="bg-helicopter helicopter-landing"
+        src="@/assets/hero/helicopter.png"
         alt="Helicopter" />
+      <div class="blur-background-overlay"></div>
       <img class="bg-image-overlay-1"
         src="https://api.builder.io/api/v1/image/assets/TEMP/d924db34fa0bd87939ee320874555174aade0a21?width=648"
         alt="" />
       <img class="bg-image-overlay-2"
         src="https://api.builder.io/api/v1/image/assets/TEMP/00da309db929fb12a1cff1a8644132770534426b?width=412"
         alt="" />
+      <div class="bottom-right-triangle"></div>
     </div>
 
     <div class="hero-section">
       <div class="hero-left">
         <div class="title-box">
           <span class="bracket bracket-animate">[</span>
-          <h1 class="hero-title title-animate">PREMIUM<br />AERIAL<br />SERVICES</h1>
+          <h1 class="hero-title title-animate">PREMIUM AERIAL<br />SERVICES</h1>
           <span class="bracket bracket-animate">]</span>
         </div>
 
@@ -169,13 +171,10 @@ onUnmounted(() => {
   position: relative;
   width: 100%;
   height: 100vh;
-  min-height: 100vh;
-  max-height: 100vh;
   overflow: hidden;
   background: #181818;
-  z-index: auto;
+  z-index: 1;
   isolation: isolate;
-  contain: layout;
 }
 
 .hero-background {
@@ -189,12 +188,23 @@ onUnmounted(() => {
   overflow: hidden;
 }
 
-.particles-container {
+.blur-background-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+  backdrop-filter: blur(2px);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.particles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
   z-index: 1;
   pointer-events: none;
   overflow: hidden;
@@ -223,12 +233,24 @@ onUnmounted(() => {
 
 .bg-helicopter-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
+  top: -30px;
+  left: 10px;
   width: 100%;
   height: 100%;
   object-fit: cover;
   z-index: 2;
+  pointer-events: none;
+}
+
+.bg-helicopter {
+  position: absolute;
+  top: 100px;
+  right: 0;
+  width: 68%;
+  height: 80%;
+  object-fit: cover;
+  z-index: 2;
+  filter: grayscale(100%);
   pointer-events: none;
 }
 
@@ -245,7 +267,7 @@ onUnmounted(() => {
 }
 
 .helicopter-landing {
-  animation: helicopterLanding 2.5s ease-in-out forwards;
+  animation: helicopterLanding 4.5s ease-in-out forwards;
 }
 
 @keyframes helicopterLanding {
@@ -303,6 +325,20 @@ onUnmounted(() => {
   }
 }
 
+.bottom-right-triangle {
+  position: absolute;
+  bottom: -10px;
+  left: 0;
+  width: 100%;
+  height: 130px;
+  background: rgb(31,
+      31,
+      31);
+  z-index: 4;
+  pointer-events: none;
+  clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 110%);
+}
+
 .hero-section {
   position: relative;
   z-index: 10;
@@ -313,8 +349,9 @@ onUnmounted(() => {
   height: calc(100vh - 120px);
   max-width: 100%;
   margin: 0;
-  padding: 0 6%;
+  padding: 120px 8% 80px;
   top: 90px;
+  margin-top: 2rem;
 }
 
 .hero-left {
@@ -336,11 +373,11 @@ onUnmounted(() => {
 .bracket {
   color: #DCC62D;
   font-family: 'Manrope', sans-serif;
-  font-size: 80px;
+  font-size: 84px;
   font-weight: 800;
   line-height: 1;
   flex-shrink: 0;
-  margin-top: 0.2em;
+  margin-top: 0.1em;
 }
 
 .bracket-animate {
@@ -368,12 +405,11 @@ onUnmounted(() => {
 .hero-title {
   color: #DCC62D;
   font-family: 'Manrope', sans-serif;
-  font-size: 56px;
+  font-size: 50px;
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: 1.8px;
   margin: 0;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.93);
 }
 
 .title-animate {
@@ -574,6 +610,9 @@ onUnmounted(() => {
     height: 50px;
     font-size: 16px;
   }
+  .bottom-right-triangle {
+    height: 250px;
+  }
 
 }
 
@@ -622,5 +661,8 @@ onUnmounted(() => {
     font-size: 15px;
   }
 
+  .bottom-right-triangle {
+    height: 200px;
+  }
 }
 </style>

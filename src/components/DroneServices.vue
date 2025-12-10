@@ -16,7 +16,7 @@
     </div>
 
     <div class="drone-image drone-scroll-reveal" ref="droneImageRef">
-      <img src="https://api.builder.io/api/v1/image/assets/TEMP/40c773e6e28bf9e9bf9623721b2eac177f01383d?width=1190"
+      <img src="@/assets/drone-services/2_drone.png"
         alt="Professional Drone" />
     </div>
 
@@ -176,11 +176,11 @@ const onMouseMove = (e) => {
 
 .bg-landscape {
   position: absolute;
-  bottom: -30%;
+  bottom: -40%;
   left: -30%;
   width: 130%;
   height: auto;
-  opacity: 0.4;
+  /* opacity: 0.4; */
   filter: url(#waterWaveFilter_ds);
 }
 
@@ -193,10 +193,10 @@ const onMouseMove = (e) => {
 
 .drone-image {
   position: absolute;
-  left: 0;
+  left: -450px;
   top: 50%;
-  width: 40%;
-  max-width: 595px;
+  width: 76%;
+  /* max-width: 595px; */
   z-index: 6;
   pointer-events: none;
   will-change: transform;
@@ -207,7 +207,7 @@ const onMouseMove = (e) => {
   position: absolute;
   right: 1%;
   /* left: 55%; */
-  top: -24%;
+  top: -20%;
   z-index: 5;
 }
 
@@ -273,6 +273,7 @@ const onMouseMove = (e) => {
   min-height: 60vh;
   max-width: 1440px;
   margin: 0 auto;
+  right:100px
 }
 
 .content {
@@ -453,11 +454,13 @@ const onMouseMove = (e) => {
 @media (max-width: 480px) {
   .content-container {
     justify-content: flex-start;
-    padding: 20px;
+    padding: 30px;
+    margin-top: 30px;
   }
 
   .drone-services {
     padding: 3rem 3% 2.5rem;
+    min-height: 75vh;
   }
 
   .section-title {

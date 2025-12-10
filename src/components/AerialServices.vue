@@ -3,14 +3,24 @@
     <img class="bg-helicopter-outline"
       src="https://api.builder.io/api/v1/image/assets/TEMP/e00c04be55eae7f3875875404c0599feb6505e25?width=2552"
       alt="" />
-    <img class="bg-geometric-1"
+    <!-- <img class="bg-geometric-1"
       src="https://api.builder.io/api/v1/image/assets/TEMP/f9a98a4ddbc26168cbe2c70d23b013cb859d0d36?width=2192"
-      alt="" />
-    <img class="bg-geometric-2"
-      src="https://api.builder.io/api/v1/image/assets/TEMP/5fadb1237fd28b1fec19da02ff507748eae7bdc7?width=556" alt="" />
+      alt="" /> -->
+    <!-- <img class="bg-geometric-2"
+      src="https://api.builder.io/api/v1/image/assets/TEMP/5fadb1237fd28b1fec19da02ff507748eae7bdc7?width=556" alt="" /> -->
+    
     <img class="drone-image"
-      src="https://api.builder.io/api/v1/image/assets/TEMP/d795a707aa2baa4cc9d514650cff6aef8ba125bd?width=2540"
+      src="@/assets/aerial-services/drone.png"
       alt="" />
+    <div class="top-left-triangle"></div>
+
+    <div class="left-top-geo">
+      <img src="@/assets/aerial-services/bg-geometric-3.png" alt="" />
+    </div>
+
+    <div class="bg-aerial-solutions">
+      <img src="@/assets/aerial-services/bg-aerial-solutions.png" alt="" />
+    </div>
 
     <div class="services-container" :class="{ 'services-loaded': isServicesLoaded }" ref="servicesContainerRef">
       <div class="services-header">
@@ -104,11 +114,42 @@ const cards = ref([
     img: 'https://api.builder.io/api/v1/image/assets/TEMP/e460f8318b5e3e98bd2835a4001e29e28d19b1f5?width=586',
     desc: 'LiDAR and photogrammetry solutions to generate detailed 3D models, point clouds and orthomosaics for engineers, planners and asset managers.'
   }
+
 ])
 
-const prevCard = () => { currentIndex.value = (currentIndex.value + cards.value.length - 1) % cards.value.length }
-const nextCard = () => { currentIndex.value = (currentIndex.value + 1) % cards.value.length }
-const goTo = (i) => { currentIndex.value = i }
+const prevCard = () => {
+  currentIndex.value = (currentIndex.value + cards.value.length - 1) % cards.value.length
+  resetAuto()
+}
+const nextCard = () => {
+  currentIndex.value = (currentIndex.value + 1) % cards.value.length
+  resetAuto()
+}
+const goTo = (i) => {
+  currentIndex.value = i
+  resetAuto()
+}
+
+const AUTO_INTERVAL_MS = 5000
+let autoTimer = null
+
+const stopAuto = () => {
+  if (autoTimer) {
+    clearInterval(autoTimer)
+    autoTimer = null
+  }
+}
+
+const startAuto = () => {
+  stopAuto()
+  autoTimer = setInterval(() => {
+    currentIndex.value = (currentIndex.value + 1) % cards.value.length
+  }, AUTO_INTERVAL_MS)
+}
+
+const resetAuto = () => {
+  startAuto()
+}
 
 const observeServices = () => {
   if (!servicesContainerRef.value) return
@@ -131,6 +172,8 @@ const observeServices = () => {
 
 onMounted(() => {
   observeServices()
+  startAuto()
+  document.addEventListener('visibilitychange', handleVisibility)
 })
 
 onUnmounted(() => {
@@ -138,17 +181,62 @@ onUnmounted(() => {
     const observer = new IntersectionObserver(() => { })
     observer.disconnect()
   }
+  stopAuto()
+  document.removeEventListener('visibilitychange', handleVisibility)
 })
+
+const handleVisibility = () => {
+  if (document.hidden) {
+    stopAuto()
+  } else {
+    startAuto()
+  }
+}
 </script>
 
 <style scoped>
+
+.bg-aerial-solutions {
+  position: absolute;
+  top: 430px;
+  /* left: -110px; */
+  left: 50%;
+  width: 100vw;
+  transform: translateX(-50%);
+  z-index: 1;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.bg-aerial-solutions img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.left-top-geo {
+  position: absolute;
+  top: 160px;
+  left: -110px;
+  width: 450px;
+  height: 450px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.left-top-geo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .aerial-services {
   position: relative;
   width: 100%;
   min-height: 100vh;
   background: #181818;
   overflow: hidden;
-  padding: 8rem 6% 6rem;
+  padding: 15rem 10% 6rem;
   z-index: 10;
 }
 
@@ -179,11 +267,11 @@ onUnmounted(() => {
 
 .bg-geometric-2 {
   position: absolute;
-  top: 8%;
-  left: -15%;
+  top: 50%;
+  left: -10%;
   width: 19%;
   height: auto;
-  transform: rotate(43.076deg);
+  transform: rotate(-50.076deg);
   opacity: 0.6;
   pointer-events: none;
   z-index: 1;
@@ -191,9 +279,9 @@ onUnmounted(() => {
 
 .drone-image {
   position: absolute;
-  top: -3%;
-  right: -8%;
-  width: 65%;
+  top: 4%;
+  right: -2%;
+  width: 50%;
   height: auto;
   mix-blend-mode: luminosity;
   opacity: 0.8;
@@ -216,6 +304,18 @@ onUnmounted(() => {
   50% {
     transform: translateY(-15px);
   }
+}
+
+.top-left-triangle {
+  position: absolute;
+  top: -2px;
+  left: 0;
+  width: 100%;
+  height: 400px;
+  background: rgb(31, 31, 31);
+  z-index: 2;
+  pointer-events: none;
+  clip-path: polygon(0 0, 100% 0, 0 200px);
 }
 
 @keyframes cardFloat {
@@ -394,6 +494,17 @@ onUnmounted(() => {
     padding: 6rem 5% 5rem;
   }
 
+  .left-top-geo {
+    width: 260px;
+    left: -50px;
+    top: -30px;
+  }
+
+  .top-left-triangle {
+    height: 350px;
+    clip-path: polygon(0 0, 100% 0, 0 350px);
+  }
+
   .services-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
@@ -414,6 +525,17 @@ onUnmounted(() => {
     padding: 5rem 4%;
   }
 
+  .left-top-geo {
+    width: 220px;
+    left: -40px;
+    top: -20px;
+  }
+
+  .top-left-triangle {
+    height: 300px;
+    clip-path: polygon(0 0, 100% 0, 0 300px);
+  }
+
   .section-title {
     font-size: 38px;
   }
@@ -432,6 +554,17 @@ onUnmounted(() => {
 @media (max-width: 768px) {
   .aerial-services {
     padding: 4rem 4% 3rem;
+  }
+
+  .left-top-geo {
+    width: 180px;
+    left: -30px;
+    top: -15px;
+  }
+
+  .top-left-triangle {
+    height: 250px;
+    clip-path: polygon(0 0, 100% 0, 0 250px);
   }
 
   /* Hide desktop grid, show slider */
@@ -465,7 +598,22 @@ onUnmounted(() => {
 
 @media (max-width: 480px) {
   .aerial-services {
-    padding: 3rem 8% 2.5rem;
+    padding: 5rem 8% 1rem;
+  }
+
+  .drone-image {
+  top: 3%;
+}
+
+  .left-top-geo {
+    width: 150px;
+    left: -25px;
+    top: -10px;
+  }
+
+  .top-left-triangle {
+    height: 200px;
+    clip-path: polygon(0 0, 100% 0, 0 80px);
   }
 
   .services-header {
@@ -486,3 +634,4 @@ onUnmounted(() => {
   }
 }
 </style>
+

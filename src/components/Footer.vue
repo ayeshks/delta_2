@@ -3,9 +3,9 @@
     <div class="bg-shape left-center">
       <img src="@/assets/footer/bg-geometric-1.png" alt="" />
     </div>
-    <div class="bg-shape left-top">
+    <!-- <div class="bg-shape left-top">
       <img src="@/assets/footer/bg-geometric-3.png" alt="" />
-    </div>
+    </div> -->
     <div class="bg-shape right-bottom">
       <img src="@/assets/footer/bg-geometric-2.png" alt="" />
     </div>
@@ -26,11 +26,26 @@
             <h4 class="col-title">Quick Links</h4>
             <span class="col-underline"></span>
             <ul class="list">
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>About</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>Fleet</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>Portfolio</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>FAQs</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>Contact</span></li>
+              <li>
+                <img src="@/assets/footer/arrow-icon.png" alt="" />
+                <a href="#about">About</a>
+              </li>
+              <li>
+                <img src="@/assets/footer/arrow-icon.png" alt="" />
+                <a href="#services">Fleet</a>
+              </li>
+              <li>
+                <img src="@/assets/footer/arrow-icon.png" alt="" />
+                <a href="#portfolio">Portfolio</a>
+              </li>
+              <li>
+                <img src="@/assets/footer/arrow-icon.png" alt="" />
+                <a href="#">FAQs</a>
+              </li>
+              <li>
+                <img src="@/assets/footer/arrow-icon.png" alt="" />
+                <a href="#getintouch">Contact</a>
+              </li>
             </ul>
           </div>
 
@@ -38,10 +53,10 @@
             <h4 class="col-title">Services</h4>
             <span class="col-underline"></span>
             <ul class="list">
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>Helicopter Rental & Charter</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>Aerial Filming & Photography</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>Surveying & Inspection</span></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /><span>3D Mapping & Modelling</span></li>
+              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">Helicopter Rental & Charter</a></li>
+              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">Aerial Filming & Photography</a></li>
+              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">Surveying & Inspection</a></li>
+              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">3D Mapping & Modelling</a></li>
             </ul>
           </div>
 
@@ -49,9 +64,15 @@
             <h4 class="col-title">Contact Us</h4>
             <span class="col-underline"></span>
             <ul class="contact-list">
-              <li><img src="@/assets/footer/mail-icon.png" alt="" /><span>hello@website.com</span></li>
+              <li>
+                <img src="@/assets/footer/mail-icon.png" alt="" />
+                <span><p><a href="mailto:hello@website.com">hello@website.com</a></p></span>
+              </li>
               <li><img src="@/assets/footer/location-icon.png" alt="" /><span>838 Cantt Sialkot, ENG</span></li>
-              <li><img src="@/assets/footer/phone-icon.png" alt="" /><span>+02 5421234560</span></li>
+              <li>
+                <img src="@/assets/footer/phone-icon.png" alt="" />
+                <span><a href="tel:+025421234560">+02 5421234560</a></span>
+              </li>
             </ul>
           </div>
         </div>
@@ -74,6 +95,7 @@
   position: relative;
   background: #0f0f0f;
   overflow: hidden;
+  min-height: 60vh;
 }
 
 .footer-inner {
@@ -81,9 +103,9 @@
   max-width: 1320px;
   margin: 0 auto;
   padding: 120px 60px 60px;
-  min-height: 580px;
+  margin-top: 30px;
+  min-height: 500px;
   z-index: 2;
-  margin-top: 200px;
 }
 
 .footer-panel {
@@ -159,10 +181,27 @@
   height: 14px;
 }
 
+.links a,
+.services a,
+.contact-list a {
+  color: #eaeaea;
+  text-decoration: none;
+}
+
+.links a:hover,
+.services a:hover,
+.contact-list a:hover,
+.links a:visited,
+.services a:visited,
+.contact-list a:visited {
+  color: #eaeaea;
+  text-decoration: none;
+}
+
 .panel-divider {
   height: 3px;
   width: 100%;
-  margin-top: 30px;
+  margin-top: 80px;
 
   /* Yellow center with faded sides */
   background: linear-gradient(to right,
@@ -183,6 +222,7 @@
   color: #d1d1d1;
   font-family: Manrope, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 18px;
+  margin-top: 30px; 
 }
 
 .copyright {
@@ -214,15 +254,16 @@
 
 .left-center {
   left: 1px;
-  top: 10%;
-  width: 280px;
+  top: -3%;
+  width: 200px;
   animation: floatUpDown 4s ease-in-out infinite;
 }
 
 .right-bottom {
-  right: -50px;
-  bottom: -40px;
-  width: 300px;
+  right: -110px;
+  bottom: -70px;
+  width: 450px;
+  transform: rotate(-15deg);
   animation: floatUpDown 4s ease-in-out infinite 1s;
 }
 
@@ -289,6 +330,7 @@
     padding: 3rem 8% 2.5rem;
     min-height: auto;
     margin-top: 120px;
+    margin-bottom: 80px;
   }
 
   .footer-grid {

@@ -1,18 +1,60 @@
 <template>
   <div class="fluid-animation-wrapper">
-    <canvas ref="canvasRef" id="fluid-background" class="fluid-canvas"></canvas>
+    <canvas ref="canvasRef" id="fluid" class="fluid-canvas" :style="{ opacity: props.OPACITY }"></canvas>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, useTemplateRef } from 'vue';
+import { onMounted, withDefaults, useTemplateRef } from 'vue';
 
+/* ---------- types ---------- */
 interface ColorRGB {
   r: number;
   g: number;
   b: number;
 }
 
+interface SplashCursorProps {
+  SIM_RESOLUTION?: number;
+  DYE_RESOLUTION?: number;
+  CAPTURE_RESOLUTION?: number;
+  DENSITY_DISSIPATION?: number;
+  VELOCITY_DISSIPATION?: number;
+  PRESSURE?: number;
+  PRESSURE_ITERATIONS?: number;
+  CURL?: number;
+  SPLAT_RADIUS?: number;
+  SPLAT_FORCE?: number;
+  SHADING?: boolean;
+  COLOR_UPDATE_SPEED?: number;
+  BACK_COLOR?: ColorRGB;
+  TRANSPARENT?: boolean;
+  OPACITY?: number;
+}
+
+/* ---------- props & defaults ---------- */
+const props = withDefaults(defineProps<SplashCursorProps>(), {
+  SIM_RESOLUTION: 128,
+  DYE_RESOLUTION: 1440,
+  CAPTURE_RESOLUTION: 512,
+  DENSITY_DISSIPATION: 3.5,
+  VELOCITY_DISSIPATION: 2,
+  PRESSURE: 0.1,
+  PRESSURE_ITERATIONS: 20,
+  CURL: 3,
+  SPLAT_RADIUS: 0.2,
+  SPLAT_FORCE: 6000,
+  SHADING: true,
+  COLOR_UPDATE_SPEED: 10,
+  BACK_COLOR: () => ({ r: 0.8, g: 0.7, b: 0 }),
+  TRANSPARENT: true,
+  OPACITY: 0.5
+});
+
+/* ---------- refs ---------- */
+const canvasRef = useTemplateRef<HTMLCanvasElement>('canvasRef');
+
+/* ---------- helper types ---------- */
 interface Pointer {
   id: number;
   texcoordX: number;
@@ -26,8 +68,6 @@ interface Pointer {
   color: ColorRGB;
 }
 
-const canvasRef = useTemplateRef<HTMLCanvasElement>('canvasRef');
-
 function pointerPrototype(): Pointer {
   return {
     id: -1,
@@ -39,10 +79,11 @@ function pointerPrototype(): Pointer {
     deltaY: 0,
     down: false,
     moved: false,
-    color: { r: 0.86, g: 0.77, b: 0.18 }
+    color: { r: 0, g: 0, b: 0 }
   };
 }
 
+/* ---------- main logic ---------- */
 onMounted(() => {
   const canvas = canvasRef.value;
   if (!canvas) return;
@@ -50,22 +91,24 @@ onMounted(() => {
   const pointers: Pointer[] = [pointerPrototype()];
 
   const config = {
-    SIM_RESOLUTION: 128,
-    DYE_RESOLUTION: 1024,
-    CAPTURE_RESOLUTION: 512,
-    DENSITY_DISSIPATION: 3.5,
-    VELOCITY_DISSIPATION: 2,
-    PRESSURE: 0.1,
-    PRESSURE_ITERATIONS: 20,
-    CURL: 3,
-    SPLAT_RADIUS: 0.2,
-    SPLAT_FORCE: 6000,
-    SHADING: true,
-    COLOR_UPDATE_SPEED: 2,
-    BACK_COLOR: { r: 0.09, g: 0.09, b: 0.09 },
-    TRANSPARENT: true
+    SIM_RESOLUTION: props.SIM_RESOLUTION!,
+    DYE_RESOLUTION: props.DYE_RESOLUTION!,
+    CAPTURE_RESOLUTION: props.CAPTURE_RESOLUTION!,
+    DENSITY_DISSIPATION: props.DENSITY_DISSIPATION!,
+    VELOCITY_DISSIPATION: props.VELOCITY_DISSIPATION!,
+    PRESSURE: props.PRESSURE!,
+    PRESSURE_ITERATIONS: props.PRESSURE_ITERATIONS!,
+    CURL: props.CURL!,
+    SPLAT_RADIUS: props.SPLAT_RADIUS!,
+    SPLAT_FORCE: props.SPLAT_FORCE!,
+    SHADING: props.SHADING,
+    COLOR_UPDATE_SPEED: props.COLOR_UPDATE_SPEED!,
+    PAUSED: false,
+    BACK_COLOR: props.BACK_COLOR,
+    TRANSPARENT: props.TRANSPARENT
   };
 
+  /* ---------- WebGL context helpers ---------- */
   const { gl, ext } = getWebGLContext(canvas);
   if (!gl || !ext) return;
 
@@ -83,40 +126,34 @@ onMounted(() => {
       preserveDrawingBuffer: false
     };
 
-    let glContext = canvasEl.getContext('webgl2', params) as WebGL2RenderingContext | null;
+    let gl = canvasEl.getContext('webgl2', params) as WebGL2RenderingContext | null;
 
-    if (!glContext) {
-      glContext = (canvasEl.getContext('webgl', params) ||
+    if (!gl) {
+      gl = (canvasEl.getContext('webgl', params) ||
         canvasEl.getContext('experimental-webgl', params)) as WebGL2RenderingContext | null;
     }
 
-    if (!glContext) {
-      console.error('Unable to initialize WebGL.');
-      return { gl: null, ext: null };
+    if (!gl) {
+      throw new Error('Unable to initialize WebGL.');
     }
 
-    const isWebGL2 = 'drawBuffers' in glContext;
+    const isWebGL2 = 'drawBuffers' in gl;
 
     let supportLinearFiltering = false;
     let halfFloat: OES_texture_half_float | null = null;
 
     if (isWebGL2) {
-      (glContext as WebGL2RenderingContext).getExtension('EXT_color_buffer_float');
-      supportLinearFiltering = !!(glContext as WebGL2RenderingContext).getExtension('OES_texture_float_linear');
+      (gl as WebGL2RenderingContext).getExtension('EXT_color_buffer_float');
+      supportLinearFiltering = !!(gl as WebGL2RenderingContext).getExtension('OES_texture_float_linear');
     } else {
-      halfFloat = glContext.getExtension('OES_texture_half_float');
-      supportLinearFiltering = !!glContext.getExtension('OES_texture_half_float_linear');
+      halfFloat = gl.getExtension('OES_texture_half_float');
+      supportLinearFiltering = !!gl.getExtension('OES_texture_half_float_linear');
     }
 
-    glContext.clearColor(
-      config.BACK_COLOR.r,
-      config.BACK_COLOR.g,
-      config.BACK_COLOR.b,
-      1
-    );
+    gl.clearColor(0, 0, 0, 1);
 
     const halfFloatTexType = isWebGL2
-      ? (glContext as WebGL2RenderingContext).HALF_FLOAT
+      ? (gl as WebGL2RenderingContext).HALF_FLOAT
       : (halfFloat && (halfFloat as OES_texture_half_float).HALF_FLOAT_OES) || 0;
 
     let formatRGBA: { internalFormat: number; format: number } | null;
@@ -124,27 +161,27 @@ onMounted(() => {
     let formatR: { internalFormat: number; format: number } | null;
 
     if (isWebGL2) {
-      formatRGBA = getSupportedFormat(glContext, (glContext as WebGL2RenderingContext).RGBA16F, glContext.RGBA, halfFloatTexType);
+      formatRGBA = getSupportedFormat(gl, (gl as WebGL2RenderingContext).RGBA16F, gl.RGBA, halfFloatTexType);
       formatRG = getSupportedFormat(
-        glContext,
-        (glContext as WebGL2RenderingContext).RG16F,
-        (glContext as WebGL2RenderingContext).RG,
+        gl,
+        (gl as WebGL2RenderingContext).RG16F,
+        (gl as WebGL2RenderingContext).RG,
         halfFloatTexType
       );
       formatR = getSupportedFormat(
-        glContext,
-        (glContext as WebGL2RenderingContext).R16F,
-        (glContext as WebGL2RenderingContext).RED,
+        gl,
+        (gl as WebGL2RenderingContext).R16F,
+        (gl as WebGL2RenderingContext).RED,
         halfFloatTexType
       );
     } else {
-      formatRGBA = getSupportedFormat(glContext, glContext.RGBA, glContext.RGBA, halfFloatTexType);
-      formatRG = getSupportedFormat(glContext, glContext.RGBA, glContext.RGBA, halfFloatTexType);
-      formatR = getSupportedFormat(glContext, glContext.RGBA, glContext.RGBA, halfFloatTexType);
+      formatRGBA = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
+      formatRG = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
+      formatR = getSupportedFormat(gl, gl.RGBA, gl.RGBA, halfFloatTexType);
     }
 
     return {
-      gl: glContext,
+      gl,
       ext: {
         formatRGBA,
         formatRG,
@@ -156,14 +193,14 @@ onMounted(() => {
   }
 
   function getSupportedFormat(
-    glContext: WebGLRenderingContext | WebGL2RenderingContext,
+    gl: WebGLRenderingContext | WebGL2RenderingContext,
     internalFormat: number,
     format: number,
     type: number
   ): { internalFormat: number; format: number } | null {
-    if (!supportRenderTextureFormat(glContext, internalFormat, format, type)) {
-      if ('drawBuffers' in glContext) {
-        const gl2 = glContext as WebGL2RenderingContext;
+    if (!supportRenderTextureFormat(gl, internalFormat, format, type)) {
+      if ('drawBuffers' in gl) {
+        const gl2 = gl as WebGL2RenderingContext;
         switch (internalFormat) {
           case gl2.R16F:
             return getSupportedFormat(gl2, gl2.RG16F, gl2.RG, type);
@@ -179,28 +216,28 @@ onMounted(() => {
   }
 
   function supportRenderTextureFormat(
-    glContext: WebGLRenderingContext | WebGL2RenderingContext,
+    gl: WebGLRenderingContext | WebGL2RenderingContext,
     internalFormat: number,
     format: number,
     type: number
   ) {
-    const texture = glContext.createTexture();
+    const texture = gl.createTexture();
     if (!texture) return false;
 
-    glContext.bindTexture(glContext.TEXTURE_2D, texture);
-    glContext.texParameteri(glContext.TEXTURE_2D, glContext.TEXTURE_MIN_FILTER, glContext.NEAREST);
-    glContext.texParameteri(glContext.TEXTURE_2D, glContext.TEXTURE_MAG_FILTER, glContext.NEAREST);
-    glContext.texParameteri(glContext.TEXTURE_2D, glContext.TEXTURE_WRAP_S, glContext.CLAMP_TO_EDGE);
-    glContext.texParameteri(glContext.TEXTURE_2D, glContext.TEXTURE_WRAP_T, glContext.CLAMP_TO_EDGE);
-    glContext.texImage2D(glContext.TEXTURE_2D, 0, internalFormat, 4, 4, 0, format, type, null);
+    gl.bindTexture(gl.TEXTURE_2D, texture);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.NEAREST);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+    gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+    gl.texImage2D(gl.TEXTURE_2D, 0, internalFormat, 4, 4, 0, format, type, null);
 
-    const fbo = glContext.createFramebuffer();
+    const fbo = gl.createFramebuffer();
     if (!fbo) return false;
 
-    glContext.bindFramebuffer(glContext.FRAMEBUFFER, fbo);
-    glContext.framebufferTexture2D(glContext.FRAMEBUFFER, glContext.COLOR_ATTACHMENT0, glContext.TEXTURE_2D, texture, 0);
-    const status = glContext.checkFramebufferStatus(glContext.FRAMEBUFFER);
-    return status === glContext.FRAMEBUFFER_COMPLETE;
+    gl.bindFramebuffer(gl.FRAMEBUFFER, fbo);
+    gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, texture, 0);
+    const status = gl.checkFramebufferStatus(gl.FRAMEBUFFER);
+    return status === gl.FRAMEBUFFER_COMPLETE;
   }
 
   function hashCode(s: string) {
@@ -229,7 +266,7 @@ onMounted(() => {
     gl.shaderSource(shader, shaderSource);
     gl.compileShader(shader);
     if (!gl.getShaderParameter(shader, gl.COMPILE_STATUS)) {
-      console.error(gl.getShaderInfoLog(shader));
+      console.trace(gl.getShaderInfoLog(shader));
     }
     return shader;
   }
@@ -242,7 +279,7 @@ onMounted(() => {
     gl.attachShader(program, fragmentShader);
     gl.linkProgram(program);
     if (!gl.getProgramParameter(program, gl.LINK_STATUS)) {
-      console.error(gl.getProgramInfoLog(program));
+      console.trace(gl.getProgramInfoLog(program));
     }
     return program;
   }
@@ -313,6 +350,7 @@ onMounted(() => {
     }
   }
 
+  /* ---------- shaders ---------- */
   const baseVertexShader = compileShader(
     gl.VERTEX_SHADER,
     `
@@ -585,6 +623,34 @@ onMounted(() => {
     `
   );
 
+  /* ---------- geometry helper ---------- */
+  const blit = (() => {
+    const buffer = gl.createBuffer()!;
+    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 1, 1, 1, 1, -1]), gl.STATIC_DRAW);
+    const elemBuffer = gl.createBuffer()!;
+    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, elemBuffer);
+    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3]), gl.STATIC_DRAW);
+    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+    gl.enableVertexAttribArray(0);
+    return (target: FBO | null, doClear = false) => {
+      if (!gl) return;
+      if (!target) {
+        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
+      } else {
+        gl.viewport(0, 0, target.width, target.height);
+        gl.bindFramebuffer(gl.FRAMEBUFFER, target.fbo);
+      }
+      if (doClear) {
+        gl.clearColor(0, 0, 0, 1);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+      }
+      gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
+    };
+  })();
+
+  /* ---------- frame-buffer object helpers ---------- */
   interface FBO {
     texture: WebGLTexture;
     fbo: WebGLFramebuffer;
@@ -621,32 +687,6 @@ onMounted(() => {
   const pressureProgram = new Program(baseVertexShader, pressureShader);
   const gradienSubtractProgram = new Program(baseVertexShader, gradientSubtractShader);
   const displayMaterial = new Material(baseVertexShader, displayShaderSource);
-
-  const blit = (() => {
-    const buffer = gl.createBuffer()!;
-    gl.bindBuffer(gl.ARRAY_BUFFER, buffer);
-    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1, -1, -1, 1, 1, 1, 1, -1]), gl.STATIC_DRAW);
-    const elemBuffer = gl.createBuffer()!;
-    gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, elemBuffer);
-    gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint16Array([0, 1, 2, 0, 2, 3]), gl.STATIC_DRAW);
-    gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-    gl.enableVertexAttribArray(0);
-    return (target: FBO | null, doClear = false) => {
-      if (!gl) return;
-      if (!target) {
-        gl.viewport(0, 0, gl.drawingBufferWidth, gl.drawingBufferHeight);
-        gl.bindFramebuffer(gl.FRAMEBUFFER, null);
-      } else {
-        gl.viewport(0, 0, target.width, target.height);
-        gl.bindFramebuffer(gl.FRAMEBUFFER, target.fbo);
-      }
-      if (doClear) {
-        gl.clearColor(config.BACK_COLOR.r, config.BACK_COLOR.g, config.BACK_COLOR.b, 1);
-        gl.clear(gl.COLOR_BUFFER_BIT);
-      }
-      gl.drawElements(gl.TRIANGLES, 6, gl.UNSIGNED_SHORT, 0);
-    };
-  })();
 
   function createFBO(w: number, h: number, internalFormat: number, format: number, type: number, param: number): FBO {
     gl.activeTexture(gl.TEXTURE0);
@@ -740,8 +780,8 @@ onMounted(() => {
   }
 
   function initFramebuffers() {
-    const simRes = getResolution(config.SIM_RESOLUTION);
-    const dyeRes = getResolution(config.DYE_RESOLUTION);
+    const simRes = getResolution(config.SIM_RESOLUTION!);
+    const dyeRes = getResolution(config.DYE_RESOLUTION!);
     const texType = ext.halfFloatTexType;
     const rgba = ext.formatRGBA;
     const rg = ext.formatRG;
@@ -809,7 +849,6 @@ onMounted(() => {
 
   let lastUpdateTime = Date.now();
   let colorUpdateTimer = 0.0;
-  let isAnimating = false;
 
   function updateFrame() {
     const dt = calcDeltaTime();
@@ -818,16 +857,7 @@ onMounted(() => {
     applyInputs();
     step(dt);
     render(null);
-    if (isAnimating) {
-      requestAnimationFrame(updateFrame);
-    }
-  }
-
-  function startAnimation() {
-    if (!isAnimating) {
-      isAnimating = true;
-      updateFrame();
-    }
+    requestAnimationFrame(updateFrame);
   }
 
   function calcDeltaTime() {
@@ -868,6 +898,7 @@ onMounted(() => {
     }
   }
 
+  /* ---------- simulation step ---------- */
   function step(dt: number) {
     gl.disable(gl.BLEND);
 
@@ -985,6 +1016,7 @@ onMounted(() => {
     dye.swap();
   }
 
+  /* ---------- render ---------- */
   function render(target: FBO | null) {
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
     gl.enable(gl.BLEND);
@@ -1004,6 +1036,7 @@ onMounted(() => {
     blit(target, false);
   }
 
+  /* ---------- splats ---------- */
   function splatPointer(pointer: Pointer) {
     const dx = pointer.deltaX * config.SPLAT_FORCE;
     const dy = pointer.deltaY * config.SPLAT_FORCE;
@@ -1056,6 +1089,7 @@ onMounted(() => {
     return radius;
   }
 
+  /* ---------- pointer helpers ---------- */
   function updatePointerDownData(pointer: Pointer, id: number, posX: number, posY: number) {
     pointer.id = id;
     pointer.down = true;
@@ -1096,14 +1130,15 @@ onMounted(() => {
     return delta;
   }
 
+  /* ---------- color helpers ---------- */
   function generateColor(): ColorRGB {
     const hue = 0.12 + Math.random() * 0.08;
-    const saturation = 0.7 + Math.random() * 0.3;
-    const value = 0.6 + Math.random() * 0.4;
+    const saturation = 0.9 + Math.random() * 0.1;
+    const value = 0.8 + Math.random() * 0.2;
     const c = HSVtoRGB(hue, saturation, value);
-    c.r *= 0.2;
-    c.g *= 0.18;
-    c.b *= 0.1;
+    c.r *= 0.25;
+    c.g *= 0.25;
+    c.b *= 0.05;
     return c;
   }
 
@@ -1157,31 +1192,33 @@ onMounted(() => {
     return ((value - min) % range) + min;
   }
 
+  /* ---------- input events ---------- */
   window.addEventListener('mousedown', e => {
     const pointer = pointers[0];
-    const posX = scaleByPixelRatio(e.clientX);
-    const posY = scaleByPixelRatio(e.clientY);
+    const rect = canvas!.getBoundingClientRect();
+    const posX = scaleByPixelRatio(e.clientX - rect.left);
+    const posY = scaleByPixelRatio(e.clientY - rect.top);
     updatePointerDownData(pointer, -1, posX, posY);
     clickSplat(pointer);
   });
 
   function handleFirstMouseMove(e: MouseEvent) {
     const pointer = pointers[0];
-    const posX = scaleByPixelRatio(e.clientX);
-    const posY = scaleByPixelRatio(e.clientY);
+    const rect = canvas!.getBoundingClientRect();
+    const posX = scaleByPixelRatio(e.clientX - rect.left);
+    const posY = scaleByPixelRatio(e.clientY - rect.top);
     const color = generateColor();
-    startAnimation();
+    updateFrame();
     updatePointerMoveData(pointer, posX, posY, color);
     document.body.removeEventListener('mousemove', handleFirstMouseMove);
   }
-
-  startAnimation();
   document.body.addEventListener('mousemove', handleFirstMouseMove);
 
   window.addEventListener('mousemove', e => {
     const pointer = pointers[0];
-    const posX = scaleByPixelRatio(e.clientX);
-    const posY = scaleByPixelRatio(e.clientY);
+    const rect = canvas!.getBoundingClientRect();
+    const posX = scaleByPixelRatio(e.clientX - rect.left);
+    const posY = scaleByPixelRatio(e.clientY - rect.top);
     const color = pointer.color;
     updatePointerMoveData(pointer, posX, posY, color);
   });
@@ -1190,9 +1227,10 @@ onMounted(() => {
     const touches = e.targetTouches;
     const pointer = pointers[0];
     for (let i = 0; i < touches.length; i++) {
-      const posX = scaleByPixelRatio(touches[i].clientX);
-      const posY = scaleByPixelRatio(touches[i].clientY);
-      startAnimation();
+      const rect = canvas!.getBoundingClientRect();
+      const posX = scaleByPixelRatio(touches[i].clientX - rect.left);
+      const posY = scaleByPixelRatio(touches[i].clientY - rect.top);
+      updateFrame();
       updatePointerDownData(pointer, touches[i].identifier, posX, posY);
     }
     document.body.removeEventListener('touchstart', handleFirstTouchStart);
@@ -1205,8 +1243,9 @@ onMounted(() => {
       const touches = e.targetTouches;
       const pointer = pointers[0];
       for (let i = 0; i < touches.length; i++) {
-        const posX = scaleByPixelRatio(touches[i].clientX);
-        const posY = scaleByPixelRatio(touches[i].clientY);
+        const rect = canvas!.getBoundingClientRect();
+        const posX = scaleByPixelRatio(touches[i].clientX - rect.left);
+        const posY = scaleByPixelRatio(touches[i].clientY - rect.top);
         updatePointerDownData(pointer, touches[i].identifier, posX, posY);
       }
     },
@@ -1219,8 +1258,9 @@ onMounted(() => {
       const touches = e.targetTouches;
       const pointer = pointers[0];
       for (let i = 0; i < touches.length; i++) {
-        const posX = scaleByPixelRatio(touches[i].clientX);
-        const posY = scaleByPixelRatio(touches[i].clientY);
+        const rect = canvas!.getBoundingClientRect();
+        const posX = scaleByPixelRatio(touches[i].clientX - rect.left);
+        const posY = scaleByPixelRatio(touches[i].clientY - rect.top);
         updatePointerMoveData(pointer, posX, posY, pointer.color);
       }
     },
@@ -1241,11 +1281,11 @@ onMounted(() => {
 .fluid-animation-wrapper {
   position: absolute;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 2;
 }
 
 .fluid-canvas {

@@ -154,7 +154,7 @@ onUnmounted(() => {
   position: absolute;
   bottom: -180px;
   left: -130px;
-  width: 500px;
+  width: 580px;
   height: auto;
   object-fit: contain;
   z-index: 2;

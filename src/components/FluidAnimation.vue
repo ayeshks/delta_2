@@ -1,6 +1,6 @@
 <template>
   <div class="fluid-animation-wrapper">
-    <canvas ref="canvasRef" id="fluid" class="fluid-canvas"></canvas>
+    <canvas ref="canvasRef" id="fluid" class="fluid-canvas" :style="{ opacity: props.OPACITY }"></canvas>
   </div>
 </template>
 
@@ -29,6 +29,7 @@ interface SplashCursorProps {
   COLOR_UPDATE_SPEED?: number;
   BACK_COLOR?: ColorRGB;
   TRANSPARENT?: boolean;
+  OPACITY?: number;
 }
 
 /* ---------- props & defaults ---------- */
@@ -46,7 +47,8 @@ const props = withDefaults(defineProps<SplashCursorProps>(), {
   SHADING: true,
   COLOR_UPDATE_SPEED: 10,
   BACK_COLOR: () => ({ r: 0.8, g: 0.7, b: 0 }),
-  TRANSPARENT: true
+  TRANSPARENT: true,
+  OPACITY: 0.5
 });
 
 /* ---------- refs ---------- */

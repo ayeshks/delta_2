@@ -204,7 +204,7 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 90%;
   z-index: 1;
   pointer-events: none;
   overflow: hidden;
@@ -410,7 +410,6 @@ onUnmounted(() => {
   line-height: 1.15;
   letter-spacing: 1.8px;
   margin: 0;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.93);
 }
 
 .title-animate {

@@ -11,7 +11,7 @@
                 </filter>
             </svg>
             <div id="tsparticles" class="particles-container"></div>
-            <img class="bg-helicopter-overlay water-wave"
+            <img class="bg-helicopter-overlay1 water-wave"
                 src="https://cdn.builder.io/api/v1/image/assets%2Ff290de50bb23438081b567faae887dbc%2F729cf7c6f1134dd6bbed2a98a7ab5f73?format=webp&width=800"
                 alt="Helicopter" />
             <img class="bg-helicopter-overlay helicopter-landing"
@@ -24,11 +24,12 @@
             <img class="bg-image-overlay-2"
                 src="https://api.builder.io/api/v1/image/assets/TEMP/00da309db929fb12a1cff1a8644132770534426b?width=412"
                 alt="" />
+            <!-- <div class="bottom-right-triangle"></div> -->
         </div>
 
         <nav class="navbar">
             <img class="navbar-logo"
-                src="https://api.builder.io/api/v1/image/assets/TEMP/4a29e3443cdf0359763cb1de98787f1a6ad707a2?width=368"
+                src="@/assets/hero/Nav_logo.png"
                 alt="Delta Helicopters" />
 
             <button class="hamburger" @click="isMenuOpen = !isMenuOpen" aria-label="Open menu"
@@ -36,24 +37,26 @@
                 <span></span><span></span><span></span>
             </button>
 
-            <div class="drawer" :class="{ open: isMenuOpen }" @click.self="isMenuOpen = false">
-                <div class="drawer-panel">
-                    <div class="drawer-header">
-                        <img class="drawer-logo"
-                            src="https://api.builder.io/api/v1/image/assets/TEMP/4a29e3443cdf0359763cb1de98787f1a6ad707a2?width=368"
-                            alt="Delta Helicopters" />
-                        <button class="close-btn" @click="isMenuOpen = false" aria-label="Close menu">×</button>
+            <Teleport to="body">
+                <div class="drawer" :class="{ open: isMenuOpen }" @click.self="isMenuOpen = false">
+                    <div class="drawer-panel">
+                        <div class="drawer-header">
+                            <img class="drawer-logo"
+                                src="https://api.builder.io/api/v1/image/assets/TEMP/4a29e3443cdf0359763cb1de98787f1a6ad707a2?width=368"
+                                alt="Delta Helicopters" />
+                            <button class="close-btn" @click="isMenuOpen = false" aria-label="Close menu">×</button>
+                        </div>
+                        <ul class="drawer-links">
+                            <li><a href="#home" @click="isMenuOpen = false">Home</a></li>
+                            <li><a href="#fleet" @click="isMenuOpen = false">Fleet</a></li>
+                            <li><a href="#services" @click="isMenuOpen = false">Services</a></li>
+                            <li><a href="#portfolio" @click="isMenuOpen = false">Portfolio</a></li>
+                            <li><a href="#testimonials" @click="isMenuOpen = false">Testimonials</a></li>
+                            <li><a href="#getintouch" @click="isMenuOpen = false">Contact Us</a></li>
+                        </ul>
                     </div>
-                    <ul class="drawer-links">
-                        <li><a href="#home" @click="isMenuOpen = false">Home</a></li>
-                        <li><a href="#fleet" @click="isMenuOpen = false">Fleet</a></li>
-                        <li><a href="#services" @click="isMenuOpen = false">Services</a></li>
-                        <li><a href="#portfolio" @click="isMenuOpen = false">Portfolio</a></li>
-                        <li><a href="#testimonials" @click="isMenuOpen = false">Testimonials</a></li>
-                        <li><a href="#getintouch" @click="isMenuOpen = false">Contact Us</a></li>
-                    </ul>
                 </div>
-            </div>
+            </Teleport>
         </nav>
 
         <div class="hero-section">
@@ -84,11 +87,19 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, watch } from 'vue'
 import PrimaryButton from '../buttons/PrimaryButton.vue'
 
 const heroRef = ref(null)
 const isMenuOpen = ref(false)
+
+watch(isMenuOpen, (newVal) => {
+    if (newVal) {
+        document.body.style.overflow = 'hidden'
+    } else {
+        document.body.style.overflow = ''
+    }
+})
 
 onMounted(async () => {
     const { tsParticles } = await import('https://cdn.jsdelivr.net/npm/@tsparticles/engine@3.1.0/+esm')
@@ -164,7 +175,7 @@ const animateWaves = () => {
     if (!turb) return
     let t = 0
     const loop = () => {
-        t += 0.006
+        t += 0.015
         const xFreq = 0.006 + 0.004 * Math.sin(t * 0.45)
         const yFreq = 0.015 + 0.006 * Math.cos(t * 0.35)
         turb.setAttribute('baseFrequency', `${xFreq.toFixed(4)} ${yFreq.toFixed(4)}`)
@@ -195,12 +206,27 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
+    document.body.style.overflow = ''
     if (rafId) cancelAnimationFrame(rafId)
     window.removeEventListener('mousemove', onMouseMove)
 })
 </script>
 
 <style scoped>
+.bottom-right-triangle {
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 100%;
+    height: 130px;
+    background: rgb(31,
+        31,
+        31);
+    z-index: 4;
+    pointer-events: none;
+    clip-path: polygon(0 100%, 100% 100%, 100% 0, 0 90%);
+}
+
 .hero-wrapper {
     position: relative;
     width: 100%;
@@ -257,6 +283,17 @@ onUnmounted(() => {
 .bg-helicopter-overlay {
     position: absolute;
     top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.bg-helicopter-overlay1 {
+    position: absolute;
+    top: 20px;
     left: 0;
     width: 100%;
     height: 100%;
@@ -385,7 +422,7 @@ onUnmounted(() => {
     opacity: 0;
     pointer-events: none;
     transition: opacity .25s ease;
-    z-index: 40;
+    z-index: 999;
 }
 
 .drawer.open {
@@ -441,6 +478,7 @@ onUnmounted(() => {
     display: flex;
     flex-direction: column;
     gap: 14px;
+     margin-top: 30px;
 }
 
 .drawer-links a {
@@ -509,9 +547,9 @@ onUnmounted(() => {
     align-items: center;
     justify-content: flex-start;
     width: 100%;
-    height: calc(85vh - 120px);
+    height: calc(75vh - 120px);
     max-width: 100%;
-    margin: 0;
+    margin-top: 20px;
 }
 
 .hero-left {
@@ -818,10 +856,12 @@ onUnmounted(() => {
     }
 
     .mobile-primary-btn {
+        top: 8px;
         display: inline-flex;
         width: 190px;
         height: 40px;
         justify-content: center;
+        margin-top: 10px;
     }
 
     .hero-left .mobile-primary-btn {

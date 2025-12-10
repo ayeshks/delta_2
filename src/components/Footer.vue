@@ -95,7 +95,7 @@
   position: relative;
   background: #0f0f0f;
   overflow: hidden;
-  min-height: 80vh;
+  min-height: 60vh;
 }
 
 .footer-inner {
@@ -201,7 +201,7 @@
 .panel-divider {
   height: 3px;
   width: 100%;
-  margin-top: 60px;
+  margin-top: 80px;
 
   /* Yellow center with faded sides */
   background: linear-gradient(to right,
@@ -222,6 +222,7 @@
   color: #d1d1d1;
   font-family: Manrope, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 18px;
+  margin-top: 30px; 
 }
 
 .copyright {

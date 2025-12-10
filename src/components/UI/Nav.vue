@@ -21,7 +21,7 @@ onUnmounted(() => {
   <nav ref="navRef" :class="['navbar', { 'navbar-scrolled': isScrolled }]">
     <img
       class="navbar-logo"
-      src="https://api.builder.io/api/v1/image/assets/TEMP/4a29e3443cdf0359763cb1de98787f1a6ad707a2?width=368"
+      src="@/assets/hero/Nav_logo.png"
       alt="Delta Helicopters"
     />
 

@@ -370,7 +370,7 @@ const previousTestimonial = () => {
   gap: 24px;
   padding: 32px;
   height: 236px;
-  border-radius: 16px;
+  border-radius: 0;
   background: rgba(170, 170, 170, 0.06);
   backdrop-filter: blur(25px);
   opacity: 0;
@@ -535,6 +535,10 @@ const previousTestimonial = () => {
   .testimonial-card {
     padding: 24px;
     height: auto;
+  }
+
+  .testimonial-card:nth-child(n+2) {
+    display: none;
   }
 
   .decorative-bg-right {

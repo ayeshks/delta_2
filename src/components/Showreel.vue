@@ -1,9 +1,5 @@
 <template>
   <div class="showreel" ref="showreelElement">
-    <img class="drone-image" :class="{ 'drone-visible': isDroneVisible }"
-      src="https://cdn.builder.io/api/v1/image/assets%2F76536513f46d49f58638b73b18830729%2Fac31c357624f485586f2ff4fa5f487b1?format=webp&width=800"
-      alt="Drone" />
-
     <div class="bg-aerial-image">
       <img class="bg-aerial-img" :class="{ 'cinematic-loaded': isDroneVisible }"
         src="https://api.builder.io/api/v1/image/assets/TEMP/3c12ed418dea13ea3e7db4992dc1d1f372d72eed?width=4236"

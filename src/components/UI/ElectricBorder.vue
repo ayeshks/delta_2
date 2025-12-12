@@ -129,7 +129,8 @@ const strokeStyle = computed<CSSProperties>(() => ({
     ...inheritRadius.value,
     borderWidth: `${props.thickness}px`,
     borderStyle: 'solid',
-    borderColor: props.color
+    borderColor: props.color,
+    opacity: 0.5
 }));
 
 const glow1Style = computed<CSSProperties>(() => ({

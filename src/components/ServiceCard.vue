@@ -223,7 +223,7 @@ onUnmounted(() => {
   --background-y: 50%;
   --behind-gradient: none;
   --inner-gradient: none;
-  --card-radius: 20px;
+  --card-radius: 0;
   perspective: 500px;
   transform: translate3d(0, 0, 0.1px);
   position: relative;

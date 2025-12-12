@@ -159,7 +159,7 @@ const props = withDefaults(defineProps<DomeGalleryProps>(), {
   dragDampening: 2,
   openedImageWidth: '400px',
   openedImageHeight: '400px',
-  imageBorderRadius: '30px',
+  imageBorderRadius: '0',
   openedImageBorderRadius: '30px',
   grayscale: true
 });

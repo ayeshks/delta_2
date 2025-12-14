@@ -345,6 +345,7 @@ onUnmounted(() => {
   object-fit: cover;
   position: absolute;
   opacity: 0.85;
+  filter: grayscale(100%);
 }
 
 .card-image-content::before {
@@ -373,7 +374,6 @@ onUnmounted(() => {
     0.1px
   ) !important;
   z-index: 5;
-  mix-blend-mode: luminosity;
 }
 
 .card-details {
@@ -384,7 +384,7 @@ onUnmounted(() => {
   right: 0;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 0.5rem;
   padding: 2rem 1.5rem;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
@@ -392,7 +392,7 @@ onUnmounted(() => {
 
 .card-number {
   font-family: 'Oswald', sans-serif;
-  font-size: 18px;
+  font-size: 36px;
   font-weight: 600;
   color: #DCC62D;
   letter-spacing: 1px;
@@ -413,6 +413,7 @@ onUnmounted(() => {
   -webkit-text-fill-color: unset;
   background-clip: unset;
   -webkit-background-clip: unset;
+  text-align: left;
 }
 
 .card-details p {
@@ -423,6 +424,7 @@ onUnmounted(() => {
   color: rgba(255, 255, 255, 0.85);
   line-height: 1.4;
   max-width: 100%;
+  text-align: left;
 }
 
 @keyframes glow-bg {
@@ -465,7 +467,7 @@ onUnmounted(() => {
   }
 
   .card-number {
-    font-size: 16px;
+    font-size: 28px;
   }
 
   .card-details h3 {
@@ -488,7 +490,7 @@ onUnmounted(() => {
   }
 
   .card-number {
-    font-size: 14px;
+    font-size: 22px;
   }
 
   .card-details h3 {

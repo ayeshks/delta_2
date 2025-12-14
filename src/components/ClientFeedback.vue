@@ -171,13 +171,12 @@ const testimonials = ref([
     name: 'Rosemary Mante',
     title: 'Human Integration Agent',
   },
-  // New two testimonial cards (distinct clients)
   {
     id: 3,
     text:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue metus quis accumsan euismod. Maecenas sed est mollis, convallis nisi convallis, imperdiet massa.',
     img:
-      'https://api.builder.io/api/v1/image/assets/TEMP/848263f85f5375bf7055de6bd05cc5a37ade935e?width=120',
+      'https://api.builder.io/api/v1/image/assets/TEMP/307f7d726da98d25a3d7afbab5acf7a2512ed447?width=120',
     alt: 'Avery Stone',
     name: 'Avery Stone',
     title: 'Operations Lead',
@@ -187,14 +186,54 @@ const testimonials = ref([
     text:
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue metus quis accumsan euismod. Maecenas sed est mollis, convallis nisi convallis, imperdiet massa.',
     img:
-      'https://api.builder.io/api/v1/image/assets/TEMP/3b2da61a2e3ad317410b97864cc39cd9227c8ea5?width=120',
+      'https://api.builder.io/api/v1/image/assets/TEMP/1bf0a13215a03880a6cfa10d11fa1d627cf6e4ca?width=120',
     alt: 'Jordan Brooks',
     name: 'Jordan Brooks',
     title: 'Project Coordinator',
   },
+  {
+    id: 5,
+    text:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue metus quis accumsan euismod. Maecenas sed est mollis, convallis nisi convallis, imperdiet massa.',
+    img:
+      'https://api.builder.io/api/v1/image/assets/TEMP/03644084a0fd8b6fa374aafc9306767822eae530?width=120',
+    alt: 'Morgan Riley',
+    name: 'Morgan Riley',
+    title: 'Senior Designer',
+  },
+  {
+    id: 6,
+    text:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue metus quis accumsan euismod. Maecenas sed est mollis, convallis nisi convallis, imperdiet massa.',
+    img:
+      'https://api.builder.io/api/v1/image/assets/TEMP/b1cc194b4ca81ad46baf5ddb8f5c918933b7d326?width=120',
+    alt: 'Casey Thompson',
+    name: 'Casey Thompson',
+    title: 'Technical Lead',
+  },
+  {
+    id: 7,
+    text:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue metus quis accumsan euismod. Maecenas sed est mollis, convallis nisi convallis, imperdiet massa.',
+    img:
+      'https://api.builder.io/api/v1/image/assets/TEMP/8f81977224e5c284583f23081ac031693bd09f2a?width=120',
+    alt: 'Blake Martinez',
+    name: 'Blake Martinez',
+    title: 'Business Analyst',
+  },
+  {
+    id: 8,
+    text:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum congue metus quis accumsan euismod. Maecenas sed est mollis, convallis nisi convallis, imperdiet massa.',
+    img:
+      'https://api.builder.io/api/v1/image/assets/TEMP/6da9614879d9bac418755ed625b1d8fe07aae119?width=120',
+    alt: 'Dakota Johnson',
+    name: 'Dakota Johnson',
+    title: 'Product Manager',
+  },
 ])
 
-const pageSize = 2
+const pageSize = 4
 const currentPage = ref(0)
 const totalPages = computed(() => Math.ceil(testimonials.value.length / pageSize))
 const displayedTestimonials = computed(() =>
@@ -387,6 +426,14 @@ const previousTestimonial = () => {
 
 .feedback-loaded .testimonial-card:nth-child(2) {
   animation-delay: 0.3s;
+}
+
+.feedback-loaded .testimonial-card:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+.feedback-loaded .testimonial-card:nth-child(4) {
+  animation-delay: 0.9s;
 }
 
 @keyframes testimonialCardLoadIn {

@@ -119,8 +119,8 @@
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.5fr 1fr 1fr 1fr;
-  gap: 48px;
+  grid-template-columns: 2fr 1fr 1.3fr 1fr;
+  gap: 20px;
 }
 
 .brand-logo {
@@ -338,14 +338,23 @@
     gap: 24px;
   }
 
+  .brand {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
   .brand-logo {
     width: 120px;
+    margin-bottom: 16px;
   }
 
   .brand-copy {
     font-size: 16px;
     line-height: 20px;
     max-width: 100%;
+    text-align: center;
   }
 
   .col-title {

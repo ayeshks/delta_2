@@ -456,6 +456,7 @@ const onMouseMove = (e) => {
     justify-content: flex-start;
     padding: 30px;
     margin-top: 30px;
+    left: 10px;
   }
 
   .drone-services {

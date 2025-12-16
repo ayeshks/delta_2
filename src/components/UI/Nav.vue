@@ -34,11 +34,11 @@ onUnmounted(() => {
       <a href="#getintouch">Contact Us</a>
     </div>
 
-    <img
+    <!-- <img
       class="navbar-user-icon"
       src="https://api.builder.io/api/v1/image/assets/TEMP/355cb9a24372485e7e886319e8b89ccc41d77dea?width=58"
       alt="User Account"
-    />
+    /> -->
   </nav>
 </template>
 <style scoped>
@@ -69,7 +69,7 @@ onUnmounted(() => {
   .nav-center {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     gap: 2.5rem;
     flex: 1;
   }

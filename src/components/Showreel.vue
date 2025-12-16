@@ -496,11 +496,11 @@ onUnmounted(() => {
 @media (max-width: 480px) {
 
   .showreel {
-  min-height: 90vh;
-}
+    min-height: 80vh;
+  }
 
   .showreel-container {
-    top : 70px;
+    top: 20px;
     min-height: 70vh;
   }
 

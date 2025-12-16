@@ -606,8 +606,14 @@ const previousTestimonial = () => {
   clip-path: polygon(100% 100%, 0 100%, 100% calc(100% - 100px));
 }
 
+ .feedback-header {
+    flex-direction: column;
+    margin-top: 70px;
+  }
+
   .client-feedback {
-    padding: 3rem 8% 2.5rem;
+    padding: 2rem 8% 2.5rem;
+    min-height: 70vh;
   }
 
   .bottom-right-geo {
@@ -620,7 +626,7 @@ const previousTestimonial = () => {
 
   .feedback-container {
     padding: 0 20px;
-    top: -50px;
+    /* top: -50px; */
   }
 
   .section-label {

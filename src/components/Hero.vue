@@ -9,12 +9,8 @@
         </filter>
       </svg>
       <div id="tsparticles" class="particles-container"></div>
-      <img class="bg-helicopter-overlay water-wave"
-        src="@/assets/hero/hero-wave.png"
-        alt="Helicopter" />
-       <img class="bg-helicopter helicopter-landing"
-        src="@/assets/hero/helicopter.png"
-        alt="Helicopter" />
+      <img class="bg-helicopter-overlay water-wave" src="@/assets/hero/hero-wave.png" alt="Helicopter" />
+      <img class="bg-helicopter helicopter-landing" src="@/assets/hero/helicopter.png" alt="Helicopter" />
       <div class="blur-background-overlay"></div>
       <img class="bg-image-overlay-1"
         src="https://api.builder.io/api/v1/image/assets/TEMP/d924db34fa0bd87939ee320874555174aade0a21?width=648"
@@ -28,9 +24,9 @@
     <div class="hero-section">
       <div class="hero-left">
         <div class="title-box">
-          <span class="bracket bracket-animate">[</span>
+          <span class="bracket bracket-animate-right">[</span>
           <h1 class="hero-title title-animate">PREMIUM AERIAL<br />SERVICES</h1>
-          <span class="bracket bracket-animate">]</span>
+          <span class="bracket bracket-animate-left">]</span>
         </div>
 
         <h2 class="hero-subtitle subtitle-animate">
@@ -368,16 +364,28 @@ onUnmounted(() => {
   align-items: flex-start;
   gap: 1rem;
   margin-bottom: 1rem;
+  justify-content: flex-end;
+  padding-right: 3rem; /* prevent overlap with right bracket */
+}
+
+.title-box .bracket.bracket-animate-left {
+  position: absolute;
+  top: 0;
+  right: -10px;
+}
+
+.title-box .bracket.bracket-animate-right {
+  position: absolute;
+  top: 0;
+  left: -10px;
 }
 
 .bracket {
   color: #DCC62D;
   font-family: 'Manrope', sans-serif;
   font-size: 84px;
-  font-weight: 800;
-  line-height: 1;
-  flex-shrink: 0;
-  margin-top: 0.1em;
+  font-weight: 600;
+  justify-content: flex-end;
 }
 
 .bracket-animate {
@@ -610,6 +618,7 @@ onUnmounted(() => {
     height: 50px;
     font-size: 16px;
   }
+
   .bottom-right-triangle {
     height: 250px;
   }

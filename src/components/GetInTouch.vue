@@ -748,8 +748,8 @@ onUnmounted(() => {
 @media (max-width: 480px) {
     .showreel {
         position: relative;
-       min-height: 60vh;
-        padding: 10rem 1% 2.5rem;
+        min-height: 40vh;
+        padding: 7rem 3% 1.5rem;
     }
 
     .bottom-left-geo {
@@ -760,18 +760,18 @@ onUnmounted(() => {
     }
 
     .right-bottom-geo {
-    right: -15px;
-    bottom: -75px;
-    width: 300px;
-    /* transform: rotate(8deg); */
-    animation: floatUpDownGeoRotated 3s ease-in-out infinite 0.75s;
-}
+        right: -15px;
+        bottom: -75px;
+        width: 300px;
+        /* transform: rotate(8deg); */
+        animation: floatUpDownGeoRotated 3s ease-in-out infinite 0.75s;
+    }
 
     .top-left-triangle {
         height: 200px;
         clip-path: polygon(0 0, 100% 0, 100% 60px, 0 0);
-         background: rgb(24, 24, 24);
-         z-index: 2;
+        background: rgb(24, 24, 24);
+        z-index: 2;
     }
 
     .bottom-left-triangle {
@@ -781,8 +781,7 @@ onUnmounted(() => {
     }
 
     .contact-wrap {
-        padding: 5px 16px;
-        bottom: -140px;
+        padding: 4px 10px;
     }
 
     .intro-title {

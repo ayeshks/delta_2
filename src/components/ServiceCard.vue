@@ -2,7 +2,6 @@
   <div ref="wrapRef" class="service-card-wrapper" :style="cardStyle">
     <section ref="cardRef" class="service-card">
       <div class="card-inside">
-        <div class="card-shine" />
         <div class="card-glare" />
 
         <div class="card-content card-image-content">
@@ -51,8 +50,6 @@ const cardRef = useTemplateRef<HTMLElement>('cardRef')
 
 const DEFAULT_BEHIND_GRADIENT =
   'radial-gradient(farthest-side circle at var(--pointer-x) var(--pointer-y),hsla(266,100%,90%,var(--card-opacity)) 4%,hsla(266,50%,80%,calc(var(--card-opacity)*0.75)) 10%,hsla(266,25%,70%,calc(var(--card-opacity)*0.5)) 50%,hsla(266,0%,60%,0) 100%),radial-gradient(35% 52% at 55% 20%,#00ffaac4 0%,#073aff00 100%),radial-gradient(100% 100% at 50% 50%,#00c1ffff 1%,#073aff00 76%),conic-gradient(from 124deg at 50% 50%,#c137ffff 0%,#07c6ffff 40%,#07c6ffff 60%,#c137ffff 100%)'
-
-const DEFAULT_INNER_GRADIENT = 'linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)'
 
 const ANIMATION_CONFIG = {
   SMOOTH_DURATION: 600,
@@ -167,10 +164,7 @@ const handlePointerLeave = (event: PointerEvent) => {
   card.classList.remove('active')
 }
 
-const cardStyle = computed(() => ({
-  '--behind-gradient': props.enableTilt ? DEFAULT_BEHIND_GRADIENT : 'none',
-  '--inner-gradient': DEFAULT_INNER_GRADIENT
-}))
+const cardStyle = computed(() => ({}))
 
 const handleImageError = (event: Event) => {
   const target = event.target as HTMLImageElement
@@ -221,8 +215,6 @@ onUnmounted(() => {
   --rotate-y: 0deg;
   --background-x: 50%;
   --background-y: 50%;
-  --behind-gradient: none;
-  --inner-gradient: none;
   --card-radius: 0;
   perspective: 500px;
   transform: translate3d(0, 0, 0.1px);
@@ -300,38 +292,22 @@ onUnmounted(() => {
 .card-inside {
   inset: 1px;
   position: absolute;
-  background-image: var(--inner-gradient);
   background-color: rgba(0, 0, 0, 0.9);
   transform: translate3d(0, 0, 0.01px);
-}
-
-.card-shine {
-  transform: translate3d(0, 0, 1px);
-  overflow: hidden;
-  z-index: 3;
-  background: transparent;
-  background-size: cover;
-  background-position: center;
-  background-image: none;
-  mix-blend-mode: normal;
-  filter: none;
-  transition: filter 0.6s ease;
-}
-
-.service-card:hover .card-shine,
-.service-card.active .card-shine {
-  filter: brightness(1) contrast(1.8);
-  animation: none;
 }
 
 .card-glare {
   transform: translate3d(0, 0, 1.1px);
   overflow: hidden;
-  background-image: none;
-  mix-blend-mode: normal;
-  filter: none;
   z-index: 4;
   border: 2px solid #DCC62D;
+  transition: box-shadow 0.6s ease, border-color 0.6s ease;
+}
+
+.service-card:hover .card-glare,
+.service-card.active .card-glare {
+  box-shadow: 0 0 20px rgba(220, 198, 45, 0.5);
+  border-color: #FFE066;
 }
 
 .card-image-content {
@@ -344,8 +320,8 @@ onUnmounted(() => {
   height: 100%;
   object-fit: cover;
   position: absolute;
-  opacity: 0.85;
-  filter: grayscale(100%);
+  opacity: 1;
+  filter: grayscale(100%) brightness(0.7) contrast(1.2);
 }
 
 .card-image-content::before {
@@ -353,13 +329,7 @@ onUnmounted(() => {
   position: absolute;
   inset: 0;
   z-index: 1;
-  backdrop-filter: none;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0) 0%,
-    rgba(0, 0, 0, 0.3) 40%,
-    rgba(0, 0, 0, 0.85) 100%
-  );
+  background: rgba(0, 0, 0, 0.45);
   pointer-events: none;
 }
 

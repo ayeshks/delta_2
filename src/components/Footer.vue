@@ -32,7 +32,11 @@
               </li>
               <li>
                 <img src="@/assets/footer/arrow-icon.png" alt="" />
-                <a href="#services">Fleet</a>
+                <a href="#fleet">Fleet</a>
+              </li>
+              <li>
+                <img src="@/assets/footer/arrow-icon.png" alt="" />
+                <a href="#services">Services</a>
               </li>
               <li>
                 <img src="@/assets/footer/arrow-icon.png" alt="" />
@@ -40,11 +44,7 @@
               </li>
               <li>
                 <img src="@/assets/footer/arrow-icon.png" alt="" />
-                <a href="#">FAQs</a>
-              </li>
-              <li>
-                <img src="@/assets/footer/arrow-icon.png" alt="" />
-                <a href="#getintouch">Contact</a>
+                <a href="#testimonials">Testimonials</a>
               </li>
             </ul>
           </div>
@@ -53,10 +53,14 @@
             <h4 class="col-title">Services</h4>
             <span class="col-underline"></span>
             <ul class="list">
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">Helicopter Rental & Charter</a></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">Aerial Filming & Photography</a></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">Surveying & Inspection</a></li>
-              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">3D Mapping & Modelling</a></li>
+              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">Helicopter Rental &
+                  Charter</a></li>
+              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">Aerial Filming &
+                  Photography</a></li>
+              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">Surveying & Inspection</a>
+              </li>
+              <li><img src="@/assets/footer/arrow-icon.png" alt="" /> <a href="#services">3D Mapping & Modelling</a>
+              </li>
             </ul>
           </div>
 
@@ -66,7 +70,9 @@
             <ul class="contact-list">
               <li>
                 <img src="@/assets/footer/mail-icon.png" alt="" />
-                <span><p><a href="mailto:hello@website.com">hello@website.com</a></p></span>
+                <span>
+                  <p><a href="mailto:hello@website.com">hello@website.com</a></p>
+                </span>
               </li>
               <li><img src="@/assets/footer/location-icon.png" alt="" /><span>838 Cantt Sialkot, ENG</span></li>
               <li>
@@ -222,7 +228,7 @@
   color: #d1d1d1;
   font-family: Manrope, -apple-system, Roboto, Helvetica, sans-serif;
   font-size: 18px;
-  margin-top: 30px; 
+  margin-top: 30px;
 }
 
 .copyright {
@@ -325,12 +331,14 @@
 }
 
 @media (max-width: 480px) {
+  .footer-section {
+    min-height: 10vh;
+  }
+
   .footer-inner {
-    top: -150px;
     padding: 3rem 8% 2.5rem;
-    min-height: auto;
-    margin-top: 120px;
-    margin-bottom: 80px;
+    min-height: 40vh;
+    margin-bottom: 100px;
   }
 
   .footer-grid {
@@ -398,11 +406,15 @@
 
   /* Keep columns centered headings, but left-align lists for readability */
   .links,
-  .services,
   .contact {
     text-align: center;
     display: grid;
     justify-items: center;
+  }
+
+  /* Hide Services column on mobile */
+  .services {
+    display: none;
   }
 
   .links .col-underline,

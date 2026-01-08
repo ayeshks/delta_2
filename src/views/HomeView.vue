@@ -1,16 +1,18 @@
 <script setup>
-import { ref, onMounted, onUnmounted } from "vue";
+import { ref, onMounted, onUnmounted, defineAsyncComponent } from "vue";
 import Nav from "@/components/UI/Nav.vue";
-import Hero from "../components/Hero.vue";
-import Mobilehero from "@/components/Mobile/Mobilehero.vue";
-import AerialServices from "../components/AerialServices.vue";
-import DroneServices from "../components/DroneServices.vue";
-import Portfolio from "../components/Portfolio.vue";
-import Showreel from "../components/Showreel.vue";
-import WhyFlyWithUs from "../components/WhyFlyWithUs.vue";
-import ClientFeedback from "../components/ClientFeedback.vue";
-import GetInTouch from "@/components/GetInTouch.vue";
-import Footer from "@/components/Footer.vue";
+
+// Lazy load components using dynamic imports
+const Hero = defineAsyncComponent(() => import("../components/Hero.vue"));
+const Mobilehero = defineAsyncComponent(() => import("@/components/Mobile/Mobilehero.vue"));
+const AerialServices = defineAsyncComponent(() => import("../components/AerialServices.vue"));
+const DroneServices = defineAsyncComponent(() => import("../components/DroneServices.vue"));
+const Portfolio = defineAsyncComponent(() => import("../components/Portfolio.vue"));
+const Showreel = defineAsyncComponent(() => import("../components/Showreel.vue"));
+const WhyFlyWithUs = defineAsyncComponent(() => import("../components/WhyFlyWithUs.vue"));
+const ClientFeedback = defineAsyncComponent(() => import("../components/ClientFeedback.vue"));
+const GetInTouch = defineAsyncComponent(() => import("@/components/GetInTouch.vue"));
+const Footer = defineAsyncComponent(() => import("@/components/Footer.vue"));
 
 const isMobile = ref(false);
 let mql;
@@ -69,25 +71,39 @@ const scrollToTop = () => {
       <div class="spinner"></div>
     </div>
     <Nav v-if="!isMobile" />
-    <section id="home"><component :is="isMobile ? Mobilehero : Hero" /></section>
-    <section id="fleet" class="parallax-section" data-speed="0.18"><DroneServices /></section>
-    <section id="services" class="parallax-section" data-speed="0.14"><AerialServices /></section>
-    <section class="parallax-section" data-speed="0.22"><Showreel /></section>
-    <section id="about" class="parallax-section" data-speed="0.16"><WhyFlyWithUs /></section>
+    <section id="home">
+      <component :is="isMobile ? Mobilehero : Hero" />
+    </section>
+    <section id="fleet" class="parallax-section" data-speed="0.18">
+      <DroneServices />
+    </section>
+    <section id="services" class="parallax-section" data-speed="0.14">
+      <AerialServices />
+    </section>
+    <section class="parallax-section" data-speed="0.22">
+      <Showreel />
+    </section>
+    <section id="about" class="parallax-section" data-speed="0.16">
+      <WhyFlyWithUs />
+    </section>
     <div id="faqs"></div>
-    <section id="testimonials" class="parallax-section" data-speed="0.12"><ClientFeedback /></section>
-    <section id="portfolio" class="parallax-section" data-speed="0.1"><Portfolio /></section>
-    <section id="getintouch" class="parallax-section" data-speed="0.12"><GetInTouch /></section>
-    <section id="contact" class="parallax-section" data-speed="0.05"><Footer /></section>
+    <section id="testimonials" class="parallax-section" data-speed="0.12">
+      <ClientFeedback />
+    </section>
+    <section id="portfolio" class="parallax-section" data-speed="0.1">
+      <Portfolio />
+    </section>
+    <section id="getintouch" class="parallax-section" data-speed="0.12">
+      <GetInTouch />
+    </section>
+    <section id="contact" class="parallax-section" data-speed="0.05">
+      <Footer />
+    </section>
 
-    <button 
-      class="scroll-to-top" 
-      :class="{ 'show': showScrollTop }" 
-      @click="scrollToTop"
-      aria-label="Scroll to top"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M18 15l-6-6-6 6"/>
+    <button class="scroll-to-top" :class="{ 'show': showScrollTop }" @click="scrollToTop" aria-label="Scroll to top">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M18 15l-6-6-6 6" />
       </svg>
     </button>
   </div>
@@ -138,7 +154,9 @@ html {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .scroll-to-top {
@@ -180,7 +198,7 @@ html {
     width: 45px;
     height: 45px;
   }
-  
+
   .scroll-to-top.show {
     bottom: 30px;
   }
@@ -194,10 +212,9 @@ html {
     height: 42px;
     z-index: 10000;
   }
-  
+
   .scroll-to-top.show {
     bottom: 24px;
   }
 }
-
 </style>

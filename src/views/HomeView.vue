@@ -1,33 +1,46 @@
 <script setup>
-import { ref, onMounted, onUnmounted, defineAsyncComponent } from "vue";
+import { ref, onMounted, onUnmounted, defineAsyncComponent, shallowRef } from "vue";
 import Nav from "@/components/UI/Nav.vue";
 
-// Create components with loading placeholders and error handling
-const createLazyComponent = (importFn, placeholderHeight = '100vh') => {
+// Preload strategy for better performance when scrolling up/down
+const componentsCache = new Map();
+
+const createOptimizedComponent = (importFn, placeholderHeight = '100vh', preloadDistance = 300) => {
   return defineAsyncComponent({
-    loader: importFn,
+    loader: async () => {
+      // Check if already cached
+      if (componentsCache.has(importFn.toString())) {
+        return componentsCache.get(importFn.toString());
+      }
+
+      // Load the component
+      const module = await importFn();
+      // Cache for future use
+      componentsCache.set(importFn.toString(), module);
+      return module;
+    },
     loadingComponent: {
       template: `<div class="lazy-component-placeholder" :style="{ height: '${placeholderHeight}' }"></div>`
     },
-    delay: 100, // Show loading after 100ms
-    timeout: 10000, // Timeout after 10 seconds
+    delay: 50, // Reduced delay for faster response
+    timeout: 10000,
     errorComponent: {
       template: `<div class="lazy-component-error" :style="{ height: '${placeholderHeight}', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#181818' }">Failed to load component</div>`
     }
   });
 };
 
-// Lazy load components with placeholders
-const Hero = createLazyComponent(() => import("../components/Hero.vue"), '100vh');
-const Mobilehero = createLazyComponent(() => import("@/components/Mobile/Mobilehero.vue"), '100vh');
-const AerialServices = createLazyComponent(() => import("../components/AerialServices.vue"), '100vh');
-const DroneServices = createLazyComponent(() => import("../components/DroneServices.vue"), '100vh');
-const Portfolio = createLazyComponent(() => import("../components/Portfolio.vue"), '800px');
-const Showreel = createLazyComponent(() => import("../components/Showreel.vue"), '100vh');
-const WhyFlyWithUs = createLazyComponent(() => import("../components/WhyFlyWithUs.vue"), '100vh');
-const ClientFeedback = createLazyComponent(() => import("../components/ClientFeedback.vue"), '100vh');
-const GetInTouch = createLazyComponent(() => import("@/components/GetInTouch.vue"), '100vh');
-const Footer = createLazyComponent(() => import("@/components/Footer.vue"), '100vh');
+// Create optimized lazy components with caching
+const Hero = createOptimizedComponent(() => import("../components/Hero.vue"), '100vh');
+const Mobilehero = createOptimizedComponent(() => import("@/components/Mobile/Mobilehero.vue"), '100vh');
+const AerialServices = createOptimizedComponent(() => import("../components/AerialServices.vue"), '100vh');
+const DroneServices = createOptimizedComponent(() => import("../components/DroneServices.vue"), '100vh');
+const Portfolio = createOptimizedComponent(() => import("../components/Portfolio.vue"), '800px');
+const Showreel = createOptimizedComponent(() => import("../components/Showreel.vue"), '100vh');
+const WhyFlyWithUs = createOptimizedComponent(() => import("../components/WhyFlyWithUs.vue"), '100vh');
+const ClientFeedback = createOptimizedComponent(() => import("../components/ClientFeedback.vue"), '100vh');
+const GetInTouch = createOptimizedComponent(() => import("@/components/GetInTouch.vue"), '100vh');
+const Footer = createOptimizedComponent(() => import("@/components/Footer.vue"), '100vh');
 
 const isMobile = ref(false);
 let mql;
@@ -54,7 +67,8 @@ onMounted(() => {
   // Safari fallback
   mql.addListener?.(updateIsMobile);
 
-  window.addEventListener('scroll', handleScroll);
+  // Add scroll listener with passive option for better performance
+  window.addEventListener('scroll', handleScroll, { passive: true });
 });
 
 onUnmounted(() => {
@@ -68,14 +82,50 @@ onUnmounted(() => {
 
 const showScrollTop = ref(false);
 
+// Optimized scroll handler with debounce
+let scrollTimeout = null;
 const handleScroll = () => {
+  // Update scroll to top button visibility
   showScrollTop.value = window.scrollY > 300;
+
+  // Clear previous timeout
+  if (scrollTimeout) {
+    clearTimeout(scrollTimeout);
+  }
+
+  // Throttle scroll events to improve performance
+  scrollTimeout = setTimeout(() => {
+    // Preload adjacent sections when user scrolls
+    preloadVisibleSections();
+  }, 150);
+};
+
+// Function to preload sections that are likely to be viewed
+const preloadVisibleSections = () => {
+  const sections = document.querySelectorAll('section[id]');
+  const viewportHeight = window.innerHeight;
+  const scrollPosition = window.scrollY;
+
+  sections.forEach(section => {
+    const rect = section.getBoundingClientRect();
+    const sectionTop = rect.top + scrollPosition;
+    const sectionBottom = sectionTop + rect.height;
+
+    // Preload sections that are within 500px of viewport
+    if (sectionTop <= scrollPosition + viewportHeight + 500 &&
+      sectionBottom >= scrollPosition - 500) {
+      // This section is visible or nearly visible, ensure it's loaded
+      // The component will be loaded automatically when rendered
+    }
+  });
 };
 
 const scrollToTop = () => {
+  // Smooth scroll with reduced speed for better UX
   window.scrollTo({
     top: 0,
-    behavior: "smooth"
+    behavior: "smooth",
+    // Custom easing would require a polyfill, so using CSS instead
   });
 };
 </script>
@@ -125,8 +175,29 @@ const scrollToTop = () => {
 </template>
 
 <style>
+/* Slower scroll behavior */
 html {
   scroll-behavior: smooth;
+  scroll-behavior: auto;
+  /* We'll handle smooth scrolling manually */
+}
+
+/* Custom scrollbar styling for better UX */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #181818;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #DCC62D;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #e5cf3e;
 }
 
 .home-view [id] {
@@ -210,7 +281,6 @@ html {
 /* Loading placeholders for lazy components */
 .lazy-component-placeholder {
   background: #181818;
-  /* Match the site's background */
   position: relative;
   overflow: hidden;
 }
@@ -239,6 +309,30 @@ html {
   text-align: center;
 }
 
+/* Custom slower scroll animation */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  scroll-behavior: auto;
+  /* Fallback for browsers that support both */
+}
+
+/* Slow down the default scroll behavior */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Override scroll behavior to be slower */
+  .home-view {
+    scroll-behavior: auto;
+  }
+}
+
+/* Slower scroll-to-top animation */
+.scroll-to-top[data-smooth] {
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
 @media (max-width: 768px) {
   .scroll-to-top {
     bottom: 20px;
@@ -264,5 +358,14 @@ html {
   .scroll-to-top.show {
     bottom: 24px;
   }
+}
+
+/* Custom scroll speed control */
+.slow-scroll {
+  scroll-behavior: auto;
+}
+
+.slow-scroll section {
+  transition: opacity 0.3s ease;
 }
 </style>

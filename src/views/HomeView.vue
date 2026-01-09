@@ -38,6 +38,58 @@ const updateIsMobile = () => {
   isMobile.value = window.matchMedia("(max-width: 768px)").matches;
 };
 
+// Throttle function to limit scroll event execution
+const throttle = (func, limit) => {
+  let inThrottle;
+  return function () {
+    const args = arguments;
+    const context = this;
+    if (!inThrottle) {
+      func.apply(context, args);
+      inThrottle = true;
+      setTimeout(() => inThrottle = false, limit);
+    }
+  }
+}
+
+// Parallax effect implementation
+const applyParallax = () => {
+  const scrolled = window.scrollY;
+  const parallaxSections = document.querySelectorAll('.parallax-section');
+
+  parallaxSections.forEach(section => {
+    const speed = parseFloat(section.getAttribute('data-speed')) || 0.1;
+    const yPos = -(scrolled * speed);
+    section.style.transform = `translate3d(0, ${yPos}px, 0)`;
+  });
+};
+
+// Optimized scroll handler using requestAnimationFrame
+let ticking = false;
+const optimizedScrollHandler = () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      applyParallax();
+      handleScroll();
+      ticking = false;
+    });
+    ticking = true;
+  }
+};
+
+const showScrollTop = ref(false);
+
+const handleScroll = () => {
+  showScrollTop.value = window.scrollY > 300;
+};
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+};
+
 onMounted(() => {
   // Preloader: hide when window has fully loaded or after a short fallback
   onWindowLoad = () => {
@@ -54,7 +106,8 @@ onMounted(() => {
   // Safari fallback
   mql.addListener?.(updateIsMobile);
 
-  window.addEventListener('scroll', handleScroll);
+  // Use throttled scroll handler for better performance
+  window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
 });
 
 onUnmounted(() => {
@@ -63,21 +116,8 @@ onUnmounted(() => {
   if (onWindowLoad) {
     window.removeEventListener("load", onWindowLoad);
   }
-  window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('scroll', optimizedScrollHandler);
 });
-
-const showScrollTop = ref(false);
-
-const handleScroll = () => {
-  showScrollTop.value = window.scrollY > 300;
-};
-
-const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-};
 </script>
 
 <template>

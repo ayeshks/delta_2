@@ -2,17 +2,32 @@
 import { ref, onMounted, onUnmounted, defineAsyncComponent } from "vue";
 import Nav from "@/components/UI/Nav.vue";
 
-// Lazy load components using dynamic imports
-const Hero = defineAsyncComponent(() => import("../components/Hero.vue"));
-const Mobilehero = defineAsyncComponent(() => import("@/components/Mobile/Mobilehero.vue"));
-const AerialServices = defineAsyncComponent(() => import("../components/AerialServices.vue"));
-const DroneServices = defineAsyncComponent(() => import("../components/DroneServices.vue"));
-const Portfolio = defineAsyncComponent(() => import("../components/Portfolio.vue"));
-const Showreel = defineAsyncComponent(() => import("../components/Showreel.vue"));
-const WhyFlyWithUs = defineAsyncComponent(() => import("../components/WhyFlyWithUs.vue"));
-const ClientFeedback = defineAsyncComponent(() => import("../components/ClientFeedback.vue"));
-const GetInTouch = defineAsyncComponent(() => import("@/components/GetInTouch.vue"));
-const Footer = defineAsyncComponent(() => import("@/components/Footer.vue"));
+// Create components with loading placeholders and error handling
+const createLazyComponent = (importFn, placeholderHeight = '100vh') => {
+  return defineAsyncComponent({
+    loader: importFn,
+    loadingComponent: {
+      template: `<div class="lazy-component-placeholder" :style="{ height: '${placeholderHeight}' }"></div>`
+    },
+    delay: 100, // Show loading after 100ms
+    timeout: 10000, // Timeout after 10 seconds
+    errorComponent: {
+      template: `<div class="lazy-component-error" :style="{ height: '${placeholderHeight}', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#181818' }">Failed to load component</div>`
+    }
+  });
+};
+
+// Lazy load components with placeholders
+const Hero = createLazyComponent(() => import("../components/Hero.vue"), '100vh');
+const Mobilehero = createLazyComponent(() => import("@/components/Mobile/Mobilehero.vue"), '100vh');
+const AerialServices = createLazyComponent(() => import("../components/AerialServices.vue"), '100vh');
+const DroneServices = createLazyComponent(() => import("../components/DroneServices.vue"), '100vh');
+const Portfolio = createLazyComponent(() => import("../components/Portfolio.vue"), '800px');
+const Showreel = createLazyComponent(() => import("../components/Showreel.vue"), '100vh');
+const WhyFlyWithUs = createLazyComponent(() => import("../components/WhyFlyWithUs.vue"), '100vh');
+const ClientFeedback = createLazyComponent(() => import("../components/ClientFeedback.vue"), '100vh');
+const GetInTouch = createLazyComponent(() => import("@/components/GetInTouch.vue"), '100vh');
+const Footer = createLazyComponent(() => import("@/components/Footer.vue"), '100vh');
 
 const isMobile = ref(false);
 let mql;
@@ -122,6 +137,7 @@ html {
   width: 100%;
   position: relative;
   overflow-x: hidden;
+  background: #181818;
 }
 
 .home-view>* {
@@ -189,6 +205,38 @@ html {
 .scroll-to-top:hover {
   transform: translateY(-5px);
   background-color: #e5cf3e;
+}
+
+/* Loading placeholders for lazy components */
+.lazy-component-placeholder {
+  background: #181818;
+  /* Match the site's background */
+  position: relative;
+  overflow: hidden;
+}
+
+.lazy-component-placeholder::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  animation: loading-shimmer 1.5s infinite;
+}
+
+@keyframes loading-shimmer {
+  100% {
+    left: 100%;
+  }
+}
+
+.lazy-component-error {
+  background: #181818;
+  color: #DCC62D;
+  font-family: 'Oswald', sans-serif;
+  text-align: center;
 }
 
 @media (max-width: 768px) {

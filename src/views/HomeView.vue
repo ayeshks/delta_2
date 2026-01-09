@@ -1,3 +1,9 @@
+{
+"scripts": {
+"build:minify": "vite build && minify dist/**/*.html dist/**/*.js dist/**/*.css --output dist/",
+"preview:minify": "npm run build:minify && vite preview"
+}
+}
 <script setup>
 import { ref, onMounted, onUnmounted, defineAsyncComponent } from "vue";
 import Nav from "@/components/UI/Nav.vue";
@@ -9,7 +15,7 @@ const createLazyComponent = (importFn, placeholderHeight = '100vh') => {
     loadingComponent: {
       template: `<div class="lazy-component-placeholder" :style="{ height: '${placeholderHeight}' }"></div>`
     },
-    delay: 100, // Show loading after 100ms
+    delay: 50, // Reduced delay for faster loading
     timeout: 10000, // Timeout after 10 seconds
     errorComponent: {
       template: `<div class="lazy-component-error" :style="{ height: '${placeholderHeight}', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#181818' }">Failed to load component</div>`
@@ -38,6 +44,32 @@ const updateIsMobile = () => {
   isMobile.value = window.matchMedia("(max-width: 768px)").matches;
 };
 
+// Optimized scroll handler without parallax effect to eliminate gaps
+let ticking = false;
+
+const optimizedScrollHandler = () => {
+  if (!ticking) {
+    requestAnimationFrame(() => {
+      const currentScrollY = window.scrollY;
+
+      // Handle scroll to top button visibility only
+      showScrollTop.value = currentScrollY > 300;
+
+      ticking = false;
+    });
+    ticking = true;
+  }
+};
+
+const showScrollTop = ref(false);
+
+const scrollToTop = () => {
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+};
+
 onMounted(() => {
   // Preloader: hide when window has fully loaded or after a short fallback
   onWindowLoad = () => {
@@ -54,7 +86,8 @@ onMounted(() => {
   // Safari fallback
   mql.addListener?.(updateIsMobile);
 
-  window.addEventListener('scroll', handleScroll);
+  // Use optimized scroll handler with passive option for better performance
+  window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
 });
 
 onUnmounted(() => {
@@ -63,21 +96,8 @@ onUnmounted(() => {
   if (onWindowLoad) {
     window.removeEventListener("load", onWindowLoad);
   }
-  window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('scroll', optimizedScrollHandler);
 });
-
-const showScrollTop = ref(false);
-
-const handleScroll = () => {
-  showScrollTop.value = window.scrollY > 300;
-};
-
-const scrollToTop = () => {
-  window.scrollTo({
-    top: 0,
-    behavior: "smooth"
-  });
-};
 </script>
 
 <template>
@@ -148,6 +168,9 @@ html {
 .parallax-section {
   will-change: transform;
   transform: translateZ(0);
+  /* Ensure no unexpected spacing */
+  margin: 0;
+  padding: 0;
 }
 
 .preloader {
@@ -213,6 +236,8 @@ html {
   /* Match the site's background */
   position: relative;
   overflow: hidden;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
 .lazy-component-placeholder::after {

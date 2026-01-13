@@ -781,8 +781,13 @@ onUnmounted(() => {
     }
 
     .contact-wrap {
-        padding: 4px 10px;
+        padding: 20px 16px;
         top: -20px;
+    }
+
+    .intro-border {
+        width: 100% !important;
+        max-width: 100%;
     }
 
     .intro-title {
@@ -850,10 +855,11 @@ onUnmounted(() => {
     .intro-frame {
         position: relative;
         border: none;
-        padding: 30px 32px 120px;
+        padding: 24px 20px 80px;
         bottom: -10px;
         background: rgba(0, 0, 0, 0.15);
-        height: 400px;
+        height: auto;
+        width: 100%;
     }
 }
 </style>

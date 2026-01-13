@@ -782,6 +782,7 @@ onUnmounted(() => {
 
     .contact-wrap {
         padding: 4px 10px;
+        top: -20px;
     }
 
     .intro-title {

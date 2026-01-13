@@ -40,12 +40,24 @@
     return `rgba(${r}, ${g}, ${b}, ${alpha})`;
   }
 
-  const rawId = `id-${crypto.randomUUID().replace(/[:]/g, "")}`;
+  function generateUniqueId(): string {
+    if (typeof crypto !== "undefined" && crypto.randomUUID) {
+      return crypto.randomUUID().replace(/[:]/g, "");
+    }
+    // Fallback for browsers that don't support crypto.randomUUID
+    return "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, (c) => {
+      const r = (Math.random() * 16) | 0;
+      const v = c === "x" ? r : (r & 0x3) | 0x8;
+      return v.toString(16);
+    });
+  }
+
+  const rawId = `id-${generateUniqueId()}`;
   const filterId = `turbulent-displace-${rawId}`;
 
-  const svgRef = useTemplateRef<SVGSVGElement>("svgRef");
-  const rootRef = useTemplateRef<HTMLDivElement>("rootRef");
-  const strokeRef = useTemplateRef<HTMLDivElement>("strokeRef");
+  const svgRef = useTemplateRef<SVGSVGElement | null>("svgRef");
+  const rootRef = useTemplateRef<HTMLDivElement | null>("rootRef");
+  const strokeRef = useTemplateRef<HTMLDivElement | null>("strokeRef");
 
   const updateAnim = () => {
     const svg = svgRef.value;

@@ -1,149 +1,207 @@
 <template>
-    <div class="showreel" ref="showreelElement">
-        <div class="bg-aerial-image">
-            <img class="bg-aerial-img" :class="{ 'cinematic-loaded': isDroneVisible }"
-                src="https://api.builder.io/api/v1/image/assets/TEMP/3c12ed418dea13ea3e7db4992dc1d1f372d72eed?width=4236"
-                alt="" />
-        </div>
-        <div class="bg-overlay"></div>
-
-        <div class="top-left-triangle"></div>
-
-        <div class="bottom-left-triangle"></div>
-
-        <div class="geo-shape bottom-left-geo">
-            <img src="@/assets/footer/bg-geometric-3.png" alt="" />
-        </div>
-
-        <div class="geo-shape left-top-geo">
-            <img src="@/assets/getintouch/bg-geometric-1.png" alt="" />
-        </div>
-        <div class="geo-shape right-bottom-geo">
-            <img src="@/assets/getintouch/bg-geometric-2.png" alt="" />
-        </div>
-
-        <div class="contact-wrap">
-            <ElectricBorder :color="'#d9b200'" :speed="1" :chaos="1" :thickness="4" :className="'intro-border'"
-                :style="{ borderRadius: '12px' }">
-                <div class="intro-frame">
-                    <div class="intro-inner">
-                        <p class="kicker">BOOK A FLIGHT OR REQUEST A QUOTE</p>
-                        <h2 class="intro-title">GET IN TOUCH</h2>
-                        <p class="intro-copy">
-                            Tell us about your project and our operations team will respond with availability, a
-                            suggested
-                            platform and a tailored quote
-                        </p>
-                    </div>
-                </div>
-            </ElectricBorder>
-
-            <div class="form-card">
-                <form @submit.prevent="submitForm" class="form-grid">
-                    <div class="field">
-                        <label>Name*</label>
-                        <input v-model="form.name" type="text" required />
-                    </div>
-                    <div class="field">
-                        <label>Company / Organisation</label>
-                        <input v-model="form.company" type="text" />
-                    </div>
-
-                    <div class="field">
-                        <label>Phone*</label>
-                        <input v-model="form.phone" type="tel" required />
-                    </div>
-                    <div class="field">
-                        <label>Email*</label>
-                        <input v-model="form.email" type="email" required />
-                    </div>
-
-                    <div class="field select">
-                        <label>Service Required</label>
-                        <select v-model="form.service">
-                            <option value="" disabled>Select a service</option>
-                            <option>Helicopter Rental & Charter</option>
-                            <option>Aerial Filming & Photography</option>
-                            <option>Surveying & Inspection</option>
-                            <option>3D Mapping & Modelling</option>
-                        </select>
-                    </div>
-                    <div class="field">
-                        <label>Preferred Date & Location</label>
-                        <input v-model="form.dateLocation" type="text" placeholder="e.g., 2026-01-20, Colombo" />
-                    </div>
-
-                    <div class="field full">
-                        <label>Message</label>
-                        <textarea v-model="form.message" rows="3"></textarea>
-                    </div>
-
-                    <div class="actions full">
-                        <button type="submit" class="submit-btn">SUBMIT</button>
-                    </div>
-                </form>
-            </div>
-        </div>
+  <div
+    class="showreel"
+    ref="showreelElement"
+  >
+    <div class="bg-aerial-image">
+      <img
+        class="bg-aerial-img"
+        :class="{ 'cinematic-loaded': isDroneVisible }"
+        src="https://api.builder.io/api/v1/image/assets/TEMP/3c12ed418dea13ea3e7db4992dc1d1f372d72eed?width=4236"
+        alt=""
+      />
     </div>
+    <div class="bg-overlay"></div>
+
+    <div class="top-left-triangle"></div>
+
+    <div class="bottom-left-triangle"></div>
+
+    <div class="geo-shape bottom-left-geo">
+      <img
+        src="@/assets/footer/bg-geometric-3.png"
+        alt=""
+      />
+    </div>
+
+    <div class="geo-shape left-top-geo">
+      <img
+        src="@/assets/getintouch/bg-geometric-1.png"
+        alt=""
+      />
+    </div>
+    <div class="geo-shape right-bottom-geo">
+      <img
+        src="@/assets/getintouch/bg-geometric-2.png"
+        alt=""
+      />
+    </div>
+
+    <div class="contact-wrap">
+      <ElectricBorder
+        :color="'#d9b200'"
+        :speed="1"
+        :chaos="1"
+        :thickness="4"
+        :className="'intro-border'"
+        :style="{ borderRadius: '12px' }"
+      >
+        <div class="intro-frame">
+          <div class="intro-inner">
+            <p class="kicker">BOOK A FLIGHT OR REQUEST A QUOTE</p>
+            <h2 class="intro-title">GET IN TOUCH</h2>
+            <p class="intro-copy">
+              Tell us about your project and our operations team will respond
+              with availability, a suggested platform and a tailored quote
+            </p>
+          </div>
+        </div>
+      </ElectricBorder>
+
+      <div class="form-card">
+        <form
+          @submit.prevent="submitForm"
+          class="form-grid"
+        >
+          <div class="field">
+            <label>Name*</label>
+            <input
+              v-model="form.name"
+              type="text"
+              required
+            />
+          </div>
+          <div class="field">
+            <label>Company / Organisation</label>
+            <input
+              v-model="form.company"
+              type="text"
+            />
+          </div>
+
+          <div class="field">
+            <label>Phone*</label>
+            <input
+              v-model="form.phone"
+              type="tel"
+              required
+            />
+          </div>
+          <div class="field">
+            <label>Email*</label>
+            <input
+              v-model="form.email"
+              type="email"
+              required
+            />
+          </div>
+
+          <div class="field select">
+            <label>Service Required</label>
+            <select v-model="form.service">
+              <option
+                value=""
+                disabled
+              >
+                Select a service
+              </option>
+              <option>Helicopter Rental & Charter</option>
+              <option>Aerial Filming & Photography</option>
+              <option>Surveying & Inspection</option>
+              <option>3D Mapping & Modelling</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>Preferred Date & Location</label>
+            <input
+              v-model="form.dateLocation"
+              type="text"
+              placeholder="e.g., 2026-01-20, Colombo"
+            />
+          </div>
+
+          <div class="field full">
+            <label>Message</label>
+            <textarea
+              v-model="form.message"
+              rows="3"
+            ></textarea>
+          </div>
+
+          <div class="actions full">
+            <button
+              type="submit"
+              class="submit-btn"
+            >
+              SUBMIT
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script setup>
-import { ref, onMounted, onUnmounted } from 'vue'
-import SectionLabel from './SectionLabel.vue'
-import ElectricBorder from '@/components/UI/ElectricBorder.vue'
+  import { ref, onMounted, onUnmounted } from "vue";
+  import SectionLabel from "./SectionLabel.vue";
+  import ElectricBorder from "@/components/UI/ElectricBorder.vue";
 
-const showreelElement = ref(null)
-const isDroneVisible = ref(false)
-const thumbnailSwapped = ref(false)
-let lastScrollY = 0
-let scrollThreshold = 200
+  const showreelElement = ref(null);
+  const isDroneVisible = ref(false);
+  const thumbnailSwapped = ref(false);
+  let lastScrollY = 0;
+  let scrollThreshold = 200;
 
-const form = ref({
-    name: '',
-    company: '',
-    phone: '',
-    email: '',
-    service: '',
-    dateLocation: '',
-    message: ''
-})
+  const form = ref({
+    name: "",
+    company: "",
+    phone: "",
+    email: "",
+    service: "",
+    dateLocation: "",
+    message: "",
+  });
 
-const submitForm = () => {
-    console.log('Form submitted', form.value)
-}
-const handleScroll = () => {
-    const currentScrollY = window.scrollY
-    const scrollDelta = Math.abs(currentScrollY - lastScrollY)
+  const submitForm = () => {
+    console.log("Form submitted", form.value);
+  };
+  const handleScroll = () => {
+    const currentScrollY = window.scrollY;
+    const scrollDelta = Math.abs(currentScrollY - lastScrollY);
     if (scrollDelta >= scrollThreshold) {
-        thumbnailSwapped.value = !thumbnailSwapped.value
-        lastScrollY = currentScrollY
+      thumbnailSwapped.value = !thumbnailSwapped.value;
+      lastScrollY = currentScrollY;
     }
-}
+  };
 
-onMounted(() => {
-    const observer = new IntersectionObserver((entries) => {
+  onMounted(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
         entries.forEach((entry) => {
-            if (entry.isIntersecting && !isDroneVisible.value) {
-                isDroneVisible.value = true
-                observer.unobserve(entry.target)
-            }
-        })
-    }, { threshold: 0.2 })
+          if (entry.isIntersecting && !isDroneVisible.value) {
+            isDroneVisible.value = true;
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.2 }
+    );
 
     if (showreelElement.value) {
-        observer.observe(showreelElement.value)
+      observer.observe(showreelElement.value);
     }
 
-    window.addEventListener('scroll', handleScroll)
-})
+    window.addEventListener("scroll", handleScroll);
+  });
 
-onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll)
-})
+  onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll);
+  });
 </script>
 
 <style scoped>
-.showreel {
+  .showreel {
     position: relative;
     width: 100vw;
     min-height: 150vh;
@@ -158,71 +216,69 @@ onUnmounted(() => {
     z-index: 10;
     display: flex;
     align-items: center;
-}
+  }
 
-.geo-shape {
+  .geo-shape {
     position: absolute;
     z-index: 2;
     pointer-events: none;
-}
+  }
 
-/* Floating animations for geometric shapes */
-@keyframes floatUpDownGeo {
-
+  /* Floating animations for geometric shapes */
+  @keyframes floatUpDownGeo {
     0%,
     100% {
-        transform: translateY(0);
+      transform: translateY(0);
     }
 
     50% {
-        transform: translateY(-10px);
+      transform: translateY(-10px);
     }
-}
+  }
 
-@keyframes floatUpDownGeoRotated {
-
+  @keyframes floatUpDownGeoRotated {
     0%,
     100% {
-        transform: translateY(0) rotate(-8deg);
+      transform: translateY(0) rotate(-8deg);
     }
 
     50% {
-        transform: translateY(-10px) rotate(-8deg);
+      transform: translateY(-10px) rotate(-8deg);
     }
-}
+  }
 
-.geo-shape img {
+  .geo-shape img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     display: block;
-}
+  }
 
-.left-top-geo {
+  .left-top-geo {
     left: -150px;
     top: -80px;
     width: 420px;
     animation: floatUpDownGeo 3s ease-in-out infinite;
-}
+  }
 
-.right-bottom-geo {
+  .right-bottom-geo {
     right: 1px;
     bottom: -80px;
     width: 420px;
     transform: rotate(-8deg);
     animation: floatUpDownGeoRotated 3s ease-in-out infinite 0.75s;
-}
+  }
 
-.bottom-left-geo {
+  .bottom-left-geo {
     left: 290px;
     bottom: -430px;
     width: 190px;
     transform: rotate(-82deg) scaleY(-1);
     z-index: 4;
     margin-bottom: 10px;
-}
+  }
 
-.contact-wrap {
+  .contact-wrap {
     position: relative;
     z-index: 3;
     max-width: 1200px;
@@ -231,53 +287,53 @@ onUnmounted(() => {
     padding: 20px 5%;
     left: 60px;
     top: -80px;
-}
+  }
 
-.intro-border {
+  .intro-border {
     width: 350px;
     bottom: -80px;
-}
+  }
 
-@media (min-width: 768px) {
+  @media (min-width: 768px) {
     .intro-border {
-        width: 425px;
+      width: 425px;
     }
-}
+  }
 
-@media (max-width: 640px) {
+  @media (max-width: 640px) {
     .contact-wrap {
-        left: 0;
-        padding: 40px 16px;
+      left: 0;
+      padding: 40px 16px;
     }
 
     .bottom-left-geo {
-        width: 180px;
-        left: 150px;
-        bottom: 60px;
+      width: 180px;
+      left: 150px;
+      bottom: 60px;
     }
 
     .intro-frame {
-        width: 100%;
-        height: auto;
-        padding: 24px 20px 80px;
+      width: 100%;
+      height: auto;
+      padding: 24px 20px 80px;
     }
 
     .form-card {
-        position: relative;
-        top: -40px;
-        left: 0;
-        width: 100%;
-        height: auto;
+      position: relative;
+      top: -40px;
+      left: 0;
+      width: 100%;
+      height: auto;
     }
 
     .form-grid {
-        grid-template-columns: 1fr;
-        gap: 16px;
-        padding: 24px 20px;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      padding: 24px 20px;
     }
-}
+  }
 
-.intro-frame {
+  .intro-frame {
     position: relative;
     width: 100%;
     height: 650px;
@@ -285,38 +341,38 @@ onUnmounted(() => {
     padding: 36px 32px 120px;
     bottom: -10px;
     background: rgba(0, 0, 0, 0.15);
-}
+  }
 
-.intro-inner {
+  .intro-inner {
     max-width: 420px;
-}
+  }
 
-.kicker {
+  .kicker {
     color: #d9b200;
     font-family: Manrope, sans-serif;
     font-size: 14px;
     margin: 0 0 8px;
-    letter-spacing: .02em;
-}
+    letter-spacing: 0.02em;
+  }
 
-.intro-title {
+  .intro-title {
     color: #fff;
     font-family: Oswald, sans-serif;
     font-size: 54px;
     line-height: 1.1;
     margin: 0 0 10px;
     text-transform: uppercase;
-}
+  }
 
-.intro-copy {
+  .intro-copy {
     color: #e5e5e5;
     font-family: Manrope, sans-serif;
     font-size: 15px;
     line-height: 1.6;
     margin: 0;
-}
+  }
 
-.form-card {
+  .form-card {
     position: absolute;
     left: 110px;
     bottom: -40px;
@@ -325,34 +381,34 @@ onUnmounted(() => {
     background: #0f0f0f;
     border: 5px solid #ffffff8c;
     box-shadow: 0 18px 24px rgba(0, 0, 0, 0.6);
-}
+  }
 
-.form-grid {
+  .form-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 20px 32px;
     padding: 30px 36px 28px;
-}
+  }
 
-.field {
+  .field {
     display: flex;
     flex-direction: column;
     gap: 1px;
-}
+  }
 
-.field.full {
+  .field.full {
     grid-column: 1 / -1;
-}
+  }
 
-.field label {
+  .field label {
     color: #d9b200;
     font-family: Manrope, sans-serif;
     font-size: 14px;
-}
+  }
 
-.field input,
-.field select,
-.field textarea {
+  .field input,
+  .field select,
+  .field textarea {
     background: transparent;
     border: none;
     border-bottom: 1px solid #3a3a3a;
@@ -361,35 +417,35 @@ onUnmounted(() => {
     font-family: Manrope, sans-serif;
     font-size: 12px;
     outline: none;
-}
+  }
 
-.field select {
+  .field select {
     appearance: none;
-}
+  }
 
-.actions {
+  .actions {
     grid-column: 2 / 3;
     display: flex;
     justify-content: flex-end;
-}
+  }
 
-.submit-btn {
+  .submit-btn {
     background: #d9b200;
     color: #000;
     font-family: Oswald, sans-serif;
     font-weight: 700;
-    letter-spacing: .02em;
+    letter-spacing: 0.02em;
     border: none;
     padding: 12px 28px;
     cursor: pointer;
     width: 150px;
-}
+  }
 
-.submit-btn:hover {
+  .submit-btn:hover {
     filter: brightness(1.05);
-}
+  }
 
-.drone-image {
+  .drone-image {
     position: absolute;
     top: 5%;
     left: 50%;
@@ -400,14 +456,14 @@ onUnmounted(() => {
     z-index: 2;
     opacity: 0;
     transition: all 2.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
+  }
 
-.drone-image.drone-visible {
+  .drone-image.drone-visible {
     transform: translateX(-50%) translateY(0);
     opacity: 1;
-}
+  }
 
-.geometric-pattern {
+  .geometric-pattern {
     position: absolute;
     bottom: 0;
     left: 0;
@@ -417,9 +473,9 @@ onUnmounted(() => {
     z-index: 2;
     opacity: 0.8;
     pointer-events: none;
-}
+  }
 
-.bg-aerial-image {
+  .bg-aerial-image {
     position: absolute;
     top: 0;
     left: 0;
@@ -427,26 +483,26 @@ onUnmounted(() => {
     height: 100%;
     overflow: hidden;
     z-index: 1;
-}
+  }
 
-.bg-aerial-image img {
+  .bg-aerial-image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-}
+  }
 
-.bg-aerial-img {
+  .bg-aerial-img {
     transform: scale(1.3);
     opacity: 0;
     transition: all 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
+  }
 
-.bg-aerial-img.cinematic-loaded {
+  .bg-aerial-img.cinematic-loaded {
     transform: scale(1);
     opacity: 1;
-}
+  }
 
-.bg-overlay {
+  .bg-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -454,9 +510,9 @@ onUnmounted(() => {
     height: 100%;
     background: rgba(0, 0, 0, 0.747);
     z-index: 2;
-}
+  }
 
-.top-left-triangle {
+  .top-left-triangle {
     position: absolute;
     top: 0;
     left: 0;
@@ -466,23 +522,21 @@ onUnmounted(() => {
     z-index: 2;
     pointer-events: none;
     clip-path: polygon(0 0, 100% 0, 100% 200px, 0 0);
-}
+  }
 
-.bottom-left-triangle {
+  .bottom-left-triangle {
     position: absolute;
     bottom: -1px;
     left: 0;
     width: 100%;
     height: 400px;
-    background: rgb(15,
-            15,
-            15);
+    background: rgb(15, 15, 15);
     z-index: 3;
     pointer-events: none;
     clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 205px));
-}
+  }
 
-.showreel-container {
+  .showreel-container {
     position: relative;
     z-index: 3;
     max-width: 1440px;
@@ -493,51 +547,50 @@ onUnmounted(() => {
     align-items: center;
     justify-content: space-between;
     gap: 6rem;
-}
+  }
 
-.video-section {
+  .video-section {
     flex: 0 0 auto;
     width: 100%;
     max-width: 506px;
-}
+  }
 
-.video-thumbnail-stack {
+  .video-thumbnail-stack {
     position: relative;
     width: 100%;
     height: 0;
     padding-bottom: 57.1%;
-}
+  }
 
-.thumbnail-layer {
+  .thumbnail-layer {
     position: absolute;
     width: 100%;
     height: 100%;
     overflow: hidden;
-}
+  }
 
-.thumbnail-back {
+  .thumbnail-back {
     top: -10.7%;
     left: -11.3%;
     z-index: 1;
     filter: drop-shadow(0 8px 4px rgba(0, 0, 0, 0.54));
-}
+  }
 
-.thumbnail-front {
+  .thumbnail-front {
     top: 9%;
     left: 11.3%;
     z-index: 2;
     filter: drop-shadow(0 11px 6.8px rgba(0, 0, 0, 0.24));
-}
+  }
 
-.thumbnail-layer img {
+  .thumbnail-layer img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-}
+  }
 
-
-.thumbnail-overlay {
+  .thumbnail-overlay {
     position: absolute;
     top: 0;
     left: 0;
@@ -546,9 +599,9 @@ onUnmounted(() => {
     background: #000;
     opacity: 0.3;
     z-index: 1;
-}
+  }
 
-.play-button {
+  .play-button {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -558,308 +611,308 @@ onUnmounted(() => {
     z-index: 2;
     cursor: pointer;
     transition: transform 0.3s ease;
-}
+  }
 
-.play-button:hover {
+  .play-button:hover {
     transform: translate(-50%, -50%) scale(1.1);
-}
+  }
 
-.play-button svg {
+  .play-button svg {
     width: 100%;
     height: 100%;
-}
+  }
 
-.content-section {
+  .content-section {
     flex: 1;
     max-width: 556px;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-}
+  }
 
-.section-title {
-    color: #FFF;
-    font-family: 'Oswald', sans-serif;
+  .section-title {
+    color: #fff;
+    font-family: "Oswald", sans-serif;
     font-size: 50px;
     font-weight: 500;
     line-height: 1.42;
     text-transform: uppercase;
     margin: 0;
-}
+  }
 
-.title-bold {
+  .title-bold {
     font-weight: 500;
-}
+  }
 
-.title-light {
+  .title-light {
     font-weight: 200;
-}
+  }
 
-.section-description {
-    color: #FFF;
-    font-family: 'Manrope', sans-serif;
+  .section-description {
+    color: #fff;
+    font-family: "Manrope", sans-serif;
     font-size: 16px;
     font-weight: 500;
     line-height: 1.625;
     margin: 0;
-}
+  }
 
-@media (max-width: 1200px) {
+  @media (max-width: 1200px) {
     .form-card {
-        left: 260px;
-        width: min(720px, 74%);
-        bottom: 40px;
+      left: 260px;
+      width: min(720px, 74%);
+      bottom: 40px;
     }
 
     .top-left-triangle {
-        height: 350px;
-        clip-path: polygon(0 0, 100% 0, 100% 350px, 0 0);
+      height: 350px;
+      clip-path: polygon(0 0, 100% 0, 100% 350px, 0 0);
     }
 
     .bottom-left-triangle {
-        height: 350px;
-        clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 350px));
+      height: 350px;
+      clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 350px));
     }
 
     .drone-image {
-        height: 250px;
+      height: 250px;
     }
 
     .geometric-pattern {
-        width: 350px;
+      width: 350px;
     }
 
     .showreel-container {
-        padding: 6rem 5%;
-        gap: 4rem;
+      padding: 6rem 5%;
+      gap: 4rem;
     }
 
     .section-title {
-        font-size: 42px;
+      font-size: 42px;
     }
 
     .video-section {
-        max-width: 450px;
+      max-width: 450px;
     }
-}
+  }
 
-@media (max-width: 1024px) {
+  @media (max-width: 1024px) {
     .contact-wrap {
-        padding: 70px 5%;
-        left: 0;
+      padding: 70px 5%;
+      left: 0;
     }
 
     .top-left-triangle {
-        height: 300px;
-        clip-path: polygon(0 0, 100% 0, 100% 300px, 0 0);
+      height: 300px;
+      clip-path: polygon(0 0, 100% 0, 100% 300px, 0 0);
     }
 
     .bottom-left-triangle {
-        height: 300px;
-        clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 300px));
+      height: 300px;
+      clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 300px));
     }
 
     .intro-frame {
-        width: 100%;
+      width: 100%;
     }
 
     .form-card {
-        position: relative;
-        left: 0;
-        top: -80px;
-        width: 100%;
+      position: relative;
+      left: 0;
+      top: -80px;
+      width: 100%;
     }
 
     .video-section {
-        max-width: 100%;
-        width: 100%;
+      max-width: 100%;
+      width: 100%;
     }
 
     .form-grid {
-        grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
     }
 
     .section-title {
-        font-size: 38px;
+      font-size: 38px;
     }
-}
+  }
 
-@media (max-width: 768px) {
+  @media (max-width: 768px) {
     .intro-frame {
-        width: 100%;
-        padding: 28px 24px 100px;
+      width: 100%;
+      padding: 28px 24px 100px;
     }
 
     .top-left-triangle {
-        height: 250px;
-        clip-path: polygon(0 0, 100% 0, 100% 250px, 0 0);
+      height: 250px;
+      clip-path: polygon(0 0, 100% 0, 100% 250px, 0 0);
     }
 
     .bottom-left-triangle {
-        height: 250px;
-        clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 250px));
+      height: 250px;
+      clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 250px));
     }
 
     .form-card {
-        top: -70px;
+      top: -70px;
     }
 
     .form-grid {
-        grid-template-columns: 1fr;
+      grid-template-columns: 1fr;
     }
 
     .drone-image {
-        height: 200px;
-        top: 3%;
+      height: 200px;
+      top: 3%;
     }
 
     .geometric-pattern {
-        width: 280px;
+      width: 280px;
     }
 
     .showreel-container {
-        padding: 4rem 4% 3rem;
-        gap: 2.5rem;
+      padding: 4rem 4% 3rem;
+      gap: 2.5rem;
     }
 
     .section-title {
-        font-size: 32px;
-        line-height: 1.3;
+      font-size: 32px;
+      line-height: 1.3;
     }
 
     .section-label {
-        font-size: 18px;
+      font-size: 18px;
     }
 
     .section-description {
-        font-size: 15px;
+      font-size: 15px;
     }
 
     .video-section {
-        max-width: 480px;
+      max-width: 480px;
     }
 
     .play-button {
-        width: 100px;
-        height: 100px;
+      width: 100px;
+      height: 100px;
     }
-}
+  }
 
-@media (max-width: 480px) {
+  @media (max-width: 480px) {
     .showreel {
-        position: relative;
-        min-height: 40vh;
-        padding: 7rem 3% 1.5rem;
+      position: relative;
+      min-height: 40vh;
+      padding: 7rem 3% 1.5rem;
     }
 
     .bottom-left-geo {
-        width: 70px;
-        left: 63px;
-        bottom: -150px;
-        transform: rotate(-75deg);
+      width: 70px;
+      left: 63px;
+      bottom: -150px;
+      transform: rotate(-75deg);
     }
 
     .right-bottom-geo {
-        right: -15px;
-        bottom: -75px;
-        width: 300px;
-        /* transform: rotate(8deg); */
-        animation: floatUpDownGeoRotated 3s ease-in-out infinite 0.75s;
+      right: -15px;
+      bottom: -75px;
+      width: 300px;
+      /* transform: rotate(8deg); */
+      animation: floatUpDownGeoRotated 3s ease-in-out infinite 0.75s;
     }
 
     .top-left-triangle {
-        height: 200px;
-        clip-path: polygon(0 0, 100% 0, 100% 60px, 0 0);
-        background: rgb(24, 24, 24);
-        z-index: 2;
+      height: 200px;
+      clip-path: polygon(0 0, 100% 0, 100% 60px, 0 0);
+      background: rgb(24, 24, 24);
+      z-index: 2;
     }
 
     .bottom-left-triangle {
-        height: 200px;
-        bottom: -3px;
-        clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 100px));
+      height: 200px;
+      bottom: -3px;
+      clip-path: polygon(0 100%, 100% 100%, 0 calc(100% - 100px));
     }
 
     .contact-wrap {
-        padding: 20px 16px;
-        top: -20px;
+      padding: 20px 16px;
+      top: -20px;
     }
 
     .intro-border {
-        width: 100% !important;
-        max-width: 100%;
+      width: 100% !important;
+      max-width: 100%;
     }
 
     .intro-title {
-        font-size: 40px;
+      font-size: 40px;
     }
 
     .form-card {
-        top: -90px;
-        height: 500px;
-        width: 90%;
-        margin: 0 auto;
-        position: relative;
+      top: -90px;
+      height: 500px;
+      width: 90%;
+      margin: 0 auto;
+      position: relative;
     }
 
     .drone-image {
-        height: 150px;
-        top: 2%;
+      height: 150px;
+      top: 2%;
     }
 
     .geometric-pattern {
-        width: 220px;
+      width: 220px;
     }
 
     .showreel-container {
-        padding: 3rem 3% 2.5rem;
+      padding: 3rem 3% 2.5rem;
     }
 
     .section-title {
-        font-size: 26px;
+      font-size: 26px;
     }
 
     .section-label {
-        font-size: 16px;
+      font-size: 16px;
     }
 
     .section-description {
-        font-size: 14px;
-        line-height: 1.5;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .video-section {
-        max-width: 100%;
+      max-width: 100%;
     }
 
     .play-button {
-        width: 80px;
-        height: 80px;
+      width: 80px;
+      height: 80px;
     }
 
     .bg-overlay {
-        background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.5);
     }
 
     .form-grid {
-        grid-template-columns: 1fr;
-        gap: 10px;
-        height: 200px;
+      grid-template-columns: 1fr;
+      gap: 10px;
+      height: 200px;
     }
 
     .actions {
-        grid-column: 1 / -1;
-        justify-content: flex-end;
+      grid-column: 1 / -1;
+      justify-content: flex-end;
     }
 
     .intro-frame {
-        position: relative;
-        border: none;
-        padding: 24px 20px 80px;
-        bottom: -10px;
-        background: rgba(0, 0, 0, 0.15);
-        height: auto;
-        width: 100%;
+      position: relative;
+      border: none;
+      padding: 24px 20px 80px;
+      bottom: -10px;
+      background: rgba(0, 0, 0, 0.15);
+      height: auto;
+      width: 100%;
     }
-}
+  }
 </style>
